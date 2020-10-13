@@ -144,14 +144,6 @@
                                     </a>
                                 </li>
                             </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="sample-page.htm">
-                                        <span class="pcoded-micon"><i class="feather icon-watch"></i></span>
-                                        <span class="pcoded-mtext">Sample Page</span>
-                                    </a>
-                                </li>
-                            </ul>
                             <div class="pcoded-navigatio-lavel">Elements UI</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
@@ -175,9 +167,9 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="dt-basic.htm">
+                                    <a href="{{ route('bailleurs.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
-                                        <span class="pcoded-mtext">Data Table</span>
+                                        <span class="pcoded-mtext">Les bailleurs</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -201,6 +193,16 @@
                                             </a>
                                         </li>
                                     </ul>
+                                </li>
+                            </ul>
+                            <div class="pcoded-navigatio-lavel">Paramétrages</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="#">
+                                        <span class="pcoded-micon"><i class="feather icon-settings"></i></span>
+                                        <span class="pcoded-mtext">Les paramétres</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
                             </ul>
                         </div>
@@ -243,6 +245,9 @@
     <script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/SmoothScroll.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
+    <!-- sweetalert2 -->
+    <script src="{{ asset('vendor/sweetalert/js/sweetalert2.min.js') }}"></script>
+
     <!-- custom js -->
     <script src="{{ asset('assets/js/vartical-layout.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/pages/dashboard/custom-dashboard.js') }}"></script>
