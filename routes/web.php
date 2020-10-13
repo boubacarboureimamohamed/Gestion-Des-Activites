@@ -18,9 +18,14 @@ Route::get('/', function () {
 });
 
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::resource('bailleurs', 'BailleursController');
+
+Route::resource('activites', 'ActivitesController');
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth', 'verifier']], function() { });
 

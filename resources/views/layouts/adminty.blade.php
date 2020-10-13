@@ -74,7 +74,7 @@
                                 <div class="dropdown-primary dropdown">
                                     <div class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="{{ asset('assets/images/avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image">
-                                        <span>John Doe</span>
+                                        <span>BOUBACAR BOUREIMA Mohamed</span>
                                         <i class="feather icon-chevron-down"></i>
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
@@ -89,10 +89,17 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="auth-normal-sign-in.htm">
+                                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
                                                 <i class="feather icon-log-out"></i> Logout
                                             </a>
+
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
                                         </li>
+
                                     </ul>
 
                                 </div>
@@ -119,10 +126,10 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
-                                        <span class="pcoded-mtext">Form Components</span>
+                                        <span class="pcoded-mtext">Activités Et Lignes Activités</span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class=" ">
+                                        <li class="{{ route('activites.index') }}">
                                             <a href="form-elements-add-on.htm">
                                                 <span class="pcoded-mtext">Les activités</span>
                                             </a>
