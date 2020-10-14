@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LigneActivite;
 
 class LigneActiviteController extends Controller
 {
@@ -13,7 +14,7 @@ class LigneActiviteController extends Controller
      */
     public function index()
     {
-        $ligne_activites = LigneActivite::al();
+        $ligne_activites = LigneActivite::all();
         return view('ligne_activites.index', compact('ligne_activites'));
     }
 
@@ -76,7 +77,12 @@ class LigneActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ligne_activite->create([
+            'nom_ligne_activite'=>$request->nom_ligne_activite,
+            'nom_responsable_ligne'=>$request->nom_responsable_ligne,
+            'mail_responsable_ligne'=>$request->mail_responsable_ligne,
+            'contact_responsable_ligne'=>$request->contact_responsable_ligne
+        ]);
     }
 
     /**

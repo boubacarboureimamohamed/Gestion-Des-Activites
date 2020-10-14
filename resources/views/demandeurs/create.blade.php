@@ -22,7 +22,7 @@
                         <div class="col-md-12">
                             <div id="wizard">
                                 <section>
-                                    <form action="{{ route('demandeurs.stoe') }}" method="POST">
+                                    <form action="{{ route('demandeurs.store') }}" method="POST">
                                         @csrf
                                             <div class="form-group row">
                                                 <div class="col-md-4 col-lg-2">

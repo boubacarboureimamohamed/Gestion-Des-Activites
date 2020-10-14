@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Budget;
+use App\Models\Activite;
 
 class BudgetsController extends Controller
 {
@@ -23,7 +25,7 @@ class BudgetsController extends Controller
      */
     public function create()
     {
-        $activites = Activites::all();        
+        $activites = Activite::all();        
         return view('budgets.create', compact('activites'));
     }
 
