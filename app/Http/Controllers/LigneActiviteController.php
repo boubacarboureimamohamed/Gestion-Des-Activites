@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bailleur;
 use Illuminate\Http\Request;
 
-class BailleursController extends Controller
+class LigneActiviteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class BailleursController extends Controller
      */
     public function index()
     {
-        $bailleurs = Bailleur::all();
-        return view('bailleurs.index', compact('bailleurs'));
+        $ligne_activites = LigneActivite::al();
+        return view('ligne_activites.index', compact('ligne_activites'));
     }
 
     /**
@@ -25,7 +24,7 @@ class BailleursController extends Controller
      */
     public function create()
     {
-        return view('bailleurs.create');
+        return view('ligne_activites.create');
     }
 
     /**
@@ -36,27 +35,14 @@ class BailleursController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request->all());
-        $this->validate($request, [
-
-            'nom_bailleur'=>'required',
-            'adresse_bailleur'=>'required',
-            'contact_bailleur'=>'required'
-
+        LigneActivite::create([
+            'nom_ligne_activite'=>$request->nom_ligne_activite,
+            'nom_responsable_ligne'=>$request->nom_responsable_ligne,
+            'mail_responsable_ligne'=>$request->mail_responsable_ligne,
+            'contact_responsable_ligne'=>$request->contact_responsable_ligne
         ]);
 
-
-        $bailleur  = Bailleur::create([
-
-            'nom_bailleur'=>$request->nom_bailleur,
-            'adresse_bailleur'=>$request->adresse_bailleur,
-            'contact_bailleur'=>$request->contact_bailleur
-
-        ]);
-
-        return redirect(route('bailleurs.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
-
+        return redirect(route('ligne_activites.index'));
     }
 
     /**

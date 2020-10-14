@@ -24,6 +24,11 @@ Route::resource('bailleurs', 'BailleursController');
 
 Route::resource('activites', 'ActivitesController');
 
+Route::resource('demandeurs', 'DemandeursController');
+
+Route::resource('ligne_activites', 'LigneActiviteController');
+
+Route::resource('budgets', 'BudgetsController');
 
 Auth::routes();
 

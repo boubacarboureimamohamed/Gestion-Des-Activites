@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bailleur;
 use Illuminate\Http\Request;
 
-class BailleursController extends Controller
+class DemandeursController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,9 @@ class BailleursController extends Controller
      */
     public function index()
     {
-        $bailleurs = Bailleur::all();
-        return view('bailleurs.index', compact('bailleurs'));
+        $demandeurs = Demandeur::all();
+
+    return view('demandeurs.index', compact('demandeurs'));
     }
 
     /**
@@ -25,7 +25,7 @@ class BailleursController extends Controller
      */
     public function create()
     {
-        return view('bailleurs.create');
+        return view('demandeurs.create');
     }
 
     /**
@@ -36,27 +36,11 @@ class BailleursController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request->all());
-        $this->validate($request, [
-
-            'nom_bailleur'=>'required',
-            'adresse_bailleur'=>'required',
-            'contact_bailleur'=>'required'
-
+        Demandeur::create([
+            'nom_demandeur'=>$request->nom_demandeur
         ]);
 
-
-        $bailleur  = Bailleur::create([
-
-            'nom_bailleur'=>$request->nom_bailleur,
-            'adresse_bailleur'=>$request->adresse_bailleur,
-            'contact_bailleur'=>$request->contact_bailleur
-
-        ]);
-
-        return redirect(route('bailleurs.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
-
+        return redirect(route('demandeurs.index'));
     }
 
     /**
