@@ -25,7 +25,7 @@ class BailleursController extends Controller
      */
     public function create()
     {
-        //
+        return view('bailleurs.create');
     }
 
     /**
@@ -36,7 +36,27 @@ class BailleursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        //dd($request->all());
+        $this->validate($request, [
+
+            'nom_bailleur'=>'required',
+            'adresse_bailleur'=>'required',
+            'contact_bailleur'=>'required'
+
+        ]);
+
+
+        $bailleur  = Bailleur::create([
+
+            'nom_bailleur'=>$request->nom_bailleur,
+            'adresse_bailleur'=>$request->adresse_bailleur,
+            'contact_bailleur'=>$request->contact_bailleur
+
+        ]);
+
+        return redirect(route('bailleurs.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+
     }
 
     /**

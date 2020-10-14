@@ -13,49 +13,49 @@
 
             <!-- Zero config.table start -->
             <div class="card">
-                <div class="card-header">
-                    <h5>Zero Configuration</h5>
-                    <span>DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</span>
-
+                <div class="card-header"  style="text-align: center;">
+                    <h3>Liste des bailleurs</h3>
                 </div>
                 <div class="card-block">
+                    <a href="{{ route('bailleurs.create') }}" class="btn btn-success">
+                        <i class="feather icon-plus"></i> Ajouter</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>Numéro</th>
+                                <th>Nom</th>
+                                <th>Adresse</th>
+                                <th>Contact</th>
+                                <th>Modifier</th>
+                                <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
+                                @foreach ($bailleurs as $bailleur)
                                 <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td>Edinburgh</td>
-                                    <td>22</td>
-                                    <td>2012/03/29</td>
-                                    <td>$433,060</td>
-                                </tr>
-                                <tr>
-                                    <td>Colleen Hurst</td>
-                                    <td>Javascript Developer</td>
-                                    <td>San Francisco</td>
-                                    <td>39</td>
-                                    <td>2009/09/15</td>
-                                    <td>$205,500</td>
-                                </tr>
+                                <td> {{ $bailleur->id }} </td>
+                                <td> {{ $bailleur->nom_bailleur}} </td>
+                                <td> {{ $bailleur->adresse_bailleur }}</td>
+                                <td> {{ $bailleur->contact_bailleur }}</td>
+                                <td>
+                                    <a href="{{ route('bailleurs.edit', $bailleur) }}" class="btn btn-primary">
+                                        <i class="feather icon-edit"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{{ route('bailleurs.destroy', $bailleur) }}" id="form{{ $bailleur->id }}">
+
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+
+                                        <button type="button" onclick="confirmation('#form{{ $bailleur->id }}')" class="btn btn-danger" >
+                                            <i class="feather icon-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
