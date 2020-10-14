@@ -1,13 +1,12 @@
 @extends('layouts.adminty')
 
 @section('css')
-<!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css') }}">
-<!--forms-wizard css-->
-<link rel="stylesheet" type="text/css" href="{{ asset('bower_components/jquery.steps/css/jquery.steps.css') }}">
 
+<!-- Font Icon -->
+<link rel="stylesheet" href="{{ asset('bower_components/wizard/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{{ asset('bower_components/wizard/css/style.css') }}">
 @endsection
 
 @section('content')
@@ -19,167 +18,233 @@
 
             <!-- Form wizard with validation card start -->
             <div class="card">
-                <div class="card-header">
-                    <h5>Form Wizard With Validation</h5>
-                    <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
-
+                <div class="card-header"  style="text-align: center;">
+                    <h3>Ajout d'une nouvelle activité</h3>
                 </div>
                 <div class="card-block">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="wizard">
-                                <section>
-                                    <form class="wizard-form" id="example-advanced-form" action="#">
-                                        <h3> Registration </h3>
-                                        <fieldset>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="userName-2" class="block">User name *</label>
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h3>
+                            <span class="title_text">Information sur l'activité </span>
+                        </h3>
+                        <fieldset>
+                            <div class="fieldset-content">
+                                <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="userName-2" name="userName" type="text" class="required form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="email-2" class="block">Email *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="email-2" name="email" type="email" class="required form-control">
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <input type="text" class="form-control" title="Veuillez entrer le nom de l'activité" placeholder="Veuillez entrer le nom de l'activité">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="password-2" class="block">Password *</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="password-2" name="password" type="password" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="confirm-2" class="block">Confirm Password *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="confirm-2" name="confirm" type="password" class="form-control required">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <h3> General information </h3>
-                                        <fieldset>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="name-2" class="block">First name *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="name-2" name="name" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="surname-2" class="block">Last name *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="surname-2" name="surname" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="phone-2" class="block">Phone #</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="phone-2" name="phone" type="number" class="form-control required phone">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="date" class="block">Date Of Birth</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="date" name="Date Of Birth" type="text" class="form-control required date-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">Select Country</div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <select class="form-control required">
-                                                        <option>Select State</option>
-                                                        <option>Gujarat</option>
-                                                        <option>Kerala</option>
-                                                        <option>Manipur</option>
-                                                        <option>Tripura</option>
-                                                        <option>Sikkim</option>
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <select class="form-control" id="" name="" title="Veuillez choisir le responsable de l'activité">
+                                                        <option selected="selected">Veuillez choisir le responsable</option>
+                                                        <option value=""></option>
                                                     </select>
                                                 </div>
                                             </div>
-                                        </fieldset>
-                                        <h3> Education </h3>
-                                        <fieldset>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="University-2" class="block">University</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="University-2" name="University" type="text" class="form-control required">
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <input type="date" class="form-control" title="Veuillez entrer la date début de l'activité" placeholder="Veuillez entrer la date début de l'activité">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="Country-2" class="block">Country</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="Country-2" name="Country" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="Degreelevel-2" class="block">Degree level #</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="Degreelevel-2" name="Degree level" type="text" class="form-control required phone">
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <input type="date" class="form-control" title="Veuillez entrer la date fin de l'activité" placeholder="Veuillez entrer la date fin de l'activité">
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="datejoin" class="block">Date Join</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="datejoin" name="Date Of Birth" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <h3> Work experience </h3>
-                                        <fieldset>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="Company-2" class="block">Company:</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="Company-21" name="Company:" type="text" class="form-control required">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="CountryW-2" class="block">Country</label>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <input id="CountryW-21" name="Country" type="text" class="form-control required">
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <select class="form-control" id="" name="" title="Veuillez choisir le demandeur de l'activité">
+                                                        <option selected="selected">Veuillez choisir le demandeur</option>
+                                                        <option value=""></option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-sm-12">
-                                                    <label for="Position-2" class="block">Position</label>
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
                                                 </div>
-                                                <div class="col-sm-12">
-                                                    <input id="Position-21" name="Position" type="text" class="form-control required">
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <input type="file" class="form-control" title="Veuillez joindre un fichier JPG, PNG, PDF" placeholder="Veuillez joindre un fichier JPG, PNG, PDF">
                                                 </div>
                                             </div>
-                                        </fieldset>
-                                    </form>
-                                </section>
+                                            <div class="row form-group">
+                                                <div class="col-sm-3">
+                                                    <label class="col-form-label"> </label>
+                                                </div>
+                                                <div class="col-sm-9 input-group">
+                                                    <span class="input-group-addon" id="basic-addon1"></span>
+                                                    <textarea name="" id="" class="form-control" rows="2" title="Veuillez faire un commentaire sur l'activité" placeholder="Veuillez faire un commentaire sur l'activité"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
                             </div>
-                        </div>
-                    </div>
+                            <div class="fieldset-footer">
+                                <span> Etape 1 sur 3</span>
+                            </div>
+                        </fieldset>
+
+                        <h3>
+                            <span class="title_text">Lignes de l'activité </span>
+                        </h3>
+                        <fieldset>
+
+                            <div class="fieldset-content">
+                                <div class="row">
+                                    <div class="col-sm-12" style="position :relative; left:50px;">
+                                        <a href="#" class="btn btn-success">
+                                            <i class="feather icon-plus"></i> </a>
+                                        <table id="example-2" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ligne d'activité </th>
+                                                    <th>Montant prévu</th>
+                                                    <th>Montant depensé</th>
+                                                    <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ligne">
+                                                <tr>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <select class="form-control" id="" name="avantage_id[]">
+                                                                        <option selected="selected">********Sélectionnez********</option>
+                                                                        <option value=""></option>
+                                                                    </select>
+                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align: center"><a href="#" class="btn btn-danger remove"><i class="feather icon-minus"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fieldset-footer">
+                                <span> Etape 2 sur 3</span>
+                            </div>
+
+                        </fieldset>
+
+                        <h3>
+                            <span class="title_text">Bailleurs de l'activité </span>
+                        </h3>
+                        <fieldset>
+                            <div class="fieldset-content">
+                                <div class="row">
+                                    <div class="col-sm-12" style="position :relative; left:50px;">
+                                        <table id="example-2" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ligne d'activité </th>
+                                                    <th>Montant prévu</th>
+                                                    <th>Montant depensé</th>
+                                                    <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ligne1">
+                                                <tr>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <select class="form-control" id="" name="avantage_id[]">
+                                                                        <option selected="selected">********Sélectionnez********</option>
+                                                                        <option value=""></option>
+                                                                    </select>
+                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            <div class="form-group form-primary">
+                                                                <div class="input-group">
+                                                                    <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="text-align: center"><a href="#" class="btn btn-danger remove1"><i class="feather icon-minus"></i></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="fieldset-footer">
+                                <span> Etape 3 sur 3</span>
+                            </div>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
             <!-- Form wizard with validation card end -->
@@ -193,18 +258,118 @@
 @section('js')
 
 <!--Forms - Wizard js-->
-<script src="{{ asset('bower_components/jquery.cookie/js/jquery.cookie.js') }}"></script>
-<script src="{{ asset('bower_components/jquery.steps/js/jquery.steps.js') }}"></script>
-<script src="{{ asset('bower_components/jquery-validation/js/jquery.validate.js') }}"></script>
-<script src="{{ asset('assets/pages/forms-wizard-validation/form-wizard.js') }}"></script>
-<script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
-<script src="{{ asset('assets/js/vartical-layout.min.js') }}"></script>
-<!-- jquery slimscroll js -->
-<script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
-<!-- modernizr js -->
-<script type="text/javascript" src="{{ asset('bower_components/modernizr/js/modernizr.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bower_components/modernizr/js/css-scrollbars.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/pages/form-validation/validate.js') }}"></script>
+<script src="{{ asset('bower_components/wizard/vendor/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('bower_components/wizard/vendor/jquery-validation/dist/additional-methods.min.js') }}"></script>
+<script src="{{ asset('bower_components/wizard/vendor/jquery-steps/jquery.steps.min.js') }}"></script>*
+<script src="{{ asset('bower_components/wizard/js/main.js') }}"></script>
+<script src="{{ asset('bower_components/wizard/vendor/minimalist-picker/dobpicker.js') }}"></script>
+<script src="{{ asset('bower_components/wizard/vendor/jquery.pwstrength/jquery.pwstrength.js') }}"></script>
+
+<script>
+
+    $('#addLigne').on('click', function (f) {
+      f.preventDefault()
+        addLigne();
+    });
+    function addLigne() {
+        var tr = `<tr>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <select class="multisteps-form__select form-control"  id="" name="avantage_id[]">
+                                <option selected="selected">***Sélectionnez***</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td style="text-align: center"><a href="#" class="btn btn-danger remove"><i class="feather icon-minus"></i></a></td>
+            </tr>`;
+        $('#ligne').append(tr);
+    };
+    $('#ligne').on('click', '.remove', function () {
+        $(this).parent().parent().remove();
+    })
+
+
+</script>
+
+<script>
+
+    $('#addLigne1').on('click', function (f) {
+      f.preventDefault()
+        addLigne1();
+    });
+    function addLigne1() {
+        var tr = `<tr>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <select class="multisteps-form__select form-control"  id="" name="avantage_id[]">
+                                <option selected="selected">***Sélectionnez***</option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="montant[]" title="" value="" id="" class="form-control" placeholder="Veillez entrer le montant decaissé">
+                        </div>
+                    </div>
+                </div>
+            </td>
+
+            <td style="text-align: center"><a href="#" class="btn btn-danger remove1"><i class="feather icon-minus"></i></td>
+            </tr>`;
+        $('#ligne1').append(tr);
+    };
+    $('#ligne1').on('click', '.remove1', function () {
+        $(this).parent().parent().remove();
+    })
+
+
+</script>
+
 
 @endsection
