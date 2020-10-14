@@ -155,6 +155,15 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
+                                    <a href="{{ route('responsable_activites.index') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Les Responsable d'activte</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
                                     <a href="{{ route('demandeurs.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                                         <span class="pcoded-mtext">Les demandeurs</span>

@@ -14,44 +14,44 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des budgets</h3>
+                    <h3>Liste des responsable d'activite</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('budgets.create') }}" class="btn btn-success">
+                    <a href="{{ route('responsable_activites.create') }}" class="btn btn-success">
                         <i class="feather icon-plus"></i> Ajouter</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Montant</th>
-                                <th>Date</th>
-                                <th>Activite</th>
-                                <th>Commentaire</th>
+                                <th>#</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Adresse mail</th>
+                                <th>Contact</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($budgets as $budget)
+                                @foreach ($responsable_activites as $responsable_activite)
                                 <tr>
-                                <td>{{ $budget->id }} </td>
-                                <td>{{ $budget->montant_budget }}</td>
-                                <td>{{ $budget->date_budget }}</td>
-                                <td>{{ $budget->activite->nom_activite }}</td>
-                                <td>{{ $budget->commentaire_budget }}</td>
+                                <td>{{ $responsable_activite->id }} </td>
+                                <td>{{ $responsable_activite->nom_responsable_activite }}</td>
+                                <td>{{ $responsable_activite->prenom_responsable_activite }}</td>
+                                <td>{{ $responsable_activite->mail_responsable_activite }}</td>
+                                <td>{{ $responsable_activite->contact_responsable_activite }}</td>
                                 <td>
-                                    <a href="{{ route('budgets.edit', $budget) }}" class="btn btn-primary">
+                                    <a href="{{ route('responsable_activites.edit', $responsable_activite) }}" class="btn btn-primary">
                                         <i class="feather icon-edit"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ route('budgets.destroy', $budget->id) }}" id="form{{ $budget->id }}">
+                                    <form method="POST" action="{{ route('responsable_activites.destroy', $responsable_activite->id) }}" id="form{{ $responsable_activite->id }}">
 
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="button" onclick="confirmation('#form{{ $budget->id }}')" class="btn btn-danger" >
+                                        <button type="button" onclick="confirmation('#form{{ $responsable_activite->id }}')" class="btn btn-danger" >
                                             <i class="feather icon-trash"></i>
                                         </button>
                                     </form>

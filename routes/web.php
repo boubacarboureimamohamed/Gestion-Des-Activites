@@ -30,6 +30,10 @@ Route::resource('ligne_activites', 'LigneActiviteController');
 
 Route::resource('budgets', 'BudgetsController');
 
+Route::resource('responsable_activites', 'ResponsablesActivite');
+
+Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'verifier']], function() { });

@@ -36,6 +36,14 @@ class LigneActiviteController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+
+            'nom_ligne_activite'=>'required',
+            'nom_responsable_ligne'=>'required',
+            'mail_responsable_ligne'=>'required',
+            'contact_responsable_ligne'=>'required'
+        ]);
+
         LigneActivite::create([
             'nom_ligne_activite'=>$request->nom_ligne_activite,
             'nom_responsable_ligne'=>$request->nom_responsable_ligne,
@@ -43,7 +51,7 @@ class LigneActiviteController extends Controller
             'contact_responsable_ligne'=>$request->contact_responsable_ligne
         ]);
 
-        return redirect(route('ligne_activites.index'));
+        return redirect(route('ligne_activites.index'))->with('success', 'Operation effectue avec success!');
     }
 
     /**
@@ -65,7 +73,8 @@ class LigneActiviteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ligne_activite = LigneActivite::find($id);
+        return view('ligne_activites.edit', compact('ligne_activite'));
     }
 
     /**
@@ -77,12 +86,25 @@ class LigneActiviteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ligne_activite->create([
+        $this->validate($request, [
+
+            'nom_ligne_activite'=>'required',
+            'nom_responsable_ligne'=>'required',
+            'mail_responsable_ligne'=>'required',
+            'contact_responsable_ligne'=>'required'
+        ]);
+
+        $ligne_activite = LigneActivite::find($id);
+
+        $ligne_activite->update([
             'nom_ligne_activite'=>$request->nom_ligne_activite,
             'nom_responsable_ligne'=>$request->nom_responsable_ligne,
             'mail_responsable_ligne'=>$request->mail_responsable_ligne,
             'contact_responsable_ligne'=>$request->contact_responsable_ligne
         ]);
+
+        return redirect(route('ligne_activites.index'))->with('success', 'Operation effectue avec success!');
+
     }
 
     /**
@@ -93,6 +115,13 @@ class LigneActiviteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ligne_activite= LigneActivite::with('activities')->find($id);
+
+        if($ligne_activite->activities)
+        {
+            return redirect(route('ligne_activites.index'))->with('error', 'Vous ne pouvez pas supprimer cette ligne car elle est a au moins une activite!');
+        }
+        LigneActivite::destroy($id);
+        return redirect(route('demandeurs.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

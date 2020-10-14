@@ -75,10 +75,22 @@ class DemandeursController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $demandeur = Demandeur::find($id);
         $demandeur->update([
             'nom_demandeur'=>$request->nom_demandeur
         ]);
+
+        return redirect(route('demandeurs.index'))->with('success', 'La modification a ete effectue avec success!');
+    }
+
+    public function modifier_demandeur(Request $request, Demandeur $demandeur)
+    {
+        dd($request->all());
+        $demandeur->update([
+            'nom_demandeur'=>$request->nom_demandeur
+        ]);
+
         return redirect(route('demandeurs.index'))->with('success', 'La modification a ete effectue avec success!');
     }
 

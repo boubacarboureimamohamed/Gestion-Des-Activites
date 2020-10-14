@@ -1,87 +1,98 @@
 @extends('layouts.adminty')
 
-@section('css')
-<!-- themify-icons line icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/themify-icons/themify-icons.css') }}">
-    <!-- ico font -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/icofont/css/icofont.css') }}">
-<!--forms-wizard css-->
-<link rel="stylesheet" type="text/css" href="{{ asset('bower_components/jquery.steps/css/jquery.steps.css') }}">
-
-@endsection
-
 @section('content')
-
-<div class="page-body">
+<div class="container">
     <div class="row">
-
-        <div class="col-sm-12">
-
-            <!-- Form wizard with validation card start -->
+        <div class="col-lg-12">
+            <!-- Date card start -->
             <div class="card">
-                <div class="card-header">
-                    <h5>Form Wizard With Validation</h5>
-                    <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span>
-
+                <div class="card-header"  style="text-align: center;">
+                    <h3>Ajout d'un nouvelle ligne d'activite</h3>
                 </div>
                 <div class="card-block">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="wizard">
-                                <section>
-                                    <form class="wizard-form" id="example-advanced-form" method="post" action="{{ route('ligne_activites.store') }}">
-                                        @csrf
-                                        <h3> Registration </h3>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="userName-2" class="block">Nom ligne *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="userName-2" name="nom_ligne_activite" type="text" class="required form-control">
-                                                </div>
+                    <form method="POST" action="{{ route('ligne_activites.store') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Nom ligne : </label>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="email-2" class="block">Nom & prenom responsable *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="email-2" name="nom_responsable_ligne" type="text" class="required form-control">
-                                                </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="nom_ligne_activite" class="form-control @error('nom_ligne_activite') is-invalid @enderror" placeholder="Veuillez entrer le nom du bailleur">
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="password-2" class="block">Mail responsable *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="password-2" name="mail_responsable_ligne" type="text" class="form-control required">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Mail responsable ligne :</label>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="confirm-2" class="block">Contact responsable *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="confirm-2" name="contact_responsable_ligne" type="text" class="form-control required">
-                                                </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="mail_responsable_ligne" class="form-control @error('mail_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer l'adresse du bailleur">
                                             </div>
-                                            <div class="text-center">
-                                                <a href="" id="edit-cancel" class="btn btn-default waves-effect">Annuler</a>
-                                                <button type="Submit" class="btn btn-primary waves-effect waves-light m-r-20">Enregister</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Responsable ligne :</label>
                                             </div>
-                                    </form>
-                                </section>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="nom_responsable_ligne" class="form-control @error('nom_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer l'adresse du bailleur">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Contact reponsable :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="contact_responsable_ligne" class="form-control @error('contact_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer le contact du bailleur">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row m-t-20">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-10" style="text-align: center;">
+                               <a href="{{ route('ligne_activites.index') }}" class="btn btn-default">
+                                     {{ ('Annuler') }}
+                               </a>
+                                <button type="submit" class="btn btn-primary">
+                                     {{ ('Enregistrer') }}
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                       </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <p class="text-inverse text-left m-b-0">Develop By </p>
+                                <p class="text-inverse text-left"><a href="#"><b class="f-w-600"> SYNETCOM </b></a></p>
+                            </div>
+                            <div class="col-md-1">
+                                <img src="{{ asset('assets/images/auth/Logo-small-bottom.png') }}" alt="small-logo.png">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!-- Form wizard with validation card end -->
+            <!-- Date card end -->
         </div>
-
     </div>
 </div>
-
-@endsection
-
-@section('js')
 @endsection

@@ -1,81 +1,103 @@
 @extends('layouts.adminty')
 
-@section('css')
-
-@endsection
-
 @section('content')
-
-<div class="page-body">
+<div class="container">
     <div class="row">
-
-        <div class="col-sm-12">
-
-            <!-- Form wizard with validation card start -->
+        <div class="col-lg-12">
+            <!-- Date card start -->
             <div class="card">
-                <div class="card-header">
-                    <h5>Form Wizard With Validation</h5>
+                <div class="card-header"  style="text-align: center;">
+                    <h3>Ajout d'un nouveau budget</h3>
                 </div>
                 <div class="card-block">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="wizard">
-                                <section>
-                                    <form class="wizard-form" id="example-advanced-form" method="post" action="{{ route('budgets.store') }}">
-                                        @csrf
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="userName-2" class="block">Montant budget *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="userName-2" name="montant_budget" type="text" class="required form-control">
-                                                </div>
+                    <form method="POST" action="{{ route('budgets.store') }}">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Montant budget : </label>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="email-2" class="block">Date budget *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="email-2" name="date_budget" type="date" class="required form-control">
-                                                </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="montant_budget" class="form-control" placeholder="Veuillez entrer le montant du budget">
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">
-                                                    <label for="password-2" class="block">Commentaire *</label>
-                                                </div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <input id="password-2" name="commentaire_budget" type="text" class="form-control required">
-                                                </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Commentaire budget :</label>
                                             </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-4 col-lg-2">Acitivite</div>
-                                                <div class="col-md-8 col-lg-10">
-                                                    <select class="form-control required" name="activite_id">
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="commentaire_budget" class="form-control" placeholder="commentaire budget">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                    <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Date budget :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="date" name="date_budget" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Activite :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <select class="form-control" name="activite_id">
                                                         <option>Selectionnez activite...</option>
                                                         @foreach($activites as $activite)
-                                                        <option value="{{  $activite->id }}">{{ $activite->nom_activite  }}</option>
+                                                          <option value="{{ $activite->id }}">{{  $activite->nom_activite }}</option>
                                                         @endforeach
-                                                    </select>
-                                                </div>
+                                                </select>
                                             </div>
-                                            <div class="text-center">
-                                                <a href="" id="edit-cancel" class="btn btn-default waves-effect">Annuler</a>
-                                                <button type="Submit" class="btn btn-primary waves-effect waves-light m-r-20">Enregister</button>
-                                            </div>
-                                    </form>
-                                </section>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row m-t-20">
+                            <div class="col-md-1">
+
+                            </div>
+                            <div class="col-md-10" style="text-align: center;">
+                               <a href="{{ route('budgets.index') }}" class="btn btn-default">
+                                     {{ ('Annuler') }}
+                               </a>
+                                <button type="submit" class="btn btn-primary">
+                                     {{ ('Enregistrer') }}
+                                </button>
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                       </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <p class="text-inverse text-left m-b-0">Develop By </p>
+                                <p class="text-inverse text-left"><a href="#"><b class="f-w-600"> SYNETCOM </b></a></p>
+                            </div>
+                            <div class="col-md-1">
+                                <img src="{{ asset('assets/images/auth/Logo-small-bottom.png') }}" alt="small-logo.png">
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <!-- Form wizard with validation card end -->
+            <!-- Date card end -->
         </div>
-
     </div>
 </div>
-
-@endsection
-
-@section('js')
 @endsection

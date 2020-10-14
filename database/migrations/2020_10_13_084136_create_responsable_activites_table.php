@@ -15,10 +15,10 @@ class CreateResponsableActivitesTable extends Migration
     {
         Schema::create('responsable_activites', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_responsable_activte');
-            $table->string('prenom_responsable_activte');
-            $table->string('mail_responsable_activte');
-            $table->string('contact_responsable_activte');
+            $table->string('nom_responsable_activite');
+            $table->string('prenom_responsable_activite');
+            $table->string('mail_responsable_activite');
+            $table->string('contact_responsable_activite');
             $table->timestamps();
         });
     }
