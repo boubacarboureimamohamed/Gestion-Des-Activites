@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+Use App\Models\Demandeur;
 class DemandeursController extends Controller
 {
     /**
@@ -40,7 +40,7 @@ class DemandeursController extends Controller
             'nom_demandeur'=>$request->nom_demandeur
         ]);
 
-        return redirect(route('demandeurs.index'));
+        return redirect(route('demandeurs.index'))->with('success', 'Operation effectue avec success!');
     }
 
     /**
@@ -62,7 +62,8 @@ class DemandeursController extends Controller
      */
     public function edit($id)
     {
-        //
+        $demandeur = Demandeur::find($id);
+        return view('demandeurs.edit', compact('demandeur'));
     }
 
     /**
@@ -74,7 +75,23 @@ class DemandeursController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request->all());
+        $demandeur = Demandeur::find($id);
+        $demandeur->update([
+            'nom_demandeur'=>$request->nom_demandeur
+        ]);
+
+        return redirect(route('demandeurs.index'))->with('success', 'La modification a ete effectue avec success!');
+    }
+
+    public function modifier_demandeur(Request $request, Demandeur $demandeur)
+    {
+        dd($request->all());
+        $demandeur->update([
+            'nom_demandeur'=>$request->nom_demandeur
+        ]);
+
+        return redirect(route('demandeurs.index'))->with('success', 'La modification a ete effectue avec success!');
     }
 
     /**
@@ -85,6 +102,13 @@ class DemandeursController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $demandeur= Demandeur::with('activities')->find($id);
+
+        if($demandeur->activities)
+        {
+            return redirect(route('demandeurs.index'))->with('error', 'Vous ne pouvez pas supprimer ce demandeur car il a demande au moins une activite!');
+        }
+        Demandeur::destroy($id);
+        return redirect(route('demandeurs.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

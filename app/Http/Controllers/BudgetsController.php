@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Budget;
+use App\Models\Activite;
 
 class BudgetsController extends Controller
 {
@@ -23,7 +25,7 @@ class BudgetsController extends Controller
      */
     public function create()
     {
-        $activites = Activites::all();        
+        $activites = Activite::all();        
         return view('budgets.create', compact('activites'));
     }
 
@@ -35,6 +37,13 @@ class BudgetsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'montant_budget'=>'required|numeric',
+            'date_budget'=>'required|date',
+            'activite_id'=>'required',
+            'commentaire_budget'=>'required'
+        ]);
+
         Budget::create([
             'montant_budget'=>$request->montant_budget,
             'date_budget'=>$request->date_budget,
@@ -42,7 +51,7 @@ class BudgetsController extends Controller
             'activite_id'=>$request->activite_id
         ]);
 
-        return redirect(route('budgets.index'));
+        return redirect(route('budgets.index'))->with('success', 'Operation effectue avec success!');
     }
 
     /**
@@ -64,7 +73,9 @@ class BudgetsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $budget = Budget::find($id);
+        $activites = Activite::all();  
+        return view('budgets.edit', compact('budget', 'activites'));
     }
 
     /**
@@ -76,7 +87,23 @@ class BudgetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+
+            'montant_budget'=>'required|numeric',
+            'date_budget'=>'required|date',
+            'activite_id'=>'required',
+            'commentaire_budget'=>'required'
+        ]);
+
+        $budget = Budget::find($id);
+        $budget->update([
+            'montant_budget'=>$request->montant_budget,
+            'date_budget'=>$request->date_budget,
+            'commentaire_budget'=>$request->commentaire_budget,
+            'activite_id'=>$request->activite_id
+        ]);
+
+        return redirect(route('budgets.index'))->with('success', 'Operation effectue avec success!');
     }
 
     /**
@@ -87,6 +114,13 @@ class BudgetsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $budget= Budget::with('activite')->find($id);
+
+        if($budget->activite)
+        {
+            return redirect(route('budgets.index'))->with('error', 'Vous ne pouvez pas supprimer cet budget car il est deja lie a une activite!');
+        }
+        Budget::destroy($id);
+        return redirect(route('demandeurs.index'))->with('success', 'La suppression a été effetué avec succés!');
     }
 }

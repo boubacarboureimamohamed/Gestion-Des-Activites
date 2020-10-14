@@ -7,38 +7,31 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Modification d'une ligne d'activite</h3>
+                    <h3>Ajout d'un nouveau d'activite</h3>
                 </div>
                 <div class="card-block">
-                    <form method="POST" action="{{ route('ligne_activites.update', $ligne_activite) }}">
-                       {{ csrf_field() }}
-                       {{ method_field('PUT') }}
+                    <form method="POST" action="{{ route('responsable_activites.store') }}">
+                        @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom ligne : </label>
+                                                <label class="col-form-label">Nom : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="nom_ligne_activite" value="{{ $ligne_activite->nom_ligne_activite }}" class="form-control @error('nom_ligne_activite') is-invalid @enderror" placeholder="Veuillez entrer le nom du bailleur">
-                                                @error('nom_ligne_activite')
-                                                    <div style="color:red;">{{ $message }}</div>
-                                                @enderror
+                                                <input type="text" name="nom_responsable_activite" value="{{ old('nom_responsable_activite') }}" class="form-control" placeholder="Veuillez entrer le nom du responsable">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Mail responsable ligne :</label>
+                                                <label class="col-form-label">Adresse mail :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="mail_responsable_ligne" value="{{ $ligne_activite->mail_responsable_ligne }}" class="form-control @error('mail_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer l'adresse du bailleur">
-                                                @error('mail_responsable_ligne')
-                                                    <div style="color:red;">{{ $message }}</div>
-                                                @enderror
+                                                <input type="text" name="mail_responsable_activite" value="{{ old('mail_responsable_activite') }}" class="form-control" placeholder="Veuillez entrer l'adresse mail du responsable">
                                             </div>
                                         </div>
                                     </div>
@@ -49,26 +42,20 @@
                                     <div class="col-sm-12">
                                     <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Responsable ligne :</label>
+                                                <label class="col-form-label">Prenom:</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="nom_responsable_ligne" value="{{ $ligne_activite->nom_responsable_ligne }}" class="form-control @error('nom_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer l'adresse du bailleur">
-                                                @error('nom_responsable_ligne')
-                                                    <div style="color:red;">{{ $message }}</div>
-                                                @enderror
+                                                <input type="text" name="prenom_responsable_activite" value="{{ old('prenom_responsable_activite') }}" class="form-control" placeholder="Veuillez entrer le prenom du responsable">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Contact reponsable :</label>
+                                                <label class="col-form-label">Contact :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_responsable_ligne" value="{{ $ligne_activite->contact_responsable_ligne }}" class="form-control @error('contact_responsable_ligne') is-invalid @enderror" placeholder="Veuillez entrer le contact du bailleur">
-                                                @error('contact_responsable_ligne')
-                                                    <div style="color:red;">{{ $message }}</div>
-                                                @enderror
+                                                <input type="text" name="contact_responsable_activite" value="{{ old('contact_responsable_activite') }}" class="form-control" placeholder="Veuillez entrer le contact du reponsable">
                                             </div>
                                         </div>
                                     </div>
@@ -80,7 +67,7 @@
 
                             </div>
                             <div class="col-md-10" style="text-align: center;">
-                               <a href="{{ route('ligne_activites.index') }}" class="btn btn-default">
+                               <a href="{{ route('responsable_activites.index') }}" class="btn btn-default">
                                      {{ ('Annuler') }}
                                </a>
                                 <button type="submit" class="btn btn-primary">

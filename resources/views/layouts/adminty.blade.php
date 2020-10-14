@@ -14,6 +14,8 @@
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Required Fremwork -->
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap/css/bootstrap.min.css') }}">
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/sweetalert/css/sweetalert.css') }}">
     <!-- feather Awesome -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/icon/feather/css/feather.css') }}">
     <!-- Style.css -->
@@ -153,6 +155,15 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
+                                    <a href="{{ route('responsable_activites.index') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Les Responsable d'activte</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
                                     <a href="{{ route('demandeurs.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                                         <span class="pcoded-mtext">Les demandeurs</span>
@@ -262,8 +273,8 @@
     <script type="text/javascript" src="{{ asset('assets/js/SmoothScroll.js') }}"></script>
     <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
     <!-- sweetalert2 -->
-    <script src="{{ asset('vendor/sweetalert/js/sweetalert2.min.js') }}"></script>
-
+    <script src="{{ asset('bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    @include('flash-message')
     <!-- custom js -->
     <script src="{{ asset('assets/js/vartical-layout.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/pages/dashboard/custom-dashboard.js') }}"></script>
