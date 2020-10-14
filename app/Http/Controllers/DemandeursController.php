@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
 use Illuminate\Http\Request;
 
-class ActivitesController extends Controller
+class DemandeursController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,9 @@ class ActivitesController extends Controller
      */
     public function index()
     {
-        $activites = Activite::all();
-        return view('activites.index', compact('activites'));
+        $demandeurs = Demandeur::all();
+
+    return view('demandeurs.index', compact('demandeurs'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ActivitesController extends Controller
      */
     public function create()
     {
-        return view('activites.create');
+        return view('demandeurs.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Demandeur::create([
+            'nom_demandeur'=>$request->nom_demandeur
+        ]);
+
+        return redirect(route('demandeurs.index'));
     }
 
     /**

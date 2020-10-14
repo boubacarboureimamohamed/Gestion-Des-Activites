@@ -135,7 +135,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="form-validation.htm">
+                                            <a href="{{ route('ligne_activites.index') }}">
                                                 <span class="pcoded-mtext">Les lignes d'activités </span>
                                             </a>
                                         </li>
@@ -144,9 +144,18 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="#">
+                                    <a href="{{ route('budgets.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                                         <span class="pcoded-mtext">Les budgets</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
+                                    <a href="{{ route('demandeurs.index') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Les demandeurs</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

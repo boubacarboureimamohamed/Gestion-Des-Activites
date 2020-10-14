@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
 use Illuminate\Http\Request;
 
-class ActivitesController extends Controller
+class BudgetsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +13,8 @@ class ActivitesController extends Controller
      */
     public function index()
     {
-        $activites = Activite::all();
-        return view('activites.index', compact('activites'));
-    }
+        $budgets = Budget::all();
+        return view('budgets.index', compact('budgets'));    }
 
     /**
      * Show the form for creating a new resource.
@@ -25,7 +23,8 @@ class ActivitesController extends Controller
      */
     public function create()
     {
-        return view('activites.create');
+        $activites = Activites::all();        
+        return view('budgets.create', compact('activites'));
     }
 
     /**
@@ -36,7 +35,14 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Budget::create([
+            'montant_budget'=>$request->montant_budget,
+            'date_budget'=>$request->date_budget,
+            'commentaire_budget'=>$request->commentaire_budget,
+            'activite_id'=>$request->activite_id
+        ]);
+
+        return redirect(route('budgets.index'));
     }
 
     /**

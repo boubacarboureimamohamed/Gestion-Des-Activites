@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Activite;
 use Illuminate\Http\Request;
 
-class ActivitesController extends Controller
+class LigneActiviteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,8 @@ class ActivitesController extends Controller
      */
     public function index()
     {
-        $activites = Activite::all();
-        return view('activites.index', compact('activites'));
+        $ligne_activites = LigneActivite::al();
+        return view('ligne_activites.index', compact('ligne_activites'));
     }
 
     /**
@@ -25,7 +24,7 @@ class ActivitesController extends Controller
      */
     public function create()
     {
-        return view('activites.create');
+        return view('ligne_activites.create');
     }
 
     /**
@@ -36,7 +35,14 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        LigneActivite::create([
+            'nom_ligne_activite'=>$request->nom_ligne_activite,
+            'nom_responsable_ligne'=>$request->nom_responsable_ligne,
+            'mail_responsable_ligne'=>$request->mail_responsable_ligne,
+            'contact_responsable_ligne'=>$request->contact_responsable_ligne
+        ]);
+
+        return redirect(route('ligne_activites.index'));
     }
 
     /**
