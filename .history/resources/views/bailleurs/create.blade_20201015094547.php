@@ -32,6 +32,7 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
                                                 <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du bailleur">
+                                d
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +47,10 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="contact_bailleur" class="form-control @error('contact_bailleur') is-invalid @enderror" placeholder="Veuillez entrer le contact du bailleur">
+                                                @error('contact_bailleur')
+                                                    <div class="alert alert-danger">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>
