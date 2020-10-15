@@ -36,6 +36,13 @@ class ResponsablesActivite extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'nom_responsable_activite'=>'required',
+            'prenom_responsable_activite'=>'required',
+            'mail_responsable_activite'=>'required',
+            'contact_responsable_activite'=>'required'
+        ]);
+
         ResponsableActivite::create([
             'nom_responsable_activite'=>$request->nom_responsable_activite,
             'prenom_responsable_activite'=>$request->prenom_responsable_activite,
@@ -78,6 +85,13 @@ class ResponsablesActivite extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'nom_responsable_activite'=>'required',
+            'prenom_responsable_activite'=>'required',
+            'mail_responsable_activite'=>'required',
+            'contact_responsable_activite'=>'required'
+        ]);
+        
         $responsable_activite = ResponsableActivite::find($id);
 
         $responsable_activite ->update([
