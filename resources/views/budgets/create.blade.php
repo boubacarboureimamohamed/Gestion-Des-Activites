@@ -22,7 +22,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="montant_budget" class="form-control" placeholder="Veuillez entrer le montant du budget">
+                                                <input type="text" name="montant_budget" value="{{ old('montant_budget') }}" class="form-control" placeholder="Veuillez entrer le montant du budget">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="commentaire_budget" class="form-control" placeholder="commentaire budget">
+                                                <input type="text" name="commentaire_budget" value="{{ old('commentaire_budget') }}" class="form-control" placeholder="commentaire budget">
                                             </div>
                                         </div>
                                     </div>
