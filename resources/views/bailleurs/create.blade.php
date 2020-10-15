@@ -32,7 +32,6 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
                                                 <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du bailleur">
-                        
                                             </div>
                                         </div>
                                     </div>

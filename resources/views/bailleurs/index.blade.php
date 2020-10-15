@@ -71,5 +71,22 @@
 @endsection
 
 @section('js')
+<script>
 
+    function confirmation(target)
+       {
+           swal({
+               title: "Êtes-vous sûr ???",
+               text: "Une fois supprimé, vous ne pourrez plus récupérer cet enregistrement! ",
+               type: "warning",
+               showCancelButton: true,
+               confirmButtonText:'Oui',
+               cancelButtonText:'Non'
+
+           }).then(function() {
+               $(target).submit();
+           });
+       }
+
+   </script>
 @endsection

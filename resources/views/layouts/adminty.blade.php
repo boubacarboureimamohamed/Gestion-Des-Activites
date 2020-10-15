@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Adminty - Premium Admin Template by Colorlib </title>
+    <title>Adminty - Gestion Des Activités</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -48,7 +48,7 @@
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
 
-            <nav class="navbar header-navbar pcoded-header">
+            <nav class="navbar header-navbar pcoded-header iscollapsed" header-theme="theme2" pcoded-header-position="fixed">
                 <div class="navbar-wrapper">
 
                     <div class="navbar-logo">
@@ -128,11 +128,11 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
-                                        <span class="pcoded-mtext">Activités Et Lignes Activités</span>
+                                        <span class="pcoded-mtext">Activités & Lignes Activités</span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class="{{ route('activites.index') }}">
-                                            <a href="form-elements-add-on.htm">
+                                        <li class="">
+                                            <a href="{{ route('activites.index') }}">
                                                 <span class="pcoded-mtext">Les activités</span>
                                             </a>
                                         </li>
@@ -146,6 +146,15 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
+                                    <a href="{{ route('bailleurs.index') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
+                                        <span class="pcoded-mtext">Les bailleurs</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
                                     <a href="{{ route('budgets.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
                                         <span class="pcoded-mtext">Les budgets</span>
@@ -155,48 +164,18 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="{{ route('responsable_activites.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
-                                        <span class="pcoded-mtext">Les Responsable d'activte</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
                                     <a href="{{ route('demandeurs.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-micon"><i class="feather icon-box"></i></span>
                                         <span class="pcoded-mtext">Les demandeurs</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                             </ul>
-                            <div class="pcoded-navigatio-lavel">Elements UI</div>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="pcoded-hasmenu">
-                                    <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="feather icon-box"></i></span>
-                                        <span class="pcoded-mtext">Basic Components</span>
-                                    </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="alert.htm">
-                                                <span class="pcoded-mtext">Alert</span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
-                                            <a href="preloader.htm">
-                                                <span class="pcoded-mtext">Pre-Loader</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
-                                    <a href="{{ route('bailleurs.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
-                                        <span class="pcoded-mtext">Les bailleurs</span>
+                                    <a href="{{ route('responsable_activites.index') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-credit-card"></i></span>
+                                        <span class="pcoded-mtext">Les Responsable d'activte</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

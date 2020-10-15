@@ -55,7 +55,7 @@ class BailleursController extends Controller
 
         ]);
 
-        return redirect(route('bailleurs.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
 
     }
 
@@ -78,7 +78,8 @@ class BailleursController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bailleur = Bailleur::find($id);
+        return view('bailleurs.edit', compact('bailleur'));
     }
 
     /**
@@ -90,9 +91,27 @@ class BailleursController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        //dd($request->all());
+        $this->validate($request, [
 
+            'nom_bailleur'=>'required',
+            'adresse_bailleur'=>'required',
+            'contact_bailleur'=>'required'
+
+        ]);
+
+        $bailleur = Bailleur::find($id);
+
+        $bailleur->update([
+
+            'nom_bailleur'=>$request->nom_bailleur,
+            'adresse_bailleur'=>$request->adresse_bailleur,
+            'contact_bailleur'=>$request->contact_bailleur
+
+        ]);
+
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -101,6 +120,7 @@ class BailleursController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Bailleur::destroy($id);
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
     }
 }
