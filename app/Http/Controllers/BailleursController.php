@@ -55,7 +55,7 @@ class BailleursController extends Controller
 
         ]);
 
-        return redirect(route('bailleurs.index'))->with('success', 'L\'enregistrement a été effetué avec succés');
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
 
     }
 
@@ -110,7 +110,7 @@ class BailleursController extends Controller
 
         ]);
 
-        return redirect(route('bailleurs.index'))->with('success', 'La modification a été effetué avec succés');
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
     }
     /**
      * Remove the specified resource from storage.
@@ -121,6 +121,6 @@ class BailleursController extends Controller
     public function destroy($id)
     {
         Bailleur::destroy($id);
-        return redirect(route('bailleurs.index'))->with('success', 'La suppression a été effetué avec succés');
+        return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
     }
 }

@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('demandeurs.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        <i class="feather icon-plus"></i>Ajouter</a>
+                        <i class="feather icon-plus"></i>Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
@@ -89,7 +89,7 @@
                             <input type="text" name="nom_demandeur" class="form-control" placeholder="Veuillez entrer le nom du demandeur">
                         </div>
                     </div>
-            
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -113,7 +113,7 @@
             <div class="modal-body">
             <form id="form2" method="post">
             {{ csrf_field() }}
-            {{ method_field('PUT') }} 
+            {{ method_field('PUT') }}
                     <div class="row form-group">
                         <div class="col-sm-3">
                             <label class="col-form-label">Nom demandeur</label>
@@ -123,7 +123,7 @@
                             <input type="text" name="nom_demandeur" id="nom_demandeur" class="form-control">
                         </div>
                     </div>
-            
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
