@@ -10,6 +10,6 @@ class LigneActivite extends Model
 
     public function activities()
     {
-        return $this->HasMany('App\Models\Activite')->withPivot('montant_prevu', 'montant_depense');
+        return $this->belongsToMany('App\Models\Activite', 'activites_ligne_activites')->withPivot('montant_prevu', 'montant_depense');
     }
 }

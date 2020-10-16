@@ -10,6 +10,7 @@
     <meta name="description" content="#">
     <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
     <!-- Required Fremwork -->
@@ -21,6 +22,11 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/data-table/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    
 </head>
 
 <body>
@@ -238,6 +244,8 @@
     <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/popper.js/js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
+
+     
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
     <!-- modernizr js -->
@@ -259,6 +267,20 @@
     <script type="text/javascript" src="{{ asset('assets/pages/dashboard/custom-dashboard.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/script.min.js') }}"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- data-table js -->
+    <script type="text/javascript" src="{{ asset('bower_components/data-table/js/jszip.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/data-table/js/pdfmake.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/data-table/js/vfs_fonts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/buttons.html5.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/js/buttons.print.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/js/dataTables.buttons.min.js') }}"></script>
+   
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
