@@ -189,8 +189,8 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
-                                            <a href="# target="_blank">
-                                                <span class="pcoded-mtext">LLes utilisateurs</span>
+                                            <a href="{{ route('users.index') }}">
+                                                <span class="pcoded-mtext">Les utilisateurs</span>
                                             </a>
                                         </li>
                                         <li class="">

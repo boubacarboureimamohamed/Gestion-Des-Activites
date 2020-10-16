@@ -30,6 +30,8 @@ Route::resource('ligne_activites', 'LigneActiviteController');
 
 Route::resource('budgets', 'BudgetsController');
 
+Route::resource('users', 'UsersController');
+
 Route::resource('responsable_activites', 'ResponsablesActivite');
 
 Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
