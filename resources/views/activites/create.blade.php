@@ -40,7 +40,9 @@
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="" name="responsable_activite_id">
                                                     <option selected="selected">********Sélectionnez********</option>
-                                                    <option value=""></option>
+                                                    @foreach ($responsable_activites as $responsable_activite) 
+                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>  
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -75,8 +77,10 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="" name="demandeur_id">
-                                                    <option selected="selected">********Sélectionnez********</option>
-                                                    <option value=""></option>
+                                                      <option selected="selected">********Sélectionnez********</option> 
+                                                    @foreach ($demandeurs as $demandeur) 
+                                                      <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>  
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -125,7 +129,9 @@
                                                         <div class="input-group">
                                                             <select class="form-control" id="" name="ligne_activite_id[]">
                                                                 <option selected="selected">********Sélectionnez********</option>
-                                                                <option value=""></option>
+                                                                @foreach ($ligne_activites as $ligne_activite) 
+                                                                 <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>  
+                                                                @endforeach
                                                             </select>
                                                          </div>
                                                     </div>
@@ -179,7 +185,9 @@
                                                         <div class="input-group">
                                                             <select class="form-control" id="" name="bailleur_id[]">
                                                                 <option selected="selected">********Sélectionnez********</option>
-                                                                <option value=""></option>
+                                                                @foreach ($bailleurs as $bailleur) 
+                                                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
+                                                                @endforeach
                                                             </select>
                                                          </div>
                                                     </div>
@@ -326,7 +334,9 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="ligne_activite_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                <option value=""></option>
+                                 @foreach ($ligne_activites as $ligne_activite) 
+                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>  
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -382,7 +392,9 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="bailleur_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                <option value=""></option>
+                                 @foreach ($bailleurs as $bailleur) 
+                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
+                                 @endforeach
                             </select>
                         </div>
                     </div>

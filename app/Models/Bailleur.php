@@ -10,6 +10,6 @@ class Bailleur extends Model
 
     public function activites()
     {
-        return $this->hasMany('App\Models\Activite')->withPivot('montant_annonce', 'montant_decaisse');
+        return $this->belongsToMany('App\Models\Activite', 'activites_bailleurs')->withPivot('montant_annonce', 'montant_decaisse');
     }
 }
