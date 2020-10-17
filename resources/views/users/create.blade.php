@@ -1,5 +1,15 @@
 @extends('layouts.adminty')
 
+@section('css')
+
+    <!-- Multi Select css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/multiselect/css/multi-select.css') }}">
+    <!-- Select 2 css -->
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/css/select2.min.css') }}">
+
+@endsection
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -18,7 +28,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom du bailleur : </label>
+                                                <label class="col-form-label">Nom de l'utilisateur : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
@@ -27,11 +37,11 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Adresse du bailleur :</label>
+                                                <label class="col-form-label">Nouveau mot de passe  :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du bailleur">
+                                                <input id="password" type="password" class="form-control" name="password"  value="{{ old('password') }}" class="form-control" placeholder="Veuillez entrer le mot de passe">
                                             </div>
                                         </div>
                                     </div>
@@ -42,23 +52,44 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Contact du bailleur :</label>
+                                                <label class="col-form-label">Email de l'utilisateur :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input id="email" type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Veuillez entrer l'adresse mail">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Confirmer mot de passe :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input id="password-confirm" type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" class="form-control" placeholder="Veuillez confirmer le mot de passe">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Multi-select start -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label class="col-form-label">Sélectionnez un ou plusiers rôle(s) :</label>
+                                <select id='custom-headers'  data-toggle="tooltip" class="searchable" name="roles[]" multiple='multiple'>
+                                    @foreach ($roles as $role)
+                                        <option value='{{ $role->id }}'>{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Multi-select end -->
                         <div class="row m-t-20">
                             <div class="col-md-1">
 
                             </div>
                             <div class="col-md-10" style="text-align: center;">
-                               <a href="{{ route('bailleurs.index') }}" class="btn btn-default">
+                               <a href="{{ route('users.index') }}" class="btn btn-default">
                                      {{ ('Annuler') }}
                                </a>
                                 <button type="submit" class="btn btn-primary">
@@ -86,4 +117,17 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+
+    <!-- Multiselect js -->
+    <script type="text/javascript" src="{{ asset('bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.quicksearch.js') }}"></script>
+    <!-- Select 2 js -->
+<script type="text/javascript" src="{{ asset('bower_components/select2/js/select2.full.min.js') }}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{{ asset('assets/pages/advance-elements/select2-custom.js') }}"></script>
+
 @endsection

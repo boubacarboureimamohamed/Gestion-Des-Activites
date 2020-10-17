@@ -26,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/data-table/css/buttons.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
-    
+
 </head>
 
 <body>
@@ -78,40 +78,49 @@
                             </li>
                         </ul>
                         <ul class="nav-right">
-                            <li class="user-profile header-notification">
-                                <div class="dropdown-primary dropdown">
-                                    <div class="dropdown-toggle" data-toggle="dropdown">
+
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                                @if (Route::has('register'))
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    </li>
+                                @endif
+                            @else
+                                <li class="user-profile header-notification">
+                                    <div class="dropdown-primary dropdown">
+                                        <div class="dropdown-toggle" data-toggle="dropdown">
                                         <img src="{{ asset('assets/images/avatar-4.jpg') }}" class="img-radius" alt="User-Profile-Image">
-                                        <span>BOUBACAR BOUREIMA Mohamed</span>
-                                        <i class="feather icon-chevron-down"></i>
+                                    <span>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
+                                    </span>
+                                    <i class="feather icon-chevron-down"></i>
                                     </div>
                                     <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                                         <li>
-                                            <a href="user-profile.htm">
-                                                <i class="feather icon-user"></i> Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="auth-lock-screen.htm">
-                                                <i class="feather icon-lock"></i> Lock Screen
+                                            <a href="">
+                                                <i class="feather icon-user"></i> {{ ('Mon profile') }}
                                             </a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                            document.getElementById('logout-form').submit();">
-                                                <i class="feather icon-log-out"></i> Logout
+                                                        document.getElementById('logout-form').submit();">
+                                                <i class="feather icon-log-out"></i>
+                                            {{ __('Deconnexion') }}
                                             </a>
-
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                @csrf
-                                            </form>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
                                         </li>
-
                                     </ul>
+                                    </div>
+                                </li>
+                            @endguest
 
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -200,7 +209,7 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="auth-reset-password.htm" target="_blank">
+                                            <a href="{{ route('roles.index') }}" target="_blank">
                                                 <span class="pcoded-mtext">Les rôles</span>
                                             </a>
                                         </li>
@@ -245,7 +254,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/popper.js/js/popper.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
 
-     
+
     <!-- jquery slimscroll js -->
     <script type="text/javascript" src="{{ asset('bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
     <!-- modernizr js -->
@@ -279,7 +288,7 @@
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/buttons.html5.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/js/buttons.print.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-buttonsjs/js/dataTables.buttons.min.js') }}"></script>
-   
+
 
 <script>
   window.dataLayer = window.dataLayer || [];

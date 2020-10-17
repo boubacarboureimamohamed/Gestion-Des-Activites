@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\User;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class UsersController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $roles = Role::all();
+        return view('users.roles.index', compact('roles'));
     }
 
     /**
@@ -27,8 +26,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('users.create', compact('roles'))->with('success', "Opération effetuée avec succés!");
+        $permissions = Permission::all();
+        return view('users.roles.create', compact('permissions'));
     }
 
     /**
@@ -39,7 +38,11 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::create(['name'=> $request->name]);
+        $role->syncPermissions($request->permissions);
+
+        return redirect(route('roles.index'))->with('success', 'Opération effetuée avec succés');
+
     }
 
     /**
@@ -59,11 +62,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        $user = User::find($id);
-        $roles = Role::all();
-        return view('users.edit', compact('user','roles'));
+        $permissions = Permission::all();
+        return view('users.roles.edit', compact('permissions', 'role'));
     }
 
     /**
@@ -73,15 +75,13 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Role $role)
     {
-        $user->update([
+        $role->update([
             'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>$request->password
         ]);
-        $user->syncRoles($request->roles);
-        return redirect(route('users.index'))->with('success', 'Opération effetuée avec succés');
+        $role->syncPermissions($request->permissions);
+        return redirect(route('roles.index'))->with('success', 'Opération effetuée avec succés');
     }
 
     /**
@@ -92,15 +92,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        $user = Auth::user();
-            if ($id == $user->id)
-            {
-                return redirect()->back()->with('error', 'Vous ne pouvez pas supprimer votre propre compte, Désolé!!!');
-            }
-            else
-            {
-                User::destroy($id);
-                return redirect(route('users.index'))->with('success', 'Opération effetuée avec succés!');
-            }
+        Role::destroy($id);
+        return redirect(route('roles.index'))->with('success', 'Opération effetuée avec succés!');
     }
 }

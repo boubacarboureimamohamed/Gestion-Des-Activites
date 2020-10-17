@@ -18,14 +18,14 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('users.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                        <i class="feather icon-plus"></i> </a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Nom</th>
+                                <th>Nom et Prénom</th>
                                 <th>Email</th>
-                                <th>rôles</th>
+                                <th>Rôle(s)</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -35,7 +35,13 @@
                                 <tr>
                                 <td> {{ $user->name}} </td>
                                 <td> {{ $user->email }} </td>
-                                <td> </td>
+                                <td>
+                                    @foreach ($user->roles as $role)
+                                        <span class="badge badge-primary badge-pill">
+                                            {{  $role->name }}
+                                        </span>
+                                    @endforeach
+                                </td>
                                 <td>
                                     <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">
                                         <i class="feather icon-edit"></i>
