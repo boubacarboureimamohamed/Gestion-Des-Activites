@@ -18,7 +18,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom du bailleur : </label>
+                                                <label class="col-form-label">Nom : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
@@ -27,7 +27,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Adresse du bailleur :</label>
+                                                <label class="col-form-label">Adresse :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
@@ -42,11 +42,20 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Contact du bailleur :</label>
+                                                <label class="col-form-label">Contact :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
                                                 <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Adresse mail :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="mail_bailleur" value="{{ old('mail_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
                                             </div>
                                         </div>
                                     </div>

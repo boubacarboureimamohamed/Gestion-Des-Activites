@@ -28,11 +28,19 @@ Route::resource('demandeurs', 'DemandeursController');
 
 Route::resource('ligne_activites', 'LigneActiviteController');
 
+Route::post('addLigne_activite', 'LigneActiviteController@addLigne_activite');
+
+Route::post('addBailleur', 'BailleursController@addBailleur');
+
 Route::resource('budgets', 'BudgetsController');
 
 Route::resource('responsable_activites', 'ResponsablesActivite');
 
 Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
+
+Route::get('/getData', 'ActivitesController@getData');
+
+Route::get('justifications/create', 'JustificationController@justification')->name('justification');
 
 Auth::routes();
 

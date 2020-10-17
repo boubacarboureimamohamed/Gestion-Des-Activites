@@ -29,13 +29,13 @@ class ActivitesController extends Controller
      */
     public function create()
     {
+        $responsable_activites = ResponsableActivite::all();
         $bailleurs = Bailleur::all();
         $demandeurs = Demandeur::all();
         $ligne_activites = LigneActivite::all();
-        $responsable_activites = ResponsableActivite::all();
         return view('activites.create', compact('bailleurs', 'demandeurs', 'ligne_activites', 'responsable_activites'));
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -44,6 +44,7 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->all());
         $this->validate($request, [
 
             'nom_activite'=>'required',
@@ -51,8 +52,10 @@ class ActivitesController extends Controller
             'date_fin_activite'=>'required|date',
             'demandeur_id'=>'required',
             'responsable_activite_id'=>'required',
-            'montant_annonce'=>'required|numeric',
-            'montant_decaisse'=>'required|numeric'
+            'montant_annonce'=>'required',
+            'nom_responsable'=>'required',
+            'mail_responsable'=>'required',
+            'contact_responsable'=>'required'
         ]);
         
         $activite = Activite::create([
@@ -69,15 +72,16 @@ class ActivitesController extends Controller
         {
             $activite->ligneActivites()->attach($request->ligne_activite_id[$i], [
                 'montant_prevu'=>$request->montant_prevu[$i],
-                'montant_depense'=>$request->montant_depense[$i]
+                'nom_responsable'=>$request->nom_responsable[$i],
+                'mail_responsable'=>$request->mail_responsable[$i],
+                'contact_responsable'=>$request->contact_responsable[$i],
             ]);
         }
 
         for($j=0; $j< count($request->bailleur_id); $j++)
         {
             $activite->bailleurs()->attach($request->bailleur_id[$j], [
-                'montant_annonce'=>$request->montant_annonce[$j],
-                'montant_decaisse'=>$request->montant_decaisse[$j]
+                'montant_annonce'=>$request->montant_annonce[$j]
             ]);
         }
 
@@ -93,7 +97,8 @@ class ActivitesController extends Controller
      */
     public function show($id)
     {
-        //
+        $activite = Activite::find($id);
+        return view('activites.show', compact('activite'));
     }
 
     /**
@@ -128,8 +133,10 @@ class ActivitesController extends Controller
             'date_fin_activite'=>'required|date',
             'demandeur_id'=>'required',
             'responsable_activite_id'=>'required',
-            'montant_annonce'=>'required|numeric',
-            'montant_decaisse'=>'required|numeric'
+            'montant_annonce'=>'required',
+            'nom_responsable'=>'required',
+            'mail_responsable'=>'required',
+            'contact_responsable'=>'required'
         ]);
 
         $activite = Activite::find($id);
@@ -147,15 +154,16 @@ class ActivitesController extends Controller
         {
             $activite->ligneActivites()->updateExistingPivot($request->ligne_activite_id[$i], [
                 'montant_prevu'=>$request->montant_prevu[$i],
-                'montant_depense'=>$request->montant_depense[$i]
+                'nom_responsable'=>$request->nom_responsable[$i],
+                'mail_responsable'=>$request->mail_responsable[$i],
+                'contact_responsable'=>$request->contact_responsable[$i],
             ]);
         }
 
         for($j=0; $j< count($request->bailleur_id); $j++)
         {
             $activite->bailleurs()->updateExistingPivot($request->bailleur_id[$j], [
-                'montant_annonce'=>$request->montant_annonce[$j],
-                'montant_decaisse'=>$request->montant_decaisse[$j]
+                'montant_annonce'=>$request->montant_annonce[$j]
             ]);
         }
 
@@ -171,5 +179,20 @@ class ActivitesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getData()
+    {
+
+        $bailleurs = Bailleur::all();
+        $demandeurs = Demandeur::all();
+        $ligne_activites = LigneActivite::all();
+        $responsable_activites = ResponsableActivite::all();
+        return json_encode([
+            'bailleurs'=>$bailleurs,
+            'demandeurs'=>$demandeurs,
+            'ligne_activites'=>$ligne_activites,
+            'responsable_activites'=>$responsable_activites
+        ]);
     }
 }

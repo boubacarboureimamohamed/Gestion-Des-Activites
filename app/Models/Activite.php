@@ -10,7 +10,7 @@ class Activite extends Model
 
     public function ligneActivites()
     {
-        return $this->belongsToMany('App\Models\LigneActivite', 'activites_ligne_activites')->withPivot('montant_prevu', 'montant_depense');
+        return $this->belongsToMany('App\Models\LigneActivite', 'activites_ligne_activites')->withPivot('montant_prevu', 'nom_responsable', 'mail_responsable', 'contact_responsable');
     }
 
     public function responsableActivite()
@@ -25,7 +25,7 @@ class Activite extends Model
 
     public function bailleurs()
     {
-        return $this->belongsToMany('App\Models\Bailleur', 'activites_bailleurs')->withPivot('montant_annonce', 'montant_decaisse');
+        return $this->belongsToMany('App\Models\Bailleur', 'activites_bailleurs')->withPivot('montant_annonce');
     }
 
     public function demandeur()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bailleur;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class BailleursController extends Controller
 {
@@ -42,7 +43,8 @@ class BailleursController extends Controller
 
             'nom_bailleur'=>'required',
             'adresse_bailleur'=>'required',
-            'contact_bailleur'=>'required'
+            'contact_bailleur'=>'required',
+            'mail_bailleur'=>'required'
 
         ]);
 
@@ -51,12 +53,35 @@ class BailleursController extends Controller
 
             'nom_bailleur'=>$request->nom_bailleur,
             'adresse_bailleur'=>$request->adresse_bailleur,
-            'contact_bailleur'=>$request->contact_bailleur
+            'contact_bailleur'=>$request->contact_bailleur,
+            'mail_bailleur'=>$request->mail_bailleur
 
         ]);
 
         return redirect(route('bailleurs.index'))->with('success', 'Opération effetuée avec succés');
 
+    }
+
+    public function addBailleur(Request $request)
+    {
+         //dd($request->all());
+         $this->validate($request, [
+
+            'nom_bailleur'=>'required',
+            'adresse_bailleur'=>'required',
+            'contact_bailleur'=>'required',
+            'mail_bailleur'=>'required'
+
+        ]);
+
+
+        $bailleur  = Bailleur::create([
+
+            'nom_bailleur'=>$request->nom_bailleur,
+            'adresse_bailleur'=>$request->adresse_bailleur,
+            'contact_bailleur'=>$request->contact_bailleur,
+            'mail_bailleur'=>$request->mail_bailleur
+        ]);
     }
 
     /**
@@ -96,7 +121,8 @@ class BailleursController extends Controller
 
             'nom_bailleur'=>'required',
             'adresse_bailleur'=>'required',
-            'contact_bailleur'=>'required'
+            'contact_bailleur'=>'required',
+            'mail_bailleur'=>'required'
 
         ]);
 
@@ -106,7 +132,8 @@ class BailleursController extends Controller
 
             'nom_bailleur'=>$request->nom_bailleur,
             'adresse_bailleur'=>$request->adresse_bailleur,
-            'contact_bailleur'=>$request->contact_bailleur
+            'contact_bailleur'=>$request->contact_bailleur,
+            'mail_bailleur'=>$request->mail_bailleur
 
         ]);
 

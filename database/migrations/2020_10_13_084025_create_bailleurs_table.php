@@ -18,6 +18,7 @@ class CreateBailleursTable extends Migration
             $table->string('nom_bailleur');
             $table->string('contact_bailleur');
             $table->string('adresse_bailleur');
+            $table->string('mail_bailleur');
             $table->timestamps();
         });
     }

@@ -118,7 +118,9 @@
                                         <tr>
                                             <th>Ligne d'activité </th>
                                             <th>Montant prévu</th>
-                                            <th>Montant depensé</th>
+                                            <th>Responsable</th>
+                                            <th>Mail</th>
+                                            <th>Contact</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
                                         </tr>
                                     </thead>
@@ -152,7 +154,25 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="montant_depense[]" value="{{ $ligne_actvte->pivot->montant_depense }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="nom_responsable[]" value="{{ $ligne_actvte->pivot->nom_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="mail_responsable[]" value="{{ $ligne_actvte->pivot->mail_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="contact_responsable[]" value="{{ $ligne_actvte->pivot->contact_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -174,9 +194,8 @@
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Bailleur </th>
+                                            <th>Bailleur de fond</th>
                                             <th>Montant annoncé</th>
-                                            <th>Montant decaissé</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                         </tr>
                                     </thead>
@@ -202,15 +221,6 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <input type="text" name="montant_annonce[]" value="{{ $bail->pivot->montant_annonce }}" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="montant_decaisse[]" value="{{ $bail->pivot->montant_decaisse }}" id="" class="form-control" placeholder="Veillez entrer le montant decaissé">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -357,12 +367,29 @@
                     </div>
                 </div>
             </td>
-
             <td>
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="nom responsable">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Mail responsable">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Contact responsable">
                         </div>
                     </div>
                 </div>
@@ -415,17 +442,6 @@
                     </div>
                 </div>
             </td>
-
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="montant_decaisse[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant decaissé">
-                        </div>
-                    </div>
-                </div>
-            </td>
-
             <td style="text-align: center">
                 <button class="btn btn-danger remove1"><i class="feather icon-minus"></i></button>
             </td>

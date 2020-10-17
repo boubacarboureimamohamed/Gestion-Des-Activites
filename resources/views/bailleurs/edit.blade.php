@@ -55,12 +55,19 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_bailleur" class="form-control @error('contact_bailleur') is-invalid @enderror" value="{{ $bailleur->contact_bailleur }}" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="contact_bailleur" class="form-control" value="{{ $bailleur->contact_bailleur }}" placeholder="Veuillez entrer le contact du bailleur">
 
                                             </div>
-                                            @error('contact_bailleur')
-                                                        <div style="color: red;">{{ $message }}</div>
-                                                    @enderror
+                                        </div>
+                                         <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Adresse mail :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon7"></span>
+                                                <input type="text" name="mail_bailleur" class="form-control" value="{{ $bailleur->mail_bailleur }}" placeholder="Veuillez entrer le contact du bailleur">
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
