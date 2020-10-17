@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LigneActivite;
+use Illuminate\Http\JsonResponse;
 
 class LigneActiviteController extends Controller
 {
@@ -52,6 +53,24 @@ class LigneActiviteController extends Controller
         ]);
 
         return redirect(route('ligne_activites.index'))->with('success', 'Operation effectue avec success!');
+    }
+
+    public function addLigne_activite(Request $request)
+    {
+        $this->validate($request, [
+
+            'nom_ligne_activite'=>'required',
+            'nom_responsable_ligne'=>'required',
+            'mail_responsable_ligne'=>'required',
+            'contact_responsable_ligne'=>'required'
+        ]);
+        LigneActivite::create([
+            'nom_ligne_activite'=>$request->nom_ligne_activite,
+            'nom_responsable_ligne'=>$request->nom_responsable_ligne,
+            'mail_responsable_ligne'=>$request->mail_responsable_ligne,
+            'contact_responsable_ligne'=>$request->contact_responsable_ligne
+        ]);
+
     }
 
     /**

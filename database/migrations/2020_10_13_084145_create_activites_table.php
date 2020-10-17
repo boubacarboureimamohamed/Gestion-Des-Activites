@@ -30,7 +30,9 @@ class CreateActivitesTable extends Migration
         Schema::create('activites_ligne_activites', function (Blueprint $table) {
             $table->id();
             $table->double('montant_prevu');
-            $table->double('montant_depense');
+            $table->string('nom_responsable');
+            $table->string('mail_responsable');
+            $table->string('contact_responsable');
             $table->bigInteger('activite_id')->index()->unsigned();
             $table->foreign('activite_id')->references('id')->on('activites');
             $table->bigInteger('ligne_activite_id')->index()->unsigned();
@@ -41,7 +43,6 @@ class CreateActivitesTable extends Migration
         Schema::create('activites_bailleurs', function (Blueprint $table) {
             $table->id();
             $table->double('montant_annonce');
-            $table->double('montant_decaisse');
             $table->bigInteger('activite_id')->index()->unsigned();
             $table->foreign('activite_id')->references('id')->on('activites');
             $table->bigInteger('bailleur_id')->index()->unsigned();

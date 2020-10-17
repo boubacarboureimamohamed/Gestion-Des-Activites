@@ -29,6 +29,12 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('demandeurs', 'DemandeursController');
 
+    Route::post('addLigne_activite', 'LigneActiviteController@addLigne_activite');
+
+    Route::post('addBailleur', 'BailleursController@addBailleur');
+
+    Route::resource('budgets', 'BudgetsController');
+        
     Route::resource('ligne_activites', 'LigneActiviteController');
 
     Route::resource('budgets', 'BudgetsController');
@@ -41,8 +47,12 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
 
+    Route::get('/getData', 'ActivitesController@getData');
+
+    Route::get('justifications/create', 'JustificationController@justification')->name('justification');
+
  });
 
 
-
+    
 

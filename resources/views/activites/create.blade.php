@@ -1,11 +1,9 @@
 @extends('layouts.adminty')
 
 @section('css')
-
 @endsection
 
 @section('content')
-
 <div class="page-body">
     <div class="row">
 
@@ -14,7 +12,7 @@
             <!-- Form wizard with validation card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Ajout d'une nouvelle activité</h3>
+                    <h3>Nouvelle activité</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('activites.store') }}">
@@ -25,7 +23,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom de l'activité : </label>
+                                                <label class="col-form-label">Libellé : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
@@ -34,12 +32,11 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Responsable de l'activité :</label>
+                                                <label class="col-form-label">Responsable :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="" name="responsable_activite_id">
-                                                    <option selected="selected">********Sélectionnez********</option>
+                                                <select class="form-control" id="responsable_activite_id" name="responsable_activite_id">
                                                     @foreach ($responsable_activites as $responsable_activite) 
                                                       <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>  
                                                     @endforeach
@@ -72,12 +69,12 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Demandeur de l'activité :</label>
+                                                <label class="col-form-label">Demandeur :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="" name="demandeur_id">
-                                                      <option selected="selected">********Sélectionnez********</option> 
+                                                      <option id="demandeur_id" selected="selected">********Sélectionnez********</option> 
                                                     @foreach ($demandeurs as $demandeur) 
                                                       <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>  
                                                     @endforeach
@@ -117,7 +114,9 @@
                                         <tr>
                                             <th>Ligne d'activité </th>
                                             <th>Montant prévu</th>
-                                            <th>Montant depensé</th>
+                                            <th>Responsable</th>
+                                            <th>Mail</th>
+                                            <th>Contact</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
                                         </tr>
                                     </thead>
@@ -150,7 +149,25 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -168,12 +185,13 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5 style="text-align: center;">Les bailleurs de l'activité</h5><br><br>
+                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">
+                                    <i class="feather icon-plus"></i></a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th>Bailleur </th>
                                             <th>Montant annoncé</th>
-                                            <th>Montant decaissé</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                         </tr>
                                     </thead>
@@ -198,15 +216,6 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <input type="text" name="montant_annonce[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="montant_decaisse[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant decaissé">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,7 +264,7 @@
     </div>
 </div>
 
-<!-- Ajout demandeur Modal -->
+<!-- Ajout ligne activite Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -266,7 +275,7 @@
             </button>
         </div>
         <div class="modal-body">
-        <form action="" method="POST">
+        <form id="ligne_activite">
             @csrf
                 <div class="row form-group">
                     <div class="col-sm-3">
@@ -315,10 +324,116 @@
     </div>
     </div>
 
+    <!-- Ajout bailleur Modal -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Nouveau bailleur de fond</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form id="bailleur">
+            @csrf
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="col-form-label">Nom :</label>
+                    </div>
+                    <div class="col-sm-9 input-group">
+                        <span class="input-group-addon" id="basic-addon7"></span>
+                         <input type="text" value="{{ old('nom_bailleur') }}" name="nom_bailleur" class="form-control" placeholder="Veuillez entrer le nom du bailleur">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="col-form-label">Adresse :</label>
+                    </div>
+                    <div class="col-sm-9 input-group">
+                        <span class="input-group-addon" id="basic-addon7"></span>
+                        <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du bailleur">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="col-form-label">Contact :</label>
+                    </div>
+                    <div class="col-sm-9 input-group">
+                        <span class="input-group-addon" id="basic-addon7"></span>
+                        <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="col-form-label">Email :</label>
+                    </div>
+                    <div class="col-sm-9 input-group">
+                        <span class="input-group-addon" id="basic-addon7"></span>
+                        <input type="email" name="mail_bailleur" value="{{ old('mail_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse mail de bailleur de fond">
+                    </div>
+                </div>
+
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
 @endsection
 
 @section('js')
+<script>
+   $(document).ready(function(){
+     $("#responsable_activite_").bind('click').on('click',function(e){
+         e.preventDefault();
+    axios.get('/getData')
+    .then(function(response){
+        response.data.responsable_activites.forEach(element => {
+            $('#responsable_activite_id').push(
+                `<option value="element.id">${element.nom_responsable_activite}</option>`
+            )
+        });
 
+    })
+    .catch(function(error){
+
+    })
+     });
+});
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#bailleur").on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '/addBailleur',
+                data: $('#bailleur').serialize(),
+                success: function(response){
+                    console.log(response);
+                    $('#exampleModal1').modal('hide');
+                    swal({
+                    title: "Enregisté !",
+                    text: "Opération effectuée!",
+                    icon: "success",
+                    button: "Ok",
+                });
+
+                },
+                 error: function(error){
+                     console.log(error);        
+                    }
+            });
+        });
+    });
+
+</script>
 <script>
 
     $('#addLigne').on('click', function (f) {
@@ -357,12 +472,29 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                         </div>
                     </div>
                 </div>
             </td>
-
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                        </div>
+                    </div>
+                </div>
+            </td>
             <td style="text-align: center">
                 <button class="btn btn-danger remove"><i class="feather icon-minus"></i></button>
             </td>
@@ -410,17 +542,6 @@
                     </div>
                 </div>
             </td>
-
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="montant_decaisse[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant decaissé">
-                        </div>
-                    </div>
-                </div>
-            </td>
-
             <td style="text-align: center">
                 <button class="btn btn-danger remove1"><i class="feather icon-minus"></i></button>
             </td>
@@ -434,6 +555,4 @@
 
 
 </script>
-
-
 @endsection

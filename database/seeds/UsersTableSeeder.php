@@ -16,9 +16,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => "Admin",
+            'name' => "Admin System",
             'email' => "admin@gmail.com",
-            'password' => Hash::make('adminadmin')
+            'password' => Hash::make('root')
         ]);
 
         $role = Role::firstOrcreate(['name'=>'Admin']);
