@@ -27,7 +27,7 @@
                                 <th>Nom activite</th>
                                 <th>Date debut</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th> 
+                                <th>Commentaire</th>
                                 <th>Piece jointe</th>
                                 <th>Detail</th>
                                 <th>Modifier</th>

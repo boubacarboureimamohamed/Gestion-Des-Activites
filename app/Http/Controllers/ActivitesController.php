@@ -35,7 +35,7 @@ class ActivitesController extends Controller
         $ligne_activites = LigneActivite::all();
         return view('activites.create', compact('bailleurs', 'demandeurs', 'ligne_activites', 'responsable_activites'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +57,7 @@ class ActivitesController extends Controller
             'mail_responsable'=>'required',
             'contact_responsable'=>'required'
         ]);
-        
+
         $activite = Activite::create([
             'nom_activite'=>$request->nom_activite,
             'date_debut_activite'=>$request->date_debut_activite,

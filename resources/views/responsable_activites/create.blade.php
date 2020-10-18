@@ -7,7 +7,7 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Ajout d'un nouveau d'activite</h3>
+                    <h3>Ajout d'un nouveau responsable d'activité</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('responsable_activites.store') }}">

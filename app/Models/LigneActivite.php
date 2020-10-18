@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LigneActivite extends Model
 {
-    protected $fillable = ['nom_ligne_activite', 'nom_responsable_ligne', 'mail_responsable_ligne', 'contact_responsable_ligne'];
+    protected $fillable = ['nom_ligne_activite'];
 
     public function activities()
     {

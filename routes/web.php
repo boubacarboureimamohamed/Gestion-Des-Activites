@@ -34,7 +34,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('addBailleur', 'BailleursController@addBailleur');
 
     Route::resource('budgets', 'BudgetsController');
-        
+
     Route::resource('ligne_activites', 'LigneActiviteController');
 
     Route::resource('budgets', 'BudgetsController');
@@ -51,8 +51,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('justifications/create', 'JustificationController@justification')->name('justification');
 
+    Route::put('update_ligne_activite/{ligne_activite}', 'LigneActiviteController@modifier_ligneActivite')->name('modifierligneactivite');
+
  });
 
 
-    
+
 
