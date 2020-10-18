@@ -184,6 +184,15 @@
                             </ul>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
+                                    <a href="{{ route('interfacedecaissement') }}">
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Les decaissements</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="">
                                     <a href="{{ route('demandeurs.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-box"></i></span>
                                         <span class="pcoded-mtext">Les demandeurs</span>
