@@ -10,9 +10,31 @@ use App\Models\LigneActivite;
 
 class JustificationController extends Controller
 {
-    public function justification()
+    public function interfacejustification()
     {
-        return view('justifications.create');
+        $user = auth()->user();
+        $activites = Activite::all();
+        return view('justifications.justification', compact('activites', 'user'));
+    }
+
+    public function justification($id)
+    {
+        $activite = LigneActivite::find($id);
+        return view('justifications.create', compact('activite'));
+    }
+
+    public function justification_store(Request $request)
+    {
+        for($i=0; $i< count($request->libelle); $i++)
+        {
+            Justification::create([
+                'libelle'=>$request->libelle[$i],
+                'montant_depense'=>$request->montant_depense[$i],
+                'piece_jointe'=>$request->piece_jointe[$i],
+                'ligne_activite_id'=>$request->ligne_activite_id
+            ]);
+        }
+        return redirect()->back();
     }
 
 }

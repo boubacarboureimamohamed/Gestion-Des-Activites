@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Information sur l'activite...</h3>
+                    <h3>Information de l'activite <strong>{{ $activite->nom_activite }}</strong></h3>
                 </div>
                 <div class="card-block">
 
@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" class="form-control" disabled placeholder="">
+                                            <input type="text"  name="" value="{{ $activite->nom_activite }}" class="form-control" disabled placeholder="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->date_fin_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -83,17 +83,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($activite->ligneActivites as $ligneActivite)
+                                           @if($ligneActivite->pivot->mail_responsable == $user->email)  
                                         <tr>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
+                                            <td>{{ $ligneActivite->nom_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->pivot->nom_responsable }} </td>
+                                            <td>{{ $ligneActivite->pivot->contact_responsable }}</td>
+                                            <td>{{ $ligneActivite->pivot->mail_responsable }}</td>
                                             <td>
-                                                <a href="{{ route('justification') }}" class="btn btn-info">
+                                                <a href="{{ route('justification', $ligneActivite->id) }}" class="btn btn-info">
                                                     <i class="feather icon-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
+                                        @endif
+                                          @endforeach
                                 </tbody>
                             </table>
                         </div>

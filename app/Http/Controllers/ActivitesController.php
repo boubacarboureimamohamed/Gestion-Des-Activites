@@ -97,8 +97,9 @@ class ActivitesController extends Controller
      */
     public function show($id)
     {
+        $user = auth()->user();
         $activite = Activite::find($id);
-        return view('activites.show', compact('activite'));
+        return view('activites.show', compact('activite', 'user'));
     }
 
     /**
