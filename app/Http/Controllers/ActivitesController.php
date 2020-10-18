@@ -35,7 +35,7 @@ class ActivitesController extends Controller
         $ligne_activites = LigneActivite::all();
         return view('activites.create', compact('bailleurs', 'demandeurs', 'ligne_activites', 'responsable_activites'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -57,7 +57,7 @@ class ActivitesController extends Controller
             'mail_responsable'=>'required',
             'contact_responsable'=>'required'
         ]);
-        
+
         $activite = Activite::create([
             'nom_activite'=>$request->nom_activite,
             'date_debut_activite'=>$request->date_debut_activite,
@@ -98,8 +98,21 @@ class ActivitesController extends Controller
     public function show($id)
     {
         $user = auth()->user();
+        foreach($user->roles as $role)
+            {
+                if($role->name == 'Admin')
+                    {
+                        $mail_admin  = $user->email;
+                    }
+            }
         $activite = Activite::find($id);
-        return view('activites.show', compact('activite', 'user'));
+        return view('activites.show', compact('activite', 'user', 'mail_admin'));
+    }
+
+    public function show_activite($id)
+    {
+        $activite = Activite::find($id);
+        return view('activites.show_activite', compact('activite'));
     }
 
     /**

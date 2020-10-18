@@ -78,13 +78,13 @@
                                     <th>Ligne activite</th>
                                     <th>Nom responsable</th>
                                     <th>Contact responsable </th>
-                                    <th>Email responsable</th> 
+                                    <th>Email responsable</th>
                                     <th>Justifier</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($activite->ligneActivites as $ligneActivite)
-                                           @if($ligneActivite->pivot->mail_responsable == $user->email)  
+                                           @if($ligneActivite->pivot->mail_responsable == $user->email || $mail_admin)
                                         <tr>
                                             <td>{{ $ligneActivite->nom_ligne_activite }}</td>
                                             <td>{{ $ligneActivite->pivot->nom_responsable }} </td>

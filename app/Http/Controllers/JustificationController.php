@@ -13,8 +13,15 @@ class JustificationController extends Controller
     public function interfacejustification()
     {
         $user = auth()->user();
+        foreach($user->roles as $role)
+            {
+                if($role->name == 'Admin')
+                    {
+                        $mail_admin  = $user->email;
+                    }
+            }
         $activites = Activite::all();
-        return view('justifications.justification', compact('activites', 'user'));
+        return view('justifications.justification', compact('activites', 'user', 'mail_admin'));
     }
 
     public function justification($id)

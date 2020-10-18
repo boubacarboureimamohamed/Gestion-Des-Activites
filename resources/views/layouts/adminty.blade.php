@@ -10,7 +10,7 @@
     <meta name="description" content="#">
     <meta name="keywords" content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
     <meta name="author" content="#">
-    
+
 
     <!-- Favicon icon -->
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
@@ -124,8 +124,8 @@
 
             <div class="pcoded-main-container">
                 <div class="pcoded-wrapper">
-                    <nav class="pcoded-navbar">
-                        <div class="pcoded-inner-navbar main-menu">
+                    <nav class="pcoded-navbar" navbar-theme="themelight1" active-item-theme="theme1" sub-item-theme="theme2" active-item-style="style0" pcoded-navbar-position="fixed">
+                        <div class="pcoded-inner-navbar main-menu mCustomScrollbar _mCS_1" id="" style="height: calc(100% - 80px);">
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="active">
                                     <a href="index-1.htm"">
@@ -293,7 +293,7 @@
     <script>
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
     </script>
-     
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script>

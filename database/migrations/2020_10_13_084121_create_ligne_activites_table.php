@@ -16,9 +16,6 @@ class CreateLigneActivitesTable extends Migration
         Schema::create('ligne_activites', function (Blueprint $table) {
             $table->id();
             $table->string('nom_ligne_activite');
-            $table->string('nom_responsable_ligne');
-            $table->string('mail_responsable_ligne');
-            $table->string('contact_responsable_ligne');
             $table->timestamps();
         });
     }

@@ -39,20 +39,14 @@ class LigneActiviteController extends Controller
     {
         $this->validate($request, [
 
-            'nom_ligne_activite'=>'required',
-            'nom_responsable_ligne'=>'required',
-            'mail_responsable_ligne'=>'required',
-            'contact_responsable_ligne'=>'required'
+            'nom_ligne_activite'=>'required'
         ]);
 
         LigneActivite::create([
-            'nom_ligne_activite'=>$request->nom_ligne_activite,
-            'nom_responsable_ligne'=>$request->nom_responsable_ligne,
-            'mail_responsable_ligne'=>$request->mail_responsable_ligne,
-            'contact_responsable_ligne'=>$request->contact_responsable_ligne
+            'nom_ligne_activite'=>$request->nom_ligne_activite
         ]);
 
-        return redirect(route('ligne_activites.index'))->with('success', 'Operation effectue avec success!');
+        return redirect(route('ligne_activites.index'))->with('success', 'Operation effectuée avec success!');
     }
 
     public function addLigne_activite(Request $request)
@@ -124,6 +118,19 @@ class LigneActiviteController extends Controller
 
         return redirect(route('ligne_activites.index'))->with('success', 'Operation effectue avec success!');
 
+    }
+
+    public function modifier_ligneActivite(Request $request, LigneActivite $ligne_activite)
+    {
+        $this->validate($request, [
+
+            'nom_ligne_activite'=>'required',
+        ]);
+        $ligne_activite->update([
+            'nom_ligne_activite'=>$request->nom_ligne_activite
+        ]);
+
+        return redirect(route('ligne_activites.index'))->with('success', 'Opération effectuée avec success!');
     }
 
     /**

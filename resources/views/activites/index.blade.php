@@ -27,7 +27,7 @@
                                 <th>Nom activite</th>
                                 <th>Date debut</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th> 
+                                <th>Commentaire</th>
                                 <th>Piece jointe</th>
                                 <th>Detail</th>
                                 <th>Modifier</th>
@@ -44,7 +44,7 @@
                                         <td>{{ $activite->commentaire_activite }}</td>
                                         <td>{{ $activite->piece_jointe }}</td>
                                         <td>
-                                            <a href="{{ route('activites.show', $activite) }}" class="btn btn-info">
+                                            <a href="{{ route('show_activite', $activite->id) }}" class="btn btn-info">
                                                 <i class="feather icon-eye"></i>
                                             </a>
                                         </td>

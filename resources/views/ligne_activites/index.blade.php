@@ -17,17 +17,14 @@
                     <h3>Liste des ligne d'activite</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('ligne_activites.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                    <a href="{{ route('ligne_activites.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        <i class="feather icon-plus"></i>Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
                                 <th>Numero</th>
                                 <th>Nom ligne</th>
-                                <th>Nom responsable</th>
-                                <th>Mail responsable</th>
-                                <th>Contact responsable</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -37,13 +34,14 @@
                                 <tr>
                                 <td>{{ $ligne_activite->id }} </td>
                                 <td>{{ $ligne_activite->nom_ligne_activite }}</td>
-                                <td>{{ $ligne_activite->nom_responsable_ligne }}</td>
-                                <td>{{ $ligne_activite->mail_responsable_ligne }}</td>
-                                <td>{{ $ligne_activite->contact_responsable_ligne }}</td>
                                 <td>
-                                    <a href="{{ route('ligne_activites.edit', $ligne_activite) }}" class="btn btn-primary">
-                                        <i class="feather icon-edit"></i>
-                                    </a>
+                                    <a href=""
+                                         id="l{{ $ligne_activite->id }}" data-toggle="modal" data-target="#exampleModal1"
+                                         data-route="{{ route('modifierligneactivite', $ligne_activite->id) }}"
+                                         data-nom_ligne_activite="{{ $ligne_activite->nom_ligne_activite}}"
+                                         onclick="update('#l{{ $ligne_activite->id }}')"
+                                         class="btn btn-primary"><i class="feather icon-edit"></i>
+                                     </a>
                                 </td>
                                 <td>
                                     <form method="POST" action="{{ route('ligne_activites.destroy', $ligne_activite->id) }}" id="form{{ $ligne_activite->id }}">
@@ -70,10 +68,80 @@
     </div>
 </div>
 
+<!-- Ajout demandeur Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ajout d'une nouvelle ligne d'activité</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form action="{{ route('ligne_activites.store') }}" method="POST">
+            @csrf
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label class="col-form-label">Intitulé : </label>
+                </div>
+                <div class="col-sm-9 input-group">
+                    <span class="input-group-addon" id="basic-addon7"></span>
+                    <input type="text" name="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer le nom du demandeur">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+         <!-- Modifcation demandeur Modal -->
+    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modification d'une ligne d'activité </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+        <form id="form2" method="post">
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <div class="row form-group">
+                <div class="col-sm-3">
+                    <label class="col-form-label">Intitulé : </label>
+                </div>
+                <div class="col-sm-9 input-group">
+                    <span class="input-group-addon" id="basic-addon7"></span>
+                    <input type="text" name="nom_ligne_activite" id="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer l'intitulé de la ligne d'activité">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
 @endsection
 
 @section('js')
-
+<script>
+    function update(ligne_activite_id) {
+            $('#nom_ligne_activite').val($(ligne_activite_id).attr('data-nom_ligne_activite'))
+            $('#form2').attr('action', $(ligne_activite_id).attr('data-route'))
+    }
+</script>
 <script>
 
      function confirmation(target)
