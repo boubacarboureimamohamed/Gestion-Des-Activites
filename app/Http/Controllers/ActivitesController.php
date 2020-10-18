@@ -98,8 +98,21 @@ class ActivitesController extends Controller
     public function show($id)
     {
         $user = auth()->user();
+        foreach($user->roles as $role)
+            {
+                if($role->name == 'Admin')
+                    {
+                        $mail_admin  = $user->email;
+                    }
+            }
         $activite = Activite::find($id);
-        return view('activites.show', compact('activite', 'user'));
+        return view('activites.show', compact('activite', 'user', 'mail_admin'));
+    }
+
+    public function show_activite($id)
+    {
+        $activite = Activite::find($id);
+        return view('activites.show_activite', compact('activite'));
     }
 
     /**

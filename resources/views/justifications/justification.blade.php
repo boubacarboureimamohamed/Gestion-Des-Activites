@@ -27,7 +27,7 @@
                                 <th>Nom activite</th>
                                 <th>Date debut</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th> 
+                                <th>Commentaire</th>
                                 <th>Piece jointe</th>
                                 <th>Detail</th>
                             </tr>
@@ -35,8 +35,8 @@
                             <tbody>
                                 @foreach ($activites as $activite)
                                         @foreach ($activite->ligneActivites as $ligneActivite)
-                                           @if($ligneActivite->pivot->mail_responsable == $user->email)    
-                                        
+                                           @if($ligneActivite->pivot->mail_responsable == $user->email || $mail_admin)
+
                                     <tr>
                                         <td>{{ $activite->id }}</td>
                                         <td>{{ $activite->nom_activite }}</td>
@@ -51,7 +51,7 @@
                                         </td>
                                     </tr>
                                        @endif
-                                      @endforeach 
+                                      @endforeach
                                 @endforeach
                             </tbody>
                         </table>

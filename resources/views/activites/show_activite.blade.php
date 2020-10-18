@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Détails de l'activite...</h3>
+                    <h3>Détails de l'activite {{ $activite->nom_activite }}</h3>
                 </div>
                 <div class="card-block">
 
@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" class="form-control" disabled placeholder="">
+                                            <input type="text"  name="" class="form-control" value="{{ $activite->nom_activite }}" disabled placeholder="Veuillez entrer le nom de l'activité">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $activite->date_debut_activite }}" placeholder="Veuillez entrer la date début de l'activité" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -46,16 +46,16 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Montant decaissé :</label>
+                                            <label class="col-form-label">Montant total decaissé :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le montant decaissé de l'activité" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite }}" placeholder="Veuillez entrer le nom et prénom du responsable de l'activité" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -79,16 +79,16 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $activite->date_fin_activite }}" placeholder="Veuillez entrer la date fin de l'activité" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Montant annoncé :</label>
+                                            <label class="col-form-label">Montant total annoncé :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control"value="" placeholder="Veuillez entrer le montant total annoncé de l'activité" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le GAP" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
 
-                    <h5 style="text-align: center;">Les sources de finacement</h5><br><br>
+                    <h5 style="text-align: center;">Les bailleurs de l'activité</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
@@ -118,12 +118,14 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($activite->bailleurs as $bailleur)
                                         <tr>
-                                            <td> </td>
-                                            <td> </td>
+                                            <td>{{ $bailleur->nom_bailleur }}</td>
+                                            <td>{{ $bailleur->pivot->montant_annonce }} </td>
                                             <td> </td>
                                             <td> </td>
                                         </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -140,20 +142,22 @@
                                     <th>Montant prévu </th>
                                     <th>Montant depensé</th>
                                     <th>GAP</th>
-                                    <th>Observation</th>
                                     <th>Piéce jointe</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($activite->ligneActivites as $ligneActivite)
                                         <tr>
+                                            <td>{{ $ligneActivite->nom_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->pivot->nom_responsable }} </td>
+                                            <td>{{ $ligneActivite->pivot->montant_prevu }}</td>
                                             <td> </td>
                                             <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td> </td>
+                                            <td>
+                                                <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
+                                            </td>
                                         </tr>
+                                   @endforeach
                                 </tbody>
                             </table>
                         </div>
