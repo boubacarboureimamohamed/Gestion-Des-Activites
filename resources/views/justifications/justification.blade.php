@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des activités</h3>
+                    <h3>Liste des activités ayant des lignes a justifier</h3>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('activites.create') }}" class="btn btn-success">
@@ -34,6 +34,9 @@
                             </thead>
                             <tbody>
                                 @foreach ($activites as $activite)
+                                        @foreach ($activite->ligneActivites as $ligneActivite)
+                                           @if($ligneActivite->pivot->mail_responsable == $user->email)    
+                                        
                                     <tr>
                                         <td>{{ $activite->id }}</td>
                                         <td>{{ $activite->nom_activite }}</td>
@@ -47,6 +50,8 @@
                                             </a>
                                         </td>
                                     </tr>
+                                       @endif
+                                      @endforeach 
                                 @endforeach
                             </tbody>
                         </table>

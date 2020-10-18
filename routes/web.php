@@ -49,7 +49,11 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/getData', 'ActivitesController@getData');
 
-    Route::get('justifications/create', 'JustificationController@justification')->name('justification');
+    Route::get('justifications/create/{id}', 'JustificationController@justification')->name('justification');
+
+    Route::post('justification_store', 'JustificationController@justification_store')->name('justification_store');
+
+    Route::get('interfacejustification', 'JustificationController@interfacejustification')->name('interfacejustification');
 
  });
 
