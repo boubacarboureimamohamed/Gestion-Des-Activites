@@ -127,7 +127,6 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <select class="form-control" id="ligne_activite_id" name="ligne_activite_id[]">
-                                                              <option selected="selected">********Sélectionnez********</option>  
                                                             </select>
                                                          </div>
                                                     </div>
@@ -199,7 +198,6 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <select class="form-control" id="bailleur_id" name="bailleur_id[]">
-                                                                <option selected="selected">********Sélectionnez********</option>
                                                             </select>
                                                          </div>
                                                     </div>
@@ -381,10 +379,9 @@
          $("#ligne_activite_id").empty();
     axios.get('/getData')
     .then(function(response){
-        `<option selected="selected">********Sélectionnez********</option>`
         response.data.ligne_activites.forEach(element => {
             $('#ligne_activite_id').append(
-                `<option value="element.id">${element.nom_ligne_activite}</option>`
+                `<option value="${ element.id }">${element.nom_ligne_activite}</option>`
             )
         });
 
@@ -403,10 +400,9 @@
          $("#bailleur_id").empty();
     axios.get('/getData')
     .then(function(response){
-        $('#bailleur_id').append(`<option selected="selected">********Sélectionnez********</option>`);
         response.data.bailleurs.forEach(element => {
             $('#bailleur_id').append(
-                `<option value="element.id">${element.nom_bailleur}</option>`
+                `<option value="${ element.id }">${element.nom_bailleur}</option>`
             )
         });
 
@@ -438,7 +434,20 @@
 
                 },
                  error: function(error){
-                     console.log(error);        
+                     let all_errors = '';
+                     console.log(error.responseJSON);
+                     $('#exampleModal1').modal('hide');
+                     Object.keys(error.responseJSON.errors).forEach(function(bailleur){
+                          all_errors += '\n'+error.responseJSON.errors[bailleur]
+                     });
+
+                 swal({
+                title: "Erreur !",
+                text: all_errors,
+                icon: "error",
+                color: "red",
+                button: "Ok",
+            });       
                     }
             });
         });
@@ -447,12 +456,12 @@
 </script>
 <script>
     $(document).ready(function(){
-        $("#ligne_activite_id").on('submit', function(e){
+        $("#ligne_activite").on('submit', function(e){
             e.preventDefault();
             $.ajax({
                 type: 'post',
-                url: '/addBailleur',
-                data: $('#ligne_activite_id').serialize(),
+                url: '/addLigne_activite',
+                data: $('#ligne_activite').serialize(),
                 success: function(response){
                     console.log(response);
                     $('#exampleModal').modal('hide');
@@ -465,7 +474,18 @@
 
                 },
                  error: function(error){
-                     console.log(error);        
+                     let all_errors = '';
+                     $('#exampleModal').modal('hide');
+                      Object.keys(error.responseJSON.errors).forEach(function(ligne_activite){
+                          all_errors += '\n'+error.responseJSON.errors[ligne_activite]
+                     });
+                 swal({
+                title: "Erreur !",
+                text: all_errors,
+                icon: "error",
+                color: "red",
+                button: "Ok",
+            });       
                     }
             });
         });
