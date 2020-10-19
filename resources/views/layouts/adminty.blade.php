@@ -148,7 +148,7 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="#">
+                                            <a href="{{ route('interfacedecaissement') }}">
                                                 <span class="pcoded-mtext">Décaissements</span>
                                             </a>
                                         </li>

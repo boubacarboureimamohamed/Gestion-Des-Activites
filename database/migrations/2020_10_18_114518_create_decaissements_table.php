@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBailleursTable extends Migration
+class CreateDecaissementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateBailleursTable extends Migration
      */
     public function up()
     {
-        Schema::create('bailleurs', function (Blueprint $table) {
+        Schema::create('decaissements', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_bailleur');
-            $table->string('contact_bailleur');
-            $table->string('adresse_bailleur');
-            $table->string('mail_bailleur')->unique();
+            $table->double('montant_decaisse');
+            $table->date('date_decaissement');
+            $table->bigInteger('bailleur_id')->index()->unsigned();
+            $table->foreign('bailleur_id')->references('id')->on('bailleurs');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateBailleursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bailleurs');
+        Schema::dropIfExists('decaissements');
     }
 }

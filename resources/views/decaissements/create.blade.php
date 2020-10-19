@@ -14,10 +14,10 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Information sur l'activite <strong>{{ $activite->activities[0]->nom_activite }}</strong></h3>
+                    <h3>Information sur l'activite <strong>{{ $bailleur->activites[0]->nom_activite }}</strong></h3>
                 </div>
                 <div class="card-block">
-                    <form method="POST" action="{{ route('justification_store') }}">
+                    <form method="POST" action="{{ route('decaissement_store') }}">
                         @csrf
                     <div class="row">
                         <div class="col-sm-6">
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" value="{{ $activite->activities[0]->nom_activite }}" class="form-control" disabled placeholder="">
+                                            <input type="text"  name="" value="{{ $bailleur->activites[0]->nom_activite }}" class="form-control" disabled placeholder="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->date_debut_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->activites[0]->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -49,11 +49,11 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                        <label class="col-form-label">Responsable Activité :</label>
+                                            <label class="col-form-label">Responsable Activité :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->responsableActivite->nom_responsable_activite.' '.$activite->activities[0]->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->activites[0]->responsableActivite->nom_responsable_activite.' '.$bailleur->activites[0]->responsableActivite->prenom_responsable_acti  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -62,35 +62,35 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->date_fin_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->activites[0]->date_fin_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <input type="text"  name="ligne_activite_id" value="{{ $activite->id }}" class="form-control" hidden placeholder="">
-                    <h5 style="text-align: center;">Information sur la ligne d'activite {{ $activite->nom_ligne_activite }}</h5><br><br>
+                    <input type="text"  name="bailleur_id" value="{{ $bailleur->id }}" class="form-control" hidden placeholder="">
+                    <h5 style="text-align: center;">Information de <strong>{{ $bailleur->nom_bailleur }}</strong></h5><br><br>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Ligne Activité : </label>
+                                            <label class="col-form-label">Libellé Projet : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" value="{{ $activite->nom_ligne_activite }}" class="form-control" disabled placeholder="">
+                                            <input type="text"  name="" value="{{ $bailleur->nom_bailleur }}" class="form-control" disabled placeholder="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Montant Prévu :</label>
+                                            <label class="col-form-label">Adresse mail :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->montant_prevu }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->mail_bailleur }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -101,11 +101,11 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable Ligne Activité:</label>
+                                            <label class="col-form-label">Adresse :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->nom_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->adresse_bailleur }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->contact_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $bailleur->contact_bailleur }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -122,15 +122,14 @@
                         </div>
                     </div>
 
-                    <h5 style="text-align: center;">Les justifications de dépense</h5><br><br>
+                    <h5 style="text-align: center;">Les décaissement du montant annoncé</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="example-2" class="table table-striped table-bordered nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Libellé </th>
-                                        <th>Montant depensé</th>
-                                        <th>Piece jointe</th>
+                                        <th>Montant decaisse</th>
+                                        <th>Date decaissement</th>
                                         <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                     </tr>
                                 </thead>
@@ -140,7 +139,7 @@
                                             <div class="">
                                                 <div class="form-group form-primary">
                                                     <div class="input-group">
-                                                        <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le libellé">
+                                                        <input type="text" name="montant_decaisse[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,16 +148,7 @@
                                             <div class="">
                                                 <div class="form-group form-primary">
                                                     <div class="input-group">
-                                                        <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="">
-                                                <div class="form-group form-primary">
-                                                    <div class="input-group">
-                                                        <input type="file" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer la piéce jointe">
+                                                        <input type="date" name="date_decaissement[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,11 +209,11 @@
     function addLigne1() {
         var tr = `<tr>
 
-            <td>
+             <td>
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le libellé">
+                            <input type="text" name="montant_decaisse[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
                         </div>
                     </div>
                 </div>
@@ -232,16 +222,7 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="file" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer la piéce jointe">
+                            <input type="date" name="date_decaissement[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
                         </div>
                     </div>
                 </div>

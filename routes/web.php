@@ -55,6 +55,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('interfacejustification', 'JustificationController@interfacejustification')->name('interfacejustification');
 
+    Route::get('interfacedecaissement', 'DecaissementController@interfacedecaissement')->name('interfacedecaissement');
+
+    Route::get('decaissement/create/{id}', 'DecaissementController@decaissement')->name('decaissement');
+
+    Route::post('decaissement_store', 'DecaissementController@decaissement_store')->name('decaissement_store');
+
+    Route::get('show_decaissemen/t/{id}', 'DecaissementController@show')->name('show_decaissement');
+
     Route::get('show_activite/{activite}', 'ActivitesController@show_activite')->name('show_activite');
 
     Route::put('update_ligne_activite/{ligne_activite}', 'LigneActiviteController@modifier_ligneActivite')->name('modifierligneactivite');

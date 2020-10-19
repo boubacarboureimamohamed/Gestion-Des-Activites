@@ -31,7 +31,7 @@ class CreateActivitesTable extends Migration
             $table->id();
             $table->double('montant_prevu');
             $table->string('nom_responsable');
-            $table->string('mail_responsable');
+            $table->string('mail_responsable')->unique();
             $table->string('contact_responsable');
             $table->bigInteger('activite_id')->index()->unsigned();
             $table->foreign('activite_id')->references('id')->on('activites');
