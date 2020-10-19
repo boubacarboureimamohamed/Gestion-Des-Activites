@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Information sur l'activite <strong>{{ $activite->activities[0]->nom_activite }}</strong></h3>
+                    <h3>Information sur l'activite <strong>{{ $activitee->nom_activite }}</strong></h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('justification_store') }}">
@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" value="{{ $activite->activities[0]->nom_activite }}" class="form-control" disabled placeholder="">
+                                            <input type="text"  name="" value="{{ $activitee->nom_activite }}" class="form-control" disabled placeholder="">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->responsableActivite->nom_responsable_activite.' '.$activite->activities[0]->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activitee->responsableActivite->nom_responsable_activite.' '.$activitee->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->date_debut_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activitee->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->date_fin_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activitee->date_fin_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->mail_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->pivot->mail_responsable }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +105,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->nom_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->pivot->nom_responsable }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -114,7 +114,7 @@
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->activities[0]->pivot->contact_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->pivot->contact_responsable }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>

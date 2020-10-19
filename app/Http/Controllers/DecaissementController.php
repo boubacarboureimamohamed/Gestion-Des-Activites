@@ -12,13 +12,16 @@ class DecaissementController extends Controller
     public function interfacedecaissement()
     {
         $user = auth()->user();
+        $x = 0;
+        $mail_admin = 0;
         foreach($user->roles as $role)
         {
             if($role->name == 'Admin')
             {
-                $mail_admin = $user->email;
+                $x = $user->email;
             }
         }
+        $mail_admin = $x;
         $activites = Activite::all();
         return view('decaissements.decaissement', compact('activites', 'user', 'mail_admin'));
     }
@@ -26,7 +29,10 @@ class DecaissementController extends Controller
     public function decaissement($id)
     {
         $bailleur = Bailleur::find($id);
-        return view('decaissements.create', compact('bailleur'));
+        $activite = Activite::with(['bailleurs' => function($query) use($bailleur){
+            $query->where('bailleurs.id', '=', $bailleur->id);
+        }])->find($id);
+        return view('decaissements.create', compact('bailleur', 'activite'));
     }
 
     public function decaissement_store(Request $request)
@@ -45,13 +51,16 @@ class DecaissementController extends Controller
     public function show($id)
     {
         $user = auth()->user();
+        $x = 0;
+        $mail_admin = 0;
         foreach($user->roles as $role)
         {
             if($role->name == 'Admin')
             {
-                $mail_admin = $user->email;
+                $x = $user->email;
             }
         }
+        $mail_admin = $x;
         $activite = Activite::find($id);
         return view('decaissements.show', compact('activite', 'user', 'mail_admin'));
     }

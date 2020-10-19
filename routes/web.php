@@ -67,6 +67,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::put('update_ligne_activite/{ligne_activite}', 'LigneActiviteController@modifier_ligneActivite')->name('modifierligneactivite');
 
+    Route::get('ligne_activite_justifier', 'JustificationController@ligne_activite_justifier')->name('ligne_activite_justifier');
+
  });
 
 

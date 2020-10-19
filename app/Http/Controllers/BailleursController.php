@@ -71,7 +71,6 @@ class BailleursController extends Controller
             'adresse_bailleur'=>'required',
             'contact_bailleur'=>'required',
             'mail_bailleur'=>'required'
-
         ]);
 
 

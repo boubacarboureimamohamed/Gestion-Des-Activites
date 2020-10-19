@@ -24,10 +24,18 @@ class JustificationController extends Controller
         return view('justifications.justification', compact('activites', 'user', 'mail_admin'));
     }
 
+    public function ligne_activite_justifier()
+    {
+        
+    }
+
     public function justification($id)
     {
         $activite = LigneActivite::find($id);
-        return view('justifications.create', compact('activite'));
+        $activitee = Activite::with(['ligneActivites' => function($query) use($activite){
+            $query->where('ligneActivites.id', '=', $activite->id);
+        }])->find($id);
+        return view('justifications.create', compact('activite', 'activite', 'activitee'));
     }
 
     public function justification_store(Request $request)

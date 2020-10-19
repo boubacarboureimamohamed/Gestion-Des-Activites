@@ -126,11 +126,8 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select class="form-control" id="" name="ligne_activite_id[]">
-                                                                <option selected="selected">********Sélectionnez********</option>
-                                                                @foreach ($ligne_activites as $ligne_activite) 
-                                                                 <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>  
-                                                                @endforeach
+                                                            <select class="form-control" id="ligne_activite_id" name="ligne_activite_id[]">
+                                                              <option selected="selected">********Sélectionnez********</option>  
                                                             </select>
                                                          </div>
                                                     </div>
@@ -201,11 +198,8 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select class="form-control" id="" name="bailleur_id[]">
+                                                            <select class="form-control" id="bailleur_id" name="bailleur_id[]">
                                                                 <option selected="selected">********Sélectionnez********</option>
-                                                                @foreach ($bailleurs as $bailleur) 
-                                                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
-                                                                @endforeach
                                                             </select>
                                                          </div>
                                                     </div>
@@ -279,38 +273,11 @@
             @csrf
                 <div class="row form-group">
                     <div class="col-sm-3">
-                        <label class="col-form-label">Nom ligne activité :</label>
+                        <label class="col-form-label">Intitulé :</label>
                     </div>
                     <div class="col-sm-9 input-group">
                         <span class="input-group-addon" id="basic-addon7"></span>
                         <input type="text" name="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer l'intitulé de la ligne d'activité">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-3">
-                        <label class="col-form-label">Nom responsable :</label>
-                    </div>
-                    <div class="col-sm-9 input-group">
-                        <span class="input-group-addon" id="basic-addon7"></span>
-                        <input type="text" name="nom_responsable_ligne" class="form-control" placeholder="Veuillez entrer le nom du responsable">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-3">
-                        <label class="col-form-label">Contact responsable :</label>
-                    </div>
-                    <div class="col-sm-9 input-group">
-                        <span class="input-group-addon" id="basic-addon7"></span>
-                        <input type="text" name="contact_responsable_ligne" class="form-control" placeholder="Veuillez entrer le contact du responsable">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-sm-3">
-                        <label class="col-form-label">Email responsable :</label>
-                    </div>
-                    <div class="col-sm-9 input-group">
-                        <span class="input-group-addon" id="basic-addon7"></span>
-                        <input type="text" name="mail_responsable_ligne" class="form-control" placeholder="Veuillez entrer l'adresse mail du responsable">
                     </div>
                 </div>
 
@@ -389,13 +356,57 @@
 @section('js')
 <script>
    $(document).ready(function(){
-     $("#responsable_activite_").bind('click').on('click',function(e){
+     $("#responsable_activite_id").on('click',function(e){
          e.preventDefault();
+         $("#responsable_activite_id").empty();
     axios.get('/getData')
     .then(function(response){
         response.data.responsable_activites.forEach(element => {
-            $('#responsable_activite_id').push(
+            $('#responsable_activite_id').append(
                 `<option value="element.id">${element.nom_responsable_activite}</option>`
+            )
+        });
+
+    })
+    .catch(function(error){
+
+    })
+     });
+});
+</script>
+<script>
+   $(document).ready(function(){
+     $("#ligne_activite_id").on('click',function(e){
+         e.preventDefault();
+         $("#ligne_activite_id").empty();
+    axios.get('/getData')
+    .then(function(response){
+        `<option selected="selected">********Sélectionnez********</option>`
+        response.data.ligne_activites.forEach(element => {
+            $('#ligne_activite_id').append(
+                `<option value="element.id">${element.nom_ligne_activite}</option>`
+            )
+        });
+
+    })
+    .catch(function(error){
+
+    })
+     });
+});
+</script>
+
+<script>
+   $(document).ready(function(){
+     $("#bailleur_id").on('click',function(e){
+         e.preventDefault();
+         $("#bailleur_id").empty();
+    axios.get('/getData')
+    .then(function(response){
+        $('#bailleur_id').append(`<option selected="selected">********Sélectionnez********</option>`);
+        response.data.bailleurs.forEach(element => {
+            $('#bailleur_id').append(
+                `<option value="element.id">${element.nom_bailleur}</option>`
             )
         });
 
@@ -418,6 +429,33 @@
                 success: function(response){
                     console.log(response);
                     $('#exampleModal1').modal('hide');
+                    swal({
+                    title: "Enregisté !",
+                    text: "Opération effectuée!",
+                    icon: "success",
+                    button: "Ok",
+                });
+
+                },
+                 error: function(error){
+                     console.log(error);        
+                    }
+            });
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function(){
+        $("#ligne_activite_id").on('submit', function(e){
+            e.preventDefault();
+            $.ajax({
+                type: 'post',
+                url: '/addBailleur',
+                data: $('#ligne_activite_id').serialize(),
+                success: function(response){
+                    console.log(response);
+                    $('#exampleModal').modal('hide');
                     swal({
                     title: "Enregisté !",
                     text: "Opération effectuée!",
