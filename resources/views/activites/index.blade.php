@@ -18,18 +18,18 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('activites.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                        <i class="feather icon-plus"></i>Nouvelle Activité</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numéro</th>
-                                <th>Nom activite</th>
-                                <th>Date debut</th>
+                                <th>#</th>
+                                <th>Libellé Activité</th>
+                                <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th>
-                                <th>Piece jointe</th>
-                                <th>Detail</th>
+                                <th>Observations</th>
+                                <th>Piéce jointe</th>
+                                <th>Détail</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -42,7 +42,9 @@
                                         <td>{{ $activite->date_debut_activite }}</td>
                                         <td>{{ $activite->date_fin_activite }} </td>
                                         <td>{{ $activite->commentaire_activite }}</td>
-                                        <td>{{ $activite->piece_jointe }}</td>
+                                        <td>
+                                            <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
+                                        </td>
                                         <td>
                                             <a href="{{ route('show_activite', $activite->id) }}" class="btn btn-info">
                                                 <i class="feather icon-eye"></i>

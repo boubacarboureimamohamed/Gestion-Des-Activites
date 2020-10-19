@@ -24,7 +24,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom de l'activite : </label>
+                                            <label class="col-form-label">Libellé de l'activite : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -105,13 +105,13 @@
                         </div>
                     </div>
 
-                    <h5 style="text-align: center;">Les bailleurs de l'activité</h5><br><br>
+                    <h5 style="text-align: center;">Les sources de financement</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Bailleur</th>
+                                    <th>Projet</th>
                                     <th>Montant annoncé </th>
                                     <th>Montant decaissé</th>
                                     <th>GAP</th>

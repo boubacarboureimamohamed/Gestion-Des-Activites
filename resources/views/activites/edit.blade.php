@@ -14,7 +14,7 @@
             <!-- Form wizard with validation card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Modificaion d'une activité</h3>
+                    <h3>Modificaion de l'activité</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('activites.update', $activite) }}">
@@ -26,61 +26,23 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom de l'activité : </label>
+                                                <label class="col-form-label">Libellé Activité : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="text" name="nom_activite" value="{{ $activite->nom_activite }}" class="form-control" placeholder="Veuillez entrer le nom de l'activité">
+                                                <input type="text" name="nom_activite" value="{{ $activite->nom_activite }}" class="form-control" placeholder="Veuillez entrer le libellé de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Responsable de l'activité :</label>
+                                                <label class="col-form-label">Responsable :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="" name="responsable_activite_id" value="{{ $activite->responsableActivite->nom_responsable_activite }}">
-                                                    <option selected="selected">********Sélectionnez********</option>
-                                                    @foreach ($responsable_activites as $responsable_activite) 
-                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>  
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Date fin :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="date" name="date_fin_activite" value="{{ $activite->date_fin_activite }}" class="form-control" placeholder="Veuillez entrer la date fin de l'activité">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Commentaire :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <textarea name="commentaire_activite" id="" value="{{ $activite->commentaire_activite }}" class="form-control" rows="1" ></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Demandeur de l'activité :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="" name="demandeur_id" value="{{ $activite->demandeur->nom_demandeur }}">
-                                                      <option selected="selected">********Sélectionnez********</option> 
-                                                    @foreach ($demandeurs as $demandeur) 
-                                                      <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>  
+                                                    <option value="">********Sélectionnez********</option>
+                                                    @foreach ($responsable_activites as $responsable_activite)
+                                                      <option @if ($responsable_activite->id == $activite->responsable_activite_id) {{ 'selected' }} @endif value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -92,6 +54,53 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <input type="date" name="date_debut_activite" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="Veuillez entrer la date début de l'activité">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Observation :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <textarea name="commentaire_activite" id="" value="{{ $activite->commentaire_activite }}" class="form-control" rows="1" placeholder="Veuillez faire une observation sur l'activité"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Demandeur :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <select class="form-control" id="" name="demandeur_id" value="{{ $activite->demandeur->nom_demandeur }}">
+                                                      <option selected="selected">********Sélectionnez********</option>
+                                                    @foreach ($demandeurs as $demandeur)
+                                                      <option @if ($demandeur->id == $activite->demandeur_id) {{ 'selected' }} @endif value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Budget :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <input type="text" name="" value="" class="form-control" placeholder="Veuillez entrer le budget de l'activité">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Date fin :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <input type="date" name="date_fin_activite" value="{{ $activite->date_fin_activite }}" class="form-control" placeholder="Veuillez entrer la date fin de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -110,13 +119,13 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les lignes de l'activité</h5>
+                                <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
                                 <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="feather icon-plus"></i></a>
+                                    <i class="feather icon-plus"></i> Nouvelle Ligne</a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Ligne d'activité </th>
+                                            <th>Ligne Activité </th>
                                             <th>Montant prévu</th>
                                             <th>Responsable</th>
                                             <th>Mail</th>
@@ -132,9 +141,8 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <select class="form-control" id="" name="ligne_activite_id[]">
-                                                                <option selected="selected">********Sélectionnez********</option>
-                                                                @foreach ($ligne_activites as $ligne_activite) 
-                                                                 <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option> 
+                                                                @foreach ($ligne_activites as $ligne_activite)
+                                                                 <option value="{{ $ligne_activite->id }}" @if ($ligne_activite->id == $activite->ligne_activite_id ) {{ 'selected' }} @endif>{{ $ligne_activite->nom_ligne_activite }}</option>
                                                                  @endforeach
                                                             </select>
                                                          </div>
@@ -154,7 +162,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="nom_responsable[]" value="{{ $ligne_actvte->pivot->nom_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="nom_responsable[]" value="{{ $ligne_actvte->pivot->nom_responsable }}" id="" class="form-control" placeholder="Veillez entrer le nom et prénom du responsable">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,7 +171,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="mail_responsable[]" value="{{ $ligne_actvte->pivot->mail_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="mail_responsable[]" value="{{ $ligne_actvte->pivot->mail_responsable }}" id="" class="form-control" placeholder="Veillez entrer l'adresse mail du responsable'">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -172,14 +180,14 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="contact_responsable[]" value="{{ $ligne_actvte->pivot->contact_responsable }}" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="contact_responsable[]" value="{{ $ligne_actvte->pivot->contact_responsable }}" id="" class="form-control" placeholder="Veillez entrer le contact du responsable">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td style="text-align: center">
                                                 <button class="btn btn-danger remove"><i class="feather icon-minus"></i></button>
-                                            </td>  
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -190,11 +198,13 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les bailleurs de l'activité</h5><br><br>
+                                <h5 style="text-align: center;">Les sources de financement</h5><br>
+                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">
+                                    <i class="feather icon-plus"></i> Nouveau Projet</a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Bailleur de fond</th>
+                                            <th>Projet </th>
                                             <th>Montant annoncé</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                         </tr>
@@ -207,9 +217,8 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <select class="form-control" id="" name="bailleur_id[]">
-                                                                <option selected="selected">********Sélectionnez********</option>
-                                                                @foreach ($bailleurs as $bailleur) 
-                                                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
+                                                                @foreach ($bailleurs as $bailleur)
+                                                                    <option @if ($bailleur->id == $activite->bailleur_id ) {{ 'selected' }} @endif value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>
                                                                 @endforeach
                                                             </select>
                                                          </div>
@@ -228,7 +237,7 @@
                                             <td style="text-align: center">
                                                 <button class="btn btn-danger remove1"><i class="feather icon-minus"></i></button>
                                             </td>
-                                        </tr>        
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -349,8 +358,8 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="ligne_activite_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($ligne_activites as $ligne_activite) 
-                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>  
+                                 @foreach ($ligne_activites as $ligne_activite)
+                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -424,8 +433,8 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="bailleur_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($bailleurs as $bailleur) 
-                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
+                                 @foreach ($bailleurs as $bailleur)
+                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>
                                  @endforeach
                             </select>
                         </div>

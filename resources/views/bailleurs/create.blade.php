@@ -7,7 +7,7 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Ajout d'un nouveau bailleur</h3>
+                    <h3>Nouveau projet</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('bailleurs.store') }}">
@@ -18,20 +18,20 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom : </label>
+                                                <label class="col-form-label">Projet : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" value="{{ old('nom_bailleur') }}" name="nom_bailleur" class="form-control" placeholder="Veuillez entrer le nom du bailleur">
+                                                <input type="text" value="{{ old('nom_bailleur') }}" name="nom_bailleur" class="form-control" placeholder="Veuillez entrer le libellé du projet">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Adresse :</label>
+                                                <label class="col-form-label">Contact :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du bailleur">
+                                                <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du projet">
                                             </div>
                                         </div>
                                     </div>
@@ -42,11 +42,11 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Contact :</label>
+                                                <label class="col-form-label">Adresse :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_bailleur" value="{{ old('contact_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="adresse_bailleur" value="{{ old('adresse_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse du projet">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -55,7 +55,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="mail_bailleur" value="{{ old('mail_bailleur') }}" class="form-control" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="mail_bailleur" value="{{ old('mail_bailleur') }}" class="form-control" placeholder="Veuillez entrer l'adresse mail du projet">
                                             </div>
                                         </div>
                                     </div>

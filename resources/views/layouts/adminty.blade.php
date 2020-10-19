@@ -138,33 +138,34 @@
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu">
                                     <a href="javascript:void(0)">
-                                        <span class="pcoded-micon"><i class="feather icon-clipboard"></i></span>
-                                        <span class="pcoded-mtext">Activités & Lignes Activités</span>
+                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
+                                        <span class="pcoded-mtext">Opérations</span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="{{ route('activites.index') }}">
-                                                <span class="pcoded-mtext">Les activités</span>
+                                                <span class="pcoded-mtext">Activités</span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="{{ route('ligne_activites.index') }}">
-                                                <span class="pcoded-mtext">Les lignes d'activités </span>
+                                        <li class="">
+                                            <a href="#">
+                                                <span class="pcoded-mtext">Décaissements</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ route('interfacejustification') }}">
+                                                <span class="pcoded-mtext">Justifications</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="#">
+                                                <span class="pcoded-mtext">Modification budget</span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="{{ route('bailleurs.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-inbox"></i></span>
-                                        <span class="pcoded-mtext">Les bailleurs</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
+                            {{-- <ul class="pcoded-item pcoded-left-item">
                                 <li class="">
                                     <a href="{{ route('budgets.index') }}">
                                         <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
@@ -172,50 +173,23 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="{{ route('interfacejustification') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-layers"></i></span>
-                                        <span class="pcoded-mtext">Les Justifications</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="{{ route('demandeurs.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-box"></i></span>
-                                        <span class="pcoded-mtext">Les demandeurs</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="{{ route('responsable_activites.index') }}">
-                                        <span class="pcoded-micon"><i class="feather icon-credit-card"></i></span>
-                                        <span class="pcoded-mtext">Les Responsable d'activte</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                            </ul>
+                            </ul> --}}
                             <div class="pcoded-navigatio-lavel">Gestion des utilisateurs</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu ">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="feather icon-users"></i></span>
-                                        <span class="pcoded-mtext">Utilisateurs et Rôles</span>
+                                        <span class="pcoded-mtext">Utilisateurs</span>
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
                                             <a href="{{ route('users.index') }}">
-                                                <span class="pcoded-mtext">Les utilisateurs</span>
+                                                <span class="pcoded-mtext">Utilisateurs</span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="{{ route('roles.index') }}" target="_blank">
-                                                <span class="pcoded-mtext">Les rôles</span>
+                                                <span class="pcoded-mtext">Rôles</span>
                                             </a>
                                         </li>
                                     </ul>
@@ -223,12 +197,33 @@
                             </ul>
                             <div class="pcoded-navigatio-lavel">Paramétrages</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="">
-                                    <a href="#">
+                                <li class="pcoded-hasmenu ">
+                                    <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="feather icon-settings"></i></span>
-                                        <span class="pcoded-mtext">Les paramétres</span>
-                                        <span class="pcoded-mcaret"></span>
+                                        <span class="pcoded-mtext">Paramétres</span>
                                     </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="">
+                                            <a href="{{ route('demandeurs.index') }}">
+                                                <span class="pcoded-mtext">Demandeurs</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ route('ligne_activites.index') }}" target="_blank">
+                                                <span class="pcoded-mtext">Lignes activités</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ route('bailleurs.index') }}" target="_blank">
+                                                <span class="pcoded-mtext">Projets</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ route('responsable_activites.index') }}" target="_blank">
+                                                <span class="pcoded-mtext">Responsables activités</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>

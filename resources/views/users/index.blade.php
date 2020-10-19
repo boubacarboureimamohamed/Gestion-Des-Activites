@@ -18,11 +18,12 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('users.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> </a>
+                        <i class="feather icon-plus"></i> Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Nom et Prénom</th>
                                 <th>Email</th>
                                 <th>Rôle(s)</th>
@@ -33,20 +34,21 @@
                             <tbody>
                                 @foreach ($users as $user)
                                 <tr>
-                                <td> {{ $user->name}} </td>
-                                <td> {{ $user->email }} </td>
-                                <td>
-                                    @foreach ($user->roles as $role)
-                                        <span class="badge badge-primary badge-pill">
-                                            {{  $role->name }}
-                                        </span>
-                                    @endforeach
-                                </td>
-                                <td>
-                                    <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">
-                                        <i class="feather icon-edit"></i>
-                                    </a>
-                                </td>
+                                    <td> {{ $user->id}} </td>
+                                    <td> {{ $user->name}} </td>
+                                    <td> {{ $user->email }} </td>
+                                    <td>
+                                        @foreach ($user->roles as $role)
+                                            <span class="badge badge-primary badge-pill">
+                                                {{  $role->name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('users.edit', $user) }}" class="btn btn-primary">
+                                            <i class="feather icon-edit"></i>
+                                        </a>
+                                    </td>
                                 <td>
                                     <form method="POST" action="{{ route('users.destroy', $user) }}" id="form{{ $user->id }}">
 

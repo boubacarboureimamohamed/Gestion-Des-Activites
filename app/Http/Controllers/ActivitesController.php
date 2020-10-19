@@ -98,13 +98,16 @@ class ActivitesController extends Controller
     public function show($id)
     {
         $user = auth()->user();
+        $x = 0;
+        $mail_admin = 0;
         foreach($user->roles as $role)
             {
                 if($role->name == 'Admin')
                     {
-                        $mail_admin  = $user->email;
+                        $x  = $user->email;
                     }
             }
+            $mail_admin = $x;
         $activite = Activite::find($id);
         return view('activites.show', compact('activite', 'user', 'mail_admin'));
     }
