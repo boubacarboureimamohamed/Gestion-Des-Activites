@@ -23,11 +23,11 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Libellé : </label>
+                                                <label class="col-form-label">Libellé Activité : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="text" name="nom_activite" class="form-control" placeholder="Veuillez entrer le nom de l'activité">
+                                                <input type="text" name="nom_activite" class="form-control" placeholder="Veuillez entrer le libellé de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -37,28 +37,29 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="responsable_activite_id" name="responsable_activite_id">
-                                                    @foreach ($responsable_activites as $responsable_activite) 
-                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>  
+                                                    <option id="responsable_activite_id" selected="selected">********Sélectionnez********</option>
+                                                    @foreach ($responsable_activites as $responsable_activite)
+                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Date fin :</label>
+                                                <label class="col-form-label">Date début :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="date" name="date_fin_activite" class="form-control" placeholder="Veuillez entrer la date fin de l'activité">
+                                                <input type="date" name="date_debut_activite" class="form-control" placeholder="Veuillez entrer la date début de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Commentaire :</label>
+                                                <label class="col-form-label">Observation :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <textarea name="commentaire_activite" id="" class="form-control" rows="1" placeholder="Veuillez faire un commentaire sur l'activité"></textarea>
+                                                <textarea name="commentaire_activite" id="" class="form-control" rows="1" placeholder="Veuillez faire une observation sur l'activité"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -74,20 +75,29 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <select class="form-control" id="" name="demandeur_id">
-                                                      <option id="demandeur_id" selected="selected">********Sélectionnez********</option> 
-                                                    @foreach ($demandeurs as $demandeur) 
-                                                      <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>  
+                                                      <option id="demandeur_id" selected="selected">********Sélectionnez********</option>
+                                                    @foreach ($demandeurs as $demandeur)
+                                                      <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Date début :</label>
+                                                <label class="col-form-label">Budget:</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="date" name="date_debut_activite" class="form-control" placeholder="Veuillez entrer la date début de l'activité">
+                                                <input type="text" name="" class="form-control" placeholder="Veuillez entrer le budget de l'activité">
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Date fin :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <input type="date" name="date_fin_activite" class="form-control" placeholder="Veuillez entrer la date fin de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -106,13 +116,13 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les lignes de l'activité</h5>
+                                <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
                                 <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="feather icon-plus"></i></a>
+                                    <i class="feather icon-plus"></i> Nouvelle Ligne</a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Ligne d'activité </th>
+                                            <th>Ligne Activité </th>
                                             <th>Montant prévu</th>
                                             <th>Responsable</th>
                                             <th>Mail</th>
@@ -145,7 +155,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le nom et prénom du responsable">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -154,7 +164,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer l'adresse mail du responsable'">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,7 +173,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
+                                                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le contact du responsable">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -180,13 +190,13 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les bailleurs de l'activité</h5><br><br>
+                                <h5 style="text-align: center;">Les sources de financement</h5><br>
                                 <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">
-                                    <i class="feather icon-plus"></i></a>
+                                    <i class="feather icon-plus"></i> Nouveau Projet</a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Bailleur </th>
+                                            <th>Projet </th>
                                             <th>Montant annoncé</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                         </tr>
@@ -485,7 +495,7 @@
                 icon: "error",
                 color: "red",
                 button: "Ok",
-            });       
+            });  
                     }
             });
         });
@@ -507,8 +517,8 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="ligne_activite_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($ligne_activites as $ligne_activite) 
-                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>  
+                                 @foreach ($ligne_activites as $ligne_activite)
+                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -582,8 +592,8 @@
                         <div class="input-group">
                             <select class="form-control" id="" name="bailleur_id[]">
                                 <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($bailleurs as $bailleur) 
-                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>  
+                                 @foreach ($bailleurs as $bailleur)
+                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>
                                  @endforeach
                             </select>
                         </div>

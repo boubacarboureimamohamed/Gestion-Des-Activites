@@ -25,7 +25,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom de l'activite : </label>
+                                            <label class="col-form-label">Libellé Activité : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -34,11 +34,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable de l'activite :</label>
+                                            <label class="col-form-label">Date début :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_acti  }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -49,11 +49,11 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Date debut :</label>
+                                            <label class="col-form-label">Responsable Activité :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -77,7 +77,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom bailleur de fond : </label>
+                                            <label class="col-form-label">Libellé Projet : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Email de bailleur de fond :</label>
+                                            <label class="col-form-label">Adresse mail :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -101,7 +101,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Adresse de bailleur de fond :</label>
+                                            <label class="col-form-label">Adresse :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Contact de bailleur de fond :</label>
+                                            <label class="col-form-label">Contact :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -121,8 +121,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <h5 style="text-align: center;">Les decaissement de montant annonce pour l'activite cette activite</h5><br><br>
+
+                    <h5 style="text-align: center;">Les décaissement du montant annoncé</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="example-2" class="table table-striped table-bordered nowrap">

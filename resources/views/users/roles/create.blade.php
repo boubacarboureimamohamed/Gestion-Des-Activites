@@ -17,7 +17,7 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Ajout d'un nouveau rôle</h3>
+                    <h3>Nouveau rôle</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('roles.store') }}">

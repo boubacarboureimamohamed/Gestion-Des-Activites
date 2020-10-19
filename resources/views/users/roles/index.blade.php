@@ -18,12 +18,13 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('roles.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> </a>
+                        <i class="feather icon-plus"></i> Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Role</th>
+                                <th>#</th>
+                                <th>Rôle</th>
                                 <th>Permission(s)</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
@@ -32,14 +33,15 @@
                             <tbody>
                                 @foreach ($roles as $role)
                                 <tr>
-                                <td> {{ $role->name}} </td>
-                                <td>
-                                    @foreach ($role->permissions as $permission)
-                                        <span class="badge badge-primary badge-pill">
-                                            {{  $permission->name }}
-                                        </span>
-                                    @endforeach
-                                </td>
+                                    <td> {{ $role->id}} </td>
+                                    <td> {{ $role->name}} </td>
+                                    <td>
+                                        @foreach ($role->permissions as $permission)
+                                            <span class="badge badge-primary badge-pill">
+                                                {{  $permission->name }}
+                                            </span>
+                                        @endforeach
+                                    </td>
                                 <td>
                                     <a href="{{ route('roles.edit', $role) }}" class="btn btn-primary">
                                         <i class="feather icon-edit"></i>

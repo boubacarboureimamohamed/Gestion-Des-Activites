@@ -14,17 +14,17 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des bailleurs</h3>
+                    <h3>Liste des projets</h3>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('bailleurs.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                        <i class="feather icon-plus"></i> Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numéro</th>
-                                <th>Nom</th>
+                                <th>#</th>
+                                <th>Projet</th>
                                 <th>Adresse</th>
                                 <th>Contact</th>
                                 <th>Modifier</th>

@@ -18,13 +18,13 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('ligne_activites.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        <i class="feather icon-plus"></i>Nouveau</a>
+                        <i class="feather icon-plus"></i>Nouvelle Ligne</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Nom ligne</th>
+                                <th>#</th>
+                                <th>Ligne Activité</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -73,7 +73,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ajout d'une nouvelle ligne d'activité</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nouvelle ligne d'activité</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
             </button>
@@ -83,11 +83,11 @@
             @csrf
             <div class="row form-group">
                 <div class="col-sm-3">
-                    <label class="col-form-label">Intitulé : </label>
+                    <label class="col-form-label">Libellé : </label>
                 </div>
                 <div class="col-sm-9 input-group">
                     <span class="input-group-addon" id="basic-addon7"></span>
-                    <input type="text" name="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer le nom du demandeur">
+                    <input type="text" name="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer le libellé de la ligne d'activité">
                 </div>
             </div>
         </div>
@@ -116,11 +116,11 @@
             {{ method_field('PUT') }}
             <div class="row form-group">
                 <div class="col-sm-3">
-                    <label class="col-form-label">Intitulé : </label>
+                    <label class="col-form-label">Libellé : </label>
                 </div>
                 <div class="col-sm-9 input-group">
                     <span class="input-group-addon" id="basic-addon7"></span>
-                    <input type="text" name="nom_ligne_activite" id="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer l'intitulé de la ligne d'activité">
+                    <input type="text" name="nom_ligne_activite" id="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer le libellé de la ligne d'activité">
                 </div>
             </div>
         </div>

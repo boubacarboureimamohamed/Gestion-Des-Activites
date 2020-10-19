@@ -14,33 +14,35 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des activités a decaisser</h3>
+                    <h3>Décaissement des projets</h3>
                 </div>
                 <div class="card-block">
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numéro</th>
-                                <th>Nom activite</th>
-                                <th>Date debut</th>
+                                <th>#</th>
+                                <th>Activite</th>
+                                <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th> 
+                                <th>Observations</th>
                                 <th>Piece jointe</th>
-                                <th>Detail</th>
+                                <th>Détail</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($activites as $activite)
                                         @foreach ($activite->bailleurs as $bailleur)
-                                           @if($bailleur->mail_bailleur == $user->email || $mail_admin)    
+                                           @if($bailleur->mail_bailleur == $user->email || $mail_admin)
                                     <tr>
                                         <td>{{ $activite->id }}</td>
                                         <td>{{ $activite->nom_activite }}</td>
                                         <td>{{ $activite->date_debut_activite }}</td>
                                         <td>{{ $activite->date_fin_activite }} </td>
                                         <td>{{ $activite->commentaire_activite }}</td>
-                                        <td>{{ $activite->piece_jointe }}</td>
+                                        <td>
+                                            <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
+                                        </td>
                                         <td>
                                             <a href="{{ route('show_decaissement', $activite) }}" class="btn btn-info">
                                                 <i class="feather icon-eye"></i>
@@ -48,7 +50,7 @@
                                         </td>
                                     </tr>
                                        @endif
-                                      @endforeach 
+                                      @endforeach
                                 @endforeach
                             </tbody>
                         </table>

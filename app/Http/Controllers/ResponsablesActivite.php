@@ -47,8 +47,8 @@ class ResponsablesActivite extends Controller
             'nom_responsable_activite'=>$request->nom_responsable_activite,
             'prenom_responsable_activite'=>$request->prenom_responsable_activite,
             'mail_responsable_activite'=>$request->mail_responsable_activite,
-            'contact_responsable_activite'=>$request->nom_responsable_activite
-        ]); 
+            'contact_responsable_activite'=>$request->contact_responsable_activite
+        ]);
 
         return redirect(route('responsable_activites.index'))->with('success', 'Operation effectue avec succes!');
     }
@@ -91,15 +91,15 @@ class ResponsablesActivite extends Controller
             'mail_responsable_activite'=>'required',
             'contact_responsable_activite'=>'required'
         ]);
-        
+
         $responsable_activite = ResponsableActivite::find($id);
 
         $responsable_activite ->update([
             'nom_responsable_activite'=>$request->nom_responsable_activite,
             'prenom_responsable_activite'=>$request->prenom_responsable_activite,
             'mail_responsable_activite'=>$request->mail_responsable_activite,
-            'contact_responsable_activite'=>$request->nom_responsable_activite
-        ]); 
+            'contact_responsable_activite'=>$request->contact_responsable_activite
+        ]);
 
         return redirect(route('responsable_activites.index'))->with('success', 'Operation effectue avec succes!');
     }

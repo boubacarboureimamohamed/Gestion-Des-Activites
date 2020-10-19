@@ -7,7 +7,7 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Modification d'un bailleur</h3>
+                    <h3>Modification d'un projet</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('bailleurs.update', $bailleur) }}">
@@ -19,29 +19,23 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Nom du bailleur : </label>
+                                                <label class="col-form-label">Projet : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="nom_bailleur" class="form-control @error('nom_bailleur') is-invalid @enderror" value="{{ $bailleur->nom_bailleur }}" placeholder="Veuillez entrer le nom du bailleur">
+                                                <input type="text" name="nom_bailleur" class="form-control" value="{{ $bailleur->nom_bailleur }}" placeholder="Veuillez entrer le libellé du projet">
 
                                             </div>
-                                            @error('nom_bailleur')
-                                                        <div style="color: red;">{{ $message }}</div>
-                                                    @enderror
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Adresse du bailleur :</label>
+                                                <label class="col-form-label">Contact :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="adresse_bailleur" class="form-control @error('adresse_bailleur') is-invalid @enderror" value="{{ $bailleur->adresse_bailleur }}" placeholder="Veuillez entrer l'adresse du bailleur">
+                                                <input type="text" name="contact_bailleur" class="form-control" value="{{ $bailleur->contact_bailleur }}" placeholder="Veuillez entrer le contact du projet">
 
                                             </div>
-                                            @error('adresse_bailleur')
-                                                        <div style="color: red;">{{ $message }}</div>
-                                                    @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -51,11 +45,11 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Contact du bailleur :</label>
+                                                <label class="col-form-label">Adresse :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="contact_bailleur" class="form-control" value="{{ $bailleur->contact_bailleur }}" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="adresse_bailleur" class="form-control" value="{{ $bailleur->adresse_bailleur }}" placeholder="Veuillez entrer l'adresse du projet">
 
                                             </div>
                                         </div>
@@ -65,7 +59,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
-                                                <input type="text" name="mail_bailleur" class="form-control" value="{{ $bailleur->mail_bailleur }}" placeholder="Veuillez entrer le contact du bailleur">
+                                                <input type="text" name="mail_bailleur" class="form-control" value="{{ $bailleur->mail_bailleur }}" placeholder="Veuillez entrer l'adresse mail du projet">
 
                                             </div>
                                         </div>

@@ -23,8 +23,8 @@
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Nom demandeur</th>
+                                <th>#</th>
+                                <th>Demandeur</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -72,7 +72,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Ajout d'un nouveau demandeur</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nouveau demandeur</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -82,11 +82,11 @@
                 @csrf
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Nom demandeur</label>
+                            <label class="col-form-label">Libellé Demandeur</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_demandeur" class="form-control" placeholder="Veuillez entrer le nom du demandeur">
+                            <input type="text" name="nom_demandeur" class="form-control" placeholder="Veuillez entrer le libellé du demandeur">
                         </div>
                     </div>
 
@@ -116,11 +116,11 @@
             {{ method_field('PUT') }}
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Nom demandeur</label>
+                            <label class="col-form-label">Libellé Demandeur :</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_demandeur" id="nom_demandeur" class="form-control">
+                            <input type="text" name="nom_demandeur" id="nom_demandeur" class="form-control" placeholder="Veuillez entrer le libellé du demandeur">
                         </div>
                     </div>
 

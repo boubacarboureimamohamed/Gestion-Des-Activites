@@ -14,20 +14,18 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des activités ayant des lignes a justifier</h3>
+                    <h3>Justification des dépenses</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('activites.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numéro</th>
-                                <th>Nom activite</th>
-                                <th>Date debut</th>
+                                <th>#</th>
+                                <th>Activite</th>
+                                <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Commentaire</th>
+                                <th>Observations</th>
                                 <th>Piece jointe</th>
                                 <th>Detail</th>
                             </tr>
@@ -43,7 +41,9 @@
                                         <td>{{ $activite->date_debut_activite }}</td>
                                         <td>{{ $activite->date_fin_activite }} </td>
                                         <td>{{ $activite->commentaire_activite }}</td>
-                                        <td>{{ $activite->piece_jointe }}</td>
+                                        <td>
+                                            <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
+                                        </td>
                                         <td>
                                             <a href="{{ route('activites.show', $activite) }}" class="btn btn-info">
                                                 <i class="feather icon-eye"></i>

@@ -14,11 +14,11 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des responsable d'activite</h3>
+                    <h3>Liste des responsable d'activité</h3>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('responsable_activites.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                        <i class="feather icon-plus"></i> Nouveau</a>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
@@ -26,7 +26,7 @@
                                 <th>#</th>
                                 <th>Nom</th>
                                 <th>Prenom</th>
-                                <th>Adresse mail</th>
+                                <th>Email</th>
                                 <th>Contact</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>

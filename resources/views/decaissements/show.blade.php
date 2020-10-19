@@ -24,7 +24,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom de l'activite : </label>
+                                            <label class="col-form-label">Libellé Activite : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -33,11 +33,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable de l'activite :</label>
+                                            <label class="col-form-label">Date début :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -48,11 +48,11 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Date debut :</label>
+                                            <label class="col-form-label">Responsable Activite :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -69,23 +69,23 @@
                         </div>
                     </div>
 
-                    <h5 style="text-align: center;">Les bailleurs qui ont financer l'activite</h5><br><br>
+                    <h5 style="text-align: center;">Les sources de financement</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Nom</th>
-                                    <th>Adresse mail</th>
+                                    <th>Projet</th>
+                                    <th>Email</th>
                                     <th>Contact</th>
-                                    <th>Adresse</th> 
-                                    <th>Montant annonce</th> 
-                                    <th>decaisser</th>
+                                    <th>Adresse</th>
+                                    <th>Montant annoncé</th>
+                                    <th>Décaisser</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($activite->bailleurs as $bailleur)
-                                           @if($bailleur->mail_bailleur == $user->email || $mail_admin)  
+                                           @if($bailleur->mail_bailleur == $user->email || $mail_admin)
                                         <tr>
                                             <td>{{ $bailleur->nom_bailleur }}</td>
                                             <td>{{ $bailleur->mail_bailleur }} </td>

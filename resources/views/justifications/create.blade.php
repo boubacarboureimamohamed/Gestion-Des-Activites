@@ -25,7 +25,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom de l'activite : </label>
+                                            <label class="col-form-label">Libellé Activité : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -34,11 +34,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable de l'activite :</label>
+                                            <label class="col-form-label">Date début :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activitee->responsableActivite->nom_responsable_activite.' '.$activitee->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activitee->date_debut_activite }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -49,11 +49,11 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Date debut :</label>
+                                        <label class="col-form-label">Responsable Activité :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activitee->date_debut_activite }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activitee->responsableActivite->nom_responsable_activite.' '.$activitee->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -70,14 +70,14 @@
                         </div>
                     </div>
                     <input type="text"  name="ligne_activite_id" value="{{ $activite->id }}" class="form-control" hidden placeholder="">
-                    <h5 style="text-align: center;">Information sur la ligne d'activite...</h5><br><br>
+                    <h5 style="text-align: center;">Information sur la ligne d'activite {{ $activite->nom_ligne_activite }}</h5><br><br>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Nom de la ligne : </label>
+                                            <label class="col-form-label">Ligne Activité : </label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -86,11 +86,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Email du responsable :</label>
+                                            <label class="col-form-label">Montant Prévu :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->pivot->mail_responsable }}" class="form-control" placeholder="" disabled>
+                                            <input type="text" name="" value="{{ $activite->pivot->montant_prevu }}" class="form-control" placeholder="" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable de la ligne :</label>
+                                            <label class="col-form-label">Responsable Ligne Activité:</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Contact du responsable :</label>
+                                            <label class="col-form-label">Contact :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
@@ -121,15 +121,15 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <h5 style="text-align: center;">Les justifications de depense pour la ligne d'activite...</h5><br><br>
+
+                    <h5 style="text-align: center;">Les justifications de dépense</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="example-2" class="table table-striped table-bordered nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Libelle </th>
-                                        <th>Montant depense</th>
+                                        <th>Libellé </th>
+                                        <th>Montant depensé</th>
                                         <th>Piece jointe</th>
                                         <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                     </tr>
@@ -140,7 +140,7 @@
                                             <div class="">
                                                 <div class="form-group form-primary">
                                                     <div class="input-group">
-                                                        <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                                                        <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le libellé">
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,7 +149,7 @@
                                             <div class="">
                                                 <div class="form-group form-primary">
                                                     <div class="input-group">
-                                                        <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                                                        <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                                                     </div>
                                                 </div>
                                             </div>
@@ -158,7 +158,7 @@
                                             <div class="">
                                                 <div class="form-group form-primary">
                                                     <div class="input-group">
-                                                        <input type="text" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                                                        <input type="file" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer la piéce jointe">
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,7 +223,7 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                            <input type="text" name="libelle[]" value="" id="" class="form-control" placeholder="Veillez entrer le libellé">
                         </div>
                     </div>
                 </div>
@@ -232,7 +232,7 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                            <input type="text" name="montant_depense[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant annoncé">
+                            <input type="file" name="piece_jointe[]" value="" id="" class="form-control" placeholder="Veillez entrer la piéce jointe">
                         </div>
                     </div>
                 </div>
