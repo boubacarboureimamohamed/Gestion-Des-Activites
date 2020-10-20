@@ -24,31 +24,11 @@ class CreateActivitesTable extends Migration
             $table->foreign('demandeur_id')->references('id')->on('demandeurs');
             $table->bigInteger('responsable_activite_id')->index()->unsigned();
             $table->foreign('responsable_activite_id')->references('id')->on('responsable_activites');
+            $table->bigInteger('budget_id')->index()->unsigned();
+            $table->foreign('budget_id')->references('id')->on('budgets');
             $table->timestamps();
         });
-
-        Schema::create('activites_ligne_activites', function (Blueprint $table) {
-            $table->id();
-            $table->double('montant_prevu');
-            $table->string('nom_responsable');
-            $table->string('mail_responsable')->unique();
-            $table->string('contact_responsable');
-            $table->bigInteger('activite_id')->index()->unsigned();
-            $table->foreign('activite_id')->references('id')->on('activites');
-            $table->bigInteger('ligne_activite_id')->index()->unsigned();
-            $table->foreign('ligne_activite_id')->references('id')->on('ligne_activites');
-            $table->timestamps();
-        });
-
-        Schema::create('activites_bailleurs', function (Blueprint $table) {
-            $table->id();
-            $table->double('montant_annonce');
-            $table->bigInteger('activite_id')->index()->unsigned();
-            $table->foreign('activite_id')->references('id')->on('activites');
-            $table->bigInteger('bailleur_id')->index()->unsigned();
-            $table->foreign('bailleur_id')->references('id')->on('bailleurs');
-            $table->timestamps();
-        });
+        
     }
 
     /**

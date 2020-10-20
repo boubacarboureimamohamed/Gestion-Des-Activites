@@ -27,7 +27,6 @@
                                 <th>Libellé Activité</th>
                                 <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Observations</th>
                                 <th>Piéce jointe</th>
                                 <th>Détail</th>
                                 <th>Modifier</th>
@@ -41,7 +40,6 @@
                                         <td>{{ $activite->nom_activite }}</td>
                                         <td>{{ $activite->date_debut_activite }}</td>
                                         <td>{{ $activite->date_fin_activite }} </td>
-                                        <td>{{ $activite->commentaire_activite }}</td>
                                         <td>
                                             <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
                                         </td>

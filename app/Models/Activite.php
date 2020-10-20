@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Activite extends Model
 {
-    protected $fillable = ['nom_activite', 'date_debut_activite', 'date_fin_activite', 'commentaire_activite', 'piece_jointe', 'demandeur_id', 'responsable_activite_id'];
-
-    public function ligneActivites()
-    {
-        return $this->belongsToMany('App\Models\LigneActivite', 'activites_ligne_activites')->withPivot('montant_prevu', 'nom_responsable', 'mail_responsable', 'contact_responsable');
-    }
+    protected $fillable = ['nom_activite', 'date_debut_activite', 'date_fin_activite', 'commentaire_activite', 'piece_jointe', 'demandeur_id', 'responsable_activite_id', 'budget_id'];
 
     public function responsableActivite()
     {
@@ -20,17 +15,22 @@ class Activite extends Model
 
     public function budgets()
     {
-        return $this->hasMany('App\Models\Budget');
-    }
-
-    public function bailleurs()
-    {
-        return $this->belongsToMany('App\Models\Bailleur', 'activites_bailleurs')->withPivot('montant_annonce');
+        return $this->belongsToMany('App\Models\Budget');
     }
 
     public function demandeur()
     {
         return $this->belongsTo('App\Models\Demandeur');
+    }
+
+    public function activiteLigneActivites()
+    {
+        return $this->hasMany('App\Models\ActiviteLigneActivite');
+    }
+
+    public function ActiviteBailleurs()
+    {
+        return $this->hasMany('App\Models\ActiviteBailleur');
     }
 
 }

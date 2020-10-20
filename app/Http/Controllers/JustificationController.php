@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Justification;
 use App\Models\Activite;
 use App\Models\LigneActivite;
-
+use App\Models\ActiviteLigneActivite;
 
 class JustificationController extends Controller
 {
@@ -24,22 +24,21 @@ class JustificationController extends Controller
             }
             $mail_admin = $x;
         $activites = Activite::all();
-        return view('justifications.justification', compact('activites', 'user', 'mail_admin'));
+        $ligne_activites = ActiviteLigneActivite::all();
+        return view('justifications.justification', compact('activites', 'user', 'mail_admin', 'ligne_activites'));
     }
 
     public function ligne_activite_justifier()
     {
-        
+
     }
 
-    public function justification($id)
+    public function justification($id, Activite $activite)
     {
-        $activite = LigneActivite::find($id);
-        $activitee = Activite::with(['ligneActivites' => function($query) use($activite){
-            $query->where('ligneActivites.id', '=', $activite->id);
-        }])->find($id);
-        return view('justifications.create', compact('activite', 'activite', 'activitee'));
+        $ligne_activite = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->find($id);
+        return view('justifications.create', compact('activite', 'ligne_activite'));
     }
+
 
     public function justification_store(Request $request)
     {

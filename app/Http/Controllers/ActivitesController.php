@@ -8,6 +8,9 @@ use App\Models\Bailleur;
 use App\Models\LigneActivite;
 use App\Models\ResponsableActivite;
 use App\Models\Demandeur;
+use App\Models\Budget;
+use App\Models\ActiviteLigneActivite;
+use App\Models\ActiviteBailleur;
 
 class ActivitesController extends Controller
 {
@@ -58,6 +61,11 @@ class ActivitesController extends Controller
             'contact_responsable'=>'required'
         ]);
 
+        $budget = Budget::create([
+            'montant_budget'=>$request->montant_budget,
+            'date_budget'=>date('Y-m-d')
+        ]);
+
         $activite = Activite::create([
             'nom_activite'=>$request->nom_activite,
             'date_debut_activite'=>$request->date_debut_activite,
@@ -65,23 +73,28 @@ class ActivitesController extends Controller
             'commentaire_activite'=>$request->commentaire_activite,
             'piece_jointe'=>$request->piece_jointe,
             'demandeur_id'=>$request->demandeur_id,
-            'responsable_activite_id'=>$request->responsable_activite_id
+            'responsable_activite_id'=>$request->responsable_activite_id,
+            'budget_id'=>$budget->id
         ]);
 
         for($i=0; $i< count($request->ligne_activite_id); $i++)
         {
-            $activite->ligneActivites()->attach($request->ligne_activite_id[$i], [
+          ActiviteLigneActivite::create([
                 'montant_prevu'=>$request->montant_prevu[$i],
                 'nom_responsable'=>$request->nom_responsable[$i],
                 'mail_responsable'=>$request->mail_responsable[$i],
                 'contact_responsable'=>$request->contact_responsable[$i],
+                'ligne_activite_id'=>$request->ligne_activite_id[$i],
+                'activite_id'=>$activite->id
             ]);
         }
 
         for($j=0; $j< count($request->bailleur_id); $j++)
         {
-            $activite->bailleurs()->attach($request->bailleur_id[$j], [
-                'montant_annonce'=>$request->montant_annonce[$j]
+            ActiviteBailleur::create([
+                'montant_annonce'=>$request->montant_annonce[$j],
+                'bailleur_id'=>$request->bailleur_id[$j],
+                'activite_id'=>$activite->id
             ]);
         }
 
@@ -109,13 +122,18 @@ class ActivitesController extends Controller
             }
             $mail_admin = $x;
         $activite = Activite::find($id);
-        return view('activites.show', compact('activite', 'user', 'mail_admin'));
+        $ligne_activites = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->get();
+        $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
+        return view('activites.show', compact('activite', 'ligne_activites', 'budget', 'user', 'mail_admin'));
     }
 
     public function show_activite($id)
     {
         $activite = Activite::find($id);
-        return view('activites.show_activite', compact('activite'));
+        $ligne_activites = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->get();
+        $bailleurs = ActiviteBailleur::where('activite_id', '=', $activite->id)->get();
+        $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
+        return view('activites.show_activite', compact('activite', 'ligne_activites', 'bailleurs', 'budget'));
     }
 
     /**

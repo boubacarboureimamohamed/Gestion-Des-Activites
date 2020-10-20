@@ -25,21 +25,22 @@
                                 <th>Activite</th>
                                 <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Observations</th>
-                                <th>Piece jointe</th>
+                                <th>Document</th>
                                 <th>Détail</th>
                             </tr>
                             </thead>
                             <tbody>
                                 @foreach ($activites as $activite)
-                                        @foreach ($activite->bailleurs as $bailleur)
-                                           @if($bailleur->mail_bailleur == $user->email || $mail_admin)
+                                        @foreach ($bailleurs as $bailleur)
+
+                                          @if($activite->id == $bailleur->bailleur_id)
+
+                                           @if($bailleur->bailleur->mail_bailleur == $user->email || $mail_admin)
                                     <tr>
                                         <td>{{ $activite->id }}</td>
                                         <td>{{ $activite->nom_activite }}</td>
                                         <td>{{ $activite->date_debut_activite }}</td>
                                         <td>{{ $activite->date_fin_activite }} </td>
-                                        <td>{{ $activite->commentaire_activite }}</td>
                                         <td>
                                             <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
                                         </td>
@@ -49,6 +50,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                       @endif
                                        @endif
                                       @endforeach
                                 @endforeach

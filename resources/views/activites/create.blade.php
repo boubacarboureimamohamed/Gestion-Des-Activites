@@ -39,7 +39,7 @@
                                                 <select class="form-control" id="responsable_activite_id" name="responsable_activite_id">
                                                     <option id="responsable_activite_id" selected="selected">********Sélectionnez********</option>
                                                     @foreach ($responsable_activites as $responsable_activite)
-                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>
+                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite.' '.$responsable_activite->prenom_responsable_activite  }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -88,7 +88,7 @@
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <input type="text" name="" class="form-control" placeholder="Veuillez entrer le budget de l'activité">
+                                                <input type="text" name="montant_budget" class="form-control" placeholder="Veuillez entrer le budget de l'activité">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -371,7 +371,7 @@
     .then(function(response){
         response.data.responsable_activites.forEach(element => {
             $('#responsable_activite_id').append(
-                `<option value="element.id">${element.nom_responsable_activite}</option>`
+                `<option value="${element.id}">${element.nom_responsable_activite}</option>`
             )
         });
 

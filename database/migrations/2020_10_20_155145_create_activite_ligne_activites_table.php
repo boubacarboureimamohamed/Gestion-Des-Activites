@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBudgetsTable extends Migration
+class CreateActiviteLigneActivitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,16 @@ class CreateBudgetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('budgets', function (Blueprint $table) {
+        Schema::create('activite_ligne_activites', function (Blueprint $table) {
             $table->id();
-            $table->double('montant_budget');
-            $table->date('date_budget');
-            $table->string('commentaire_budget')->nullable();
+            $table->double('montant_prevu');
+            $table->string('nom_responsable');
+            $table->string('mail_responsable')->unique();
+            $table->string('contact_responsable');
             $table->bigInteger('activite_id')->index()->unsigned();
             $table->foreign('activite_id')->references('id')->on('activites');
+            $table->bigInteger('ligne_activite_id')->index()->unsigned();
+            $table->foreign('ligne_activite_id')->references('id')->on('ligne_activites');
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ class CreateBudgetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('budgets');
+        Schema::dropIfExists('activite_ligne_activites');
     }
 }

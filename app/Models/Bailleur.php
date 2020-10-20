@@ -8,8 +8,8 @@ class Bailleur extends Model
 {
     protected $fillable = ['nom_bailleur', 'contact_bailleur', 'adresse_bailleur', 'mail_bailleur'];
 
-    public function activites()
+    public function ActiviteBailleurs()
     {
-        return $this->belongsToMany('App\Models\Activite', 'activites_bailleurs')->withPivot('montant_annonce');
+        return $this->hasMany('App\Models\ActiviteBailleur');
     }
 }
