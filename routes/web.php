@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/getData', 'ActivitesController@getData');
 
-    Route::get('justifications/create/{id}', 'JustificationController@justification')->name('justification');
+    Route::get('justifications/create/{id}/{activite}', 'JustificationController@justification')->name('justification');
 
     Route::post('justification_store', 'JustificationController@justification_store')->name('justification_store');
 
@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('interfacedecaissement', 'DecaissementController@interfacedecaissement')->name('interfacedecaissement');
 
-    Route::get('decaissement/create/{id}', 'DecaissementController@decaissement')->name('decaissement');
+    Route::get('decaissement/create/{id}/{activite}', 'DecaissementController@decaissement')->name('decaissement');
 
     Route::post('decaissement_store', 'DecaissementController@decaissement_store')->name('decaissement_store');
 

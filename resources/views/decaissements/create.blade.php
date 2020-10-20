@@ -14,115 +14,14 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Information sur l'activite <strong>{{ $activite->nom_activite }}</strong></h3>
+                    <h3>Les décaissement du montant</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('decaissement_store') }}">
                         @csrf
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Libellé Activité : </label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" value="{{ $activite->nom_activite }}" class="form-control" disabled placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Date début :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->date_debut_activite }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable Activité :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite  }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Date fin :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $activite->date_fin_activite }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <input type="text"  name="bailleur_id" value="{{ $bailleur->id }}" class="form-control" hidden placeholder="">
-                    <h5 style="text-align: center;">Information de <strong>{{ $bailleur->nom_bailleur }}</strong></h5><br><br>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Libellé Projet : </label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text"  name="" value="{{ $bailleur->nom_bailleur }}" class="form-control" disabled placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Adresse mail :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $bailleur->mail_bailleur }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Adresse :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $bailleur->adresse_bailleur }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Contact :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" value="{{ $bailleur->contact_bailleur }}" class="form-control" placeholder="" disabled>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <h5 style="text-align: center;">Les décaissement du montant annoncé</h5><br><br>
                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="example-2" class="table table-striped table-bordered nowrap">

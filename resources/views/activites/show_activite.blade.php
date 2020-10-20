@@ -42,20 +42,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Budget total :</label>
+                                            <label class="col-form-label">Budget :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le budget total de l'activité" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">Montant total decaissé :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le montant decaissé de l'activité" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $budget->montant_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -84,20 +75,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Montant total annoncé :</label>
+                                            <label class="col-form-label">Date budget :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control"value="" placeholder="Veuillez entrer le montant total annoncé de l'activité" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">GAP :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="" placeholder="Veuillez entrer le GAP" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $budget->date_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -113,17 +95,13 @@
                                 <tr>
                                     <th>Projet</th>
                                     <th>Montant annoncé </th>
-                                    <th>Montant decaissé</th>
-                                    <th>GAP</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($activite->bailleurs as $bailleur)
+                                    @foreach ($bailleurs as $bailleur)
                                         <tr>
-                                            <td>{{ $bailleur->nom_bailleur }}</td>
-                                            <td>{{ $bailleur->pivot->montant_annonce }} </td>
-                                            <td> </td>
-                                            <td> </td>
+                                            <td>{{ $bailleur->bailleur->nom_bailleur }}</td>
+                                            <td>{{ $bailleur->montant_annonce }} </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -137,25 +115,17 @@
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
                                 <thead>
                                 <tr>
-                                    <th>Ligne</th>
+                                    <th>Ligne Activite</th>
                                     <th>Responsable</th>
                                     <th>Montant prévu </th>
-                                    <th>Montant depensé</th>
-                                    <th>GAP</th>
-                                    <th>Piéce jointe</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($activite->ligneActivites as $ligneActivite)
+                                    @foreach ($ligne_activites as $ligneActivite)
                                         <tr>
-                                            <td>{{ $ligneActivite->nom_ligne_activite }}</td>
-                                            <td>{{ $ligneActivite->pivot->nom_responsable }} </td>
-                                            <td>{{ $ligneActivite->pivot->montant_prevu }}</td>
-                                            <td> </td>
-                                            <td> </td>
-                                            <td>
-                                                <a href="{{ asset($activite->piece_jointe) }}" class="btn btn-link">Visualiser</a>
-                                            </td>
+                                            <td>{{ $ligneActivite->ligneActivite->nom_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->nom_responsable }} </td>
+                                            <td>{{ $ligneActivite->montant_prevu }}</td>
                                         </tr>
                                    @endforeach
                                 </tbody>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Activite;
 use App\Models\Bailleur;
+use App\Models\Budget;
 use App\Models\Decaissement;
+use App\Models\ActiviteBailleur;
 
 class DecaissementController extends Controller
 {
@@ -15,23 +17,21 @@ class DecaissementController extends Controller
         $x = 0;
         $mail_admin = 0;
         foreach($user->roles as $role)
-        {
-            if($role->name == 'Admin')
             {
-                $x = $user->email;
+                if($role->name == 'Admin')
+                    {
+                        $x  = $user->email;
+                    }
             }
-        }
-        $mail_admin = $x;
+            $mail_admin = $x;
         $activites = Activite::all();
-        return view('decaissements.decaissement', compact('activites', 'user', 'mail_admin'));
+        $bailleurs = ActiviteBailleur::all();
+        return view('decaissements.decaissement', compact('activites', 'user', 'mail_admin', 'bailleurs'));
     }
 
-    public function decaissement($id)
+    public function decaissement($id, Activite $activite)
     {
-        $bailleur = Bailleur::find($id);
-        $activite = Activite::with(['bailleurs' => function($query) use($bailleur){
-            $query->where('bailleurs.id', '=', $bailleur->id);
-        }])->find($id);
+        $bailleur = ActiviteBailleur::where('activite_id', '=', $activite->id)->find($id);
         return view('decaissements.create', compact('bailleur', 'activite'));
     }
 
@@ -54,14 +54,16 @@ class DecaissementController extends Controller
         $x = 0;
         $mail_admin = 0;
         foreach($user->roles as $role)
-        {
-            if($role->name == 'Admin')
             {
-                $x = $user->email;
+                if($role->name == 'Admin')
+                    {
+                        $x  = $user->email;
+                    }
             }
-        }
-        $mail_admin = $x;
+            $mail_admin = $x;
         $activite = Activite::find($id);
-        return view('decaissements.show', compact('activite', 'user', 'mail_admin'));
+        $bailleurs = ActiviteBailleur::where('activite_id', '=', $activite->id)->get();
+        $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
+        return view('decaissements.show', compact('activite', 'bailleurs', 'budget', 'user', 'mail_admin'));
     }
 }
