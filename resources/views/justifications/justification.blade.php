@@ -34,7 +34,7 @@
                                         @foreach ($ligne_activites as $ligneActivite)
 
                                           @if($activite->id == $ligneActivite->activite_id)
-                                              
+
                                            @if($ligneActivite->mail_responsable == $user->email || $mail_admin)
 
                                     <tr>

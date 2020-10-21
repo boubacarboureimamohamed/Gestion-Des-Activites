@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('activites.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i>Nouvelle Activité</a>
+                        <i class="feather icon-plus"></i>Nouvelle Activité</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
@@ -27,7 +27,7 @@
                                 <th>Libellé Activité</th>
                                 <th>Date début</th>
                                 <th>Date fin</th>
-                                <th>Piéce jointe</th>
+                                <th>Document</th>
                                 <th>Détail</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
