@@ -18,7 +18,7 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('ligne_activites.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        <i class="feather icon-plus"></i>Nouvelle Ligne</a>
+                        <i class="feather icon-plus"></i>Nouvelle Ligne</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>

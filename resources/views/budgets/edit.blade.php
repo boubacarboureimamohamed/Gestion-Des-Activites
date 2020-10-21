@@ -19,6 +19,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
+                                                <input type="text" name="activite_id" value="{{ $budget->activite ->id}}" hidden class="form-control" placeholder="Veuillez entrer le montant du budget">
                                                 <label class="col-form-label">Montant budget : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
@@ -48,20 +49,6 @@
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
                                                 <input type="date" name="date_budget" value="{{ $budget->date_budget }}" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Activite :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon7"></span>
-                                                <select class="form-control" value="{{ $budget->activite_id }}">
-                                                        <option>Selectionnez activite...</option>
-                                                        @foreach($activites as $activite)
-                                                          <option value="{{ $activite->id }}">{{  $activite->nom_activite }}</option>
-                                                        @endforeach
-                                                </select>
                                             </div>
                                         </div>
                                     </div>

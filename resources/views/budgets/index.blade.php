@@ -18,16 +18,16 @@
                 </div>
                 <div class="card-block">
                     <a href="{{ route('budgets.create') }}" class="btn btn-success">
-                        <i class="feather icon-plus"></i> Ajouter</a>
+                        <i class="feather icon-plus"></i> Ajouter</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
-                                <th>Numero</th>
-                                <th>Montant</th>
+                                <th>#</th>
+                                <th>Activité</th>
+                                <th>Budget</th>
                                 <th>Date</th>
-                                <th>Activite</th>
-                                <th>Commentaire</th>
+                                <th>Observations</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -36,9 +36,9 @@
                                 @foreach ($budgets as $budget)
                                 <tr>
                                 <td>{{ $budget->id }} </td>
+                                <td>{{ $budget->nom_activite }}</td>
                                 <td>{{ $budget->montant_budget }}</td>
                                 <td>{{ $budget->date_budget }}</td>
-                                <td>{{ $budget->activite->nom_activite }}</td>
                                 <td>{{ $budget->commentaire_budget }}</td>
                                 <td>
                                     <a href="{{ route('budgets.edit', $budget) }}" class="btn btn-primary">

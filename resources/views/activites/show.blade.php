@@ -33,7 +33,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($ligne_activites as $ligneActivite)
-                                             
+
                                            @if($ligneActivite->mail_responsable == $user->email || $mail_admin)
                                         <tr>
                                            <td>{{ $ligneActivite->id }}</td>

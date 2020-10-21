@@ -11,11 +11,11 @@ class BudgetsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Responseø
      */
     public function index()
     {
-        $budgets = Budget::all();
+        $budgets = Budget::with('activite')->get();
         return view('budgets.index', compact('budgets'));    }
 
     /**
@@ -25,7 +25,7 @@ class BudgetsController extends Controller
      */
     public function create()
     {
-        $activites = Activite::all();        
+        $activites = Activite::all();
         return view('budgets.create', compact('activites'));
     }
 
@@ -74,7 +74,7 @@ class BudgetsController extends Controller
     public function edit($id)
     {
         $budget = Budget::find($id);
-        $activites = Activite::all();  
+        $activites = Activite::all();
         return view('budgets.edit', compact('budget', 'activites'));
     }
 
@@ -87,16 +87,16 @@ class BudgetsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $this->validate($request, [
 
             'montant_budget'=>'required|numeric',
             'date_budget'=>'required|date',
-            'activite_id'=>'required',
             'commentaire_budget'=>'required'
         ]);
 
         $budget = Budget::find($id);
-        $budget->update([
+        $budget->create([
             'montant_budget'=>$request->montant_budget,
             'date_budget'=>$request->date_budget,
             'commentaire_budget'=>$request->commentaire_budget,

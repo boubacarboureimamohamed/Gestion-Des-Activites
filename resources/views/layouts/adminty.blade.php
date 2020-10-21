@@ -23,6 +23,10 @@
     <!-- Style.css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.mCustomScrollbar.css') }}">
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/pages/data-table/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
 </head>
 
 <body>
@@ -142,26 +146,34 @@
                                         <span class="pcoded-mtext">Opérations</span>
                                     </a>
                                     <ul class="pcoded-submenu">
+                                        @role('Admin')
                                         <li class="">
                                             <a href="{{ route('activites.index') }}">
                                                 <span class="pcoded-mtext">Activités</span>
                                             </a>
                                         </li>
+                                        @endrole
+                                        @role('Admin|Bailleur')
                                         <li class="">
                                             <a href="{{ route('interfacedecaissement') }}">
                                                 <span class="pcoded-mtext">Décaissements</span>
                                             </a>
                                         </li>
+                                        @endrole
+                                        @role('Admin|Responsable')
                                         <li class="">
                                             <a href="{{ route('interfacejustification') }}">
                                                 <span class="pcoded-mtext">Justifications</span>
                                             </a>
                                         </li>
+                                        @endrole
+                                        @role('Admin')
                                         <li class="">
-                                            <a href="#">
+                                            <a href="{{ route('budgets.index') }}">
                                                 <span class="pcoded-mtext">Modification budget</span>
                                             </a>
                                         </li>
+                                        @endrole
                                     </ul>
                                 </li>
                             </ul>
@@ -174,6 +186,7 @@
                                     </a>
                                 </li>
                             </ul> --}}
+                            @role('Admin')
                             <div class="pcoded-navigatio-lavel">Gestion des utilisateurs</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu ">
@@ -195,6 +208,8 @@
                                     </ul>
                                 </li>
                             </ul>
+                            @endrole
+                            @role('Admin')
                             <div class="pcoded-navigatio-lavel">Paramétrages</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="pcoded-hasmenu ">
@@ -226,6 +241,7 @@
                                     </ul>
                                 </li>
                             </ul>
+                            @endrole
                         </div>
                     </nav>
                     <div class="pcoded-content">
@@ -269,7 +285,21 @@
     <script src="{{ asset('assets/js/pcoded.min.js') }}"></script>
     <!-- sweetalert2 -->
     <script src="{{ asset('bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    <!-- data-table js -->
+    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('assets/pages/data-table/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script><!-- Custom js -->
+    <script src="{{ asset('assets/pages/data-table/js/data-table-custom.js') }}"></script>
+
     @include('flash-message')
+
     <!-- custom js -->
     <script src="{{ asset('assets/js/vartical-layout.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/script.min.js') }}"></script>
@@ -288,6 +318,23 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-23581568-13');
+
+
+    $(document).ready(function () {
+
+        $('#table').DataTable({
+
+            language: {
+
+                url: "{{ asset('assets/pages/data-table/French.json') }}"
+
+            }
+
+        });
+
+    });
+
+
 </script>
 
     @yield('js')
