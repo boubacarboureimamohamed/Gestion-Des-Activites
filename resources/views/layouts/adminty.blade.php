@@ -188,7 +188,7 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('roles.index') }}" target="_blank">
+                                            <a href="{{ route('roles.index') }}" >
                                                 <span class="pcoded-mtext">Rôles</span>
                                             </a>
                                         </li>
@@ -209,17 +209,17 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('ligne_activites.index') }}" target="_blank">
+                                            <a href="{{ route('ligne_activites.index') }}" >
                                                 <span class="pcoded-mtext">Lignes activités</span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('bailleurs.index') }}" target="_blank">
+                                            <a href="{{ route('bailleurs.index') }}" >
                                                 <span class="pcoded-mtext">Projets</span>
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('responsable_activites.index') }}" target="_blank">
+                                            <a href="{{ route('responsable_activites.index') }}" >
                                                 <span class="pcoded-mtext">Responsables activités</span>
                                             </a>
                                         </li>

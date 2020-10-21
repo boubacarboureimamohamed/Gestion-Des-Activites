@@ -19,7 +19,7 @@ class CreateActivitesTable extends Migration
             $table->date('date_debut_activite');
             $table->date('date_fin_activite');
             $table->string('commentaire_activite');
-            $table->string('piece_jointe');
+            $table->string('piece_jointe')->nullable();
             $table->bigInteger('demandeur_id')->index()->unsigned();
             $table->foreign('demandeur_id')->references('id')->on('demandeurs');
             $table->bigInteger('responsable_activite_id')->index()->unsigned();

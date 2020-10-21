@@ -15,7 +15,7 @@
                     <h3>Nouvelle activité</h3>
                 </div>
                 <div class="card-block">
-                    <form method="POST" action="{{ route('activites.store') }}">
+                    <form method="POST" action="{{ route('activites.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-6">

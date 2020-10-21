@@ -17,7 +17,7 @@
                     <h3>Modificaion de l'activité</h3>
                 </div>
                 <div class="card-block">
-                    <form method="POST" action="{{ route('activites.update', $activite) }}">
+                    <form method="POST" action="{{ route('activites.update', $activite) }}"   enctype="multipart/form-data">
                         {{ csrf_field() }}
                         {{ method_field('put') }}
                         <div class="row">

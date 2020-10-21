@@ -12,4 +12,9 @@ class Bailleur extends Model
     {
         return $this->hasMany('App\Models\ActiviteBailleur');
     }
+
+    public function decaissements()
+    {
+        return $this->hasMany('App\Models\Decaissement');
+    }
 }

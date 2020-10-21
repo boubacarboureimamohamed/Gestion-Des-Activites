@@ -47,7 +47,6 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $this->validate($request, [
 
             'nom_activite'=>'required',
@@ -71,11 +70,12 @@ class ActivitesController extends Controller
             'date_debut_activite'=>$request->date_debut_activite,
             'date_fin_activite'=>$request->date_fin_activite,
             'commentaire_activite'=>$request->commentaire_activite,
-            'piece_jointe'=>$request->piece_jointe,
+            'piece_jointe'=>$request->piece_jointe->storePublicly('Piece_Jointes', ['disk' => 'public']),
             'demandeur_id'=>$request->demandeur_id,
             'responsable_activite_id'=>$request->responsable_activite_id,
             'budget_id'=>$budget->id
         ]);
+
 
         for($i=0; $i< count($request->ligne_activite_id); $i++)
         {
@@ -180,10 +180,16 @@ class ActivitesController extends Controller
             'date_debut_activite'=>$request->date_debut_activite,
             'date_fin_activite'=>$request->date_fin_activite,
             'commentaire_activite'=>$request->commentaire_activite,
-            'piece_jointe'=>$request->piece_jointe,
             'demandeur_id'=>$request->demandeur_id,
             'responsable_activite_id'=>$request->responsable_activite_id
         ]);
+
+        if($request->piece_jointe)
+        {
+            $activite->update([
+                'piece_jointe'=>$request->piece_jointe->storePublicly('Piece_Jointes', ['disk' => 'public']),
+            ]);
+        }
 
         for($i=0; $i< count($request->ligne_activite_id); $i++)
         {

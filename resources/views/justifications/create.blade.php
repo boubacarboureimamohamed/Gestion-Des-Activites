@@ -17,10 +17,38 @@
                     <h3>Les justifications de dépense</h3>
                 </div>
                 <div class="card-block">
-                    <form method="POST" action="{{ route('justification_store') }}">
+                @if(!empty($justifications) )
+                <div class="row">
+                        <div class="dt-responsive table-responsive">
+                            <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                <tr>
+                                   <th>#</th>
+                                    <th>Libelle</th>
+                                    <th>Montant depensé</th>
+                                    <th>Document </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($justifications as $justification)
+                                        <tr>
+                                            <td>{{ $justification->id }}</td>
+                                            <td>{{ $justification->libelle }}</td>
+                                            <td>{{ $justification->montant_depense }}</td>
+                                            <td>
+                                               <a href="{{ asset($justification->piece_jointe) }}" class="btn btn-link">Visualiser</a>
+                                           </td>
+                                        </tr> 
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><br><br>
+                    @endif
+                    <form method="POST" action="{{ route('justification_store') }}" enctype="multipart/form-data">
                         @csrf
 
-                    <input type="text"  name="ligne_activite_id" value="{{ $activite->id }}" class="form-control" hidden placeholder="">
+                    <input type="text"  name="ligne_activite_id" value="{{ $ligne_activite->ligne_activite_id }}" class="form-control" hidden placeholder="">
 
                     <div class="row">
                         <div class="dt-responsive table-responsive">

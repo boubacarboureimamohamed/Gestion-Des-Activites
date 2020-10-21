@@ -36,7 +36,8 @@ class JustificationController extends Controller
     public function justification($id, Activite $activite)
     {
         $ligne_activite = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->find($id);
-        return view('justifications.create', compact('activite', 'ligne_activite'));
+        $justifications = Justification::where('ligne_activite_id', '=', $ligne_activite->ligne_activite_id)->get();
+        return view('justifications.create', compact('activite', 'ligne_activite', 'justifications'));
     }
 
 
@@ -47,7 +48,7 @@ class JustificationController extends Controller
             Justification::create([
                 'libelle'=>$request->libelle[$i],
                 'montant_depense'=>$request->montant_depense[$i],
-                'piece_jointe'=>$request->piece_jointe[$i],
+                'piece_jointe'=>$request->piece_jointe[$i]->storePublicly('Piece_Jointes', ['disk' => 'public']),
                 'ligne_activite_id'=>$request->ligne_activite_id
             ]);
         }

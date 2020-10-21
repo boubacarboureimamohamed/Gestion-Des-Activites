@@ -17,10 +17,34 @@
                     <h3>Les décaissement du montant</h3>
                 </div>
                 <div class="card-block">
+                 @if(!empty($decaissements))
+                <div class="row">
+                        <div class="dt-responsive table-responsive">
+                            <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                <thead>
+                                <tr>
+                                   <th>#</th>
+                                    <th>Libelle</th>
+                                    <th>Montant depensé</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($decaissements as $decaissement)
+                                        <tr>
+                                            <td>{{ $decaissement->id }}</td>
+                                            <td>{{ $decaissement->montant_decaisse }}</td>
+                                            <td>{{ $decaissement->date_decaissement }}</td>
+                                        </tr> 
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><br><br>
+                    @endif
                     <form method="POST" action="{{ route('decaissement_store') }}">
                         @csrf
                     
-                    <input type="text"  name="bailleur_id" value="{{ $bailleur->id }}" class="form-control" hidden placeholder="">
+                    <input type="text"  name="bailleur_id" value="{{ $bailleur->bailleur_id }}" class="form-control" hidden placeholder="">
 
                     <div class="row">
                         <div class="dt-responsive table-responsive">

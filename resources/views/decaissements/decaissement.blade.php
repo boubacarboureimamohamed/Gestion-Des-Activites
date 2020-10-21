@@ -33,7 +33,7 @@
                                 @foreach ($activites as $activite)
                                         @foreach ($bailleurs as $bailleur)
 
-                                          @if($activite->id == $bailleur->bailleur_id)
+                                          @if($activite->id == $bailleur->activite_id)
 
                                            @if($bailleur->bailleur->mail_bailleur == $user->email || $mail_admin)
                                     <tr>
