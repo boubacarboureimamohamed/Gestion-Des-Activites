@@ -42,12 +42,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', 'UsersController');
 
     Route::resource('roles', 'RolesController');
-
-    Route::resource('responsable_activites', 'ResponsablesActivite');
-
+    
     Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
 
     Route::get('/getData', 'ActivitesController@getData');
+
+    Route::get('/getProjet', 'ActivitesController@getProjet');
 
     Route::get('justifications/create/{id}/{activite}', 'JustificationController@justification')->name('justification');
 
@@ -68,6 +68,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('update_ligne_activite/{ligne_activite}', 'LigneActiviteController@modifier_ligneActivite')->name('modifierligneactivite');
 
     Route::get('ligne_activite_justifier', 'JustificationController@ligne_activite_justifier')->name('ligne_activite_justifier');
+
+    Route::resource('plan_actions', 'PlanActionController');
 
  });
 

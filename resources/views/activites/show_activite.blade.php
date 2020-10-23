@@ -57,15 +57,6 @@
                                 <div class="col-sm-12">
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Responsable de l'activite :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="{{ $activite->responsableActivite->nom_responsable_activite.' '.$activite->responsableActivite->prenom_responsable_activite }}" placeholder="Veuillez entrer le nom et prénom du responsable de l'activité" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
                                             <label class="col-form-label">Date fin :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
@@ -116,7 +107,6 @@
                                 <thead>
                                 <tr>
                                     <th>Ligne Activite</th>
-                                    <th>Responsable</th>
                                     <th>Montant prévu </th>
                                 </tr>
                                 </thead>
@@ -124,7 +114,6 @@
                                     @foreach ($ligne_activites as $ligneActivite)
                                         <tr>
                                             <td>{{ $ligneActivite->ligneActivite->nom_ligne_activite }}</td>
-                                            <td>{{ $ligneActivite->nom_responsable }} </td>
                                             <td>{{ $ligneActivite->montant_prevu }}</td>
                                         </tr>
                                    @endforeach

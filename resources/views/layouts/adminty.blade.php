@@ -234,8 +234,8 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('responsable_activites.index') }}" >
-                                                <span class="pcoded-mtext">Responsables activités</span>
+                                            <a href="{{ route('plan_actions.index') }}" >
+                                                <span class="pcoded-mtext">Plan actions</span>
                                             </a>
                                         </li>
                                     </ul>

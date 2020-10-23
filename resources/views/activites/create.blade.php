@@ -1,6 +1,13 @@
 @extends('layouts.adminty')
 
 @section('css')
+
+  <!-- Multi Select css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/multiselect/css/multi-select.css') }}">
+    <!-- Select 2 css -->
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/css/select2.min.css') }}">
+
 @endsection
 
 @section('content')
@@ -15,6 +22,7 @@
                     <h3>Nouvelle activité</h3>
                 </div>
                 <div class="card-block">
+
                     <form method="POST" action="{{ route('activites.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -23,25 +31,25 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
+                                                <label class="col-form-label">Plan d'action :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <select class="form-control" id="select" name="plan_action_id" onchange="change()">
+                                                      <option id="" selected="selected">********Sélectionnez********</option>
+                                                    @foreach ($plan_actions as $plan_action)
+                                                        <option value="{{ $plan_action->id }}" data-pa="{{ $plan_action->nom_plan_action }}">{{ $plan_action->nom_plan_action }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
                                                 <label class="col-form-label">Libellé Activité : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
                                                 <input type="text" name="nom_activite" class="form-control" placeholder="Veuillez entrer le libellé de l'activité">
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Responsable :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="responsable_activite_id" name="responsable_activite_id">
-                                                    <option id="responsable_activite_id" selected="selected">********Sélectionnez********</option>
-                                                    @foreach ($responsable_activites as $responsable_activite)
-                                                      <option value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite.' '.$responsable_activite->prenom_responsable_activite  }}</option>
-                                                    @endforeach
-                                                </select>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -70,15 +78,12 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Demandeur :</label>
+                                                <label class="col-form-label">Projet mise en oeuvre :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="" name="demandeur_id">
-                                                      <option id="demandeur_id" selected="selected">********Sélectionnez********</option>
-                                                    @foreach ($demandeurs as $demandeur)
-                                                      <option value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>
-                                                    @endforeach
+                                                <select class="form-control"  id="select1" name="projet_mise_en_oeuvre_id">
+                                                     
                                                 </select>
                                             </div>
                                         </div>
@@ -116,87 +121,13 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
-                                <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                                    <i class="feather icon-plus"></i> Nouvelle Ligne</a>
-                                <table id="example-2" class="table table-striped table-bordered nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>Ligne Activité </th>
-                                            <th>Montant prévu</th>
-                                            <th>Responsable</th>
-                                            <th>Mail</th>
-                                            <th>Contact</th>
-                                            <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="ligne">
-                                        <tr>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <select class="form-control" id="ligne_activite_id" name="ligne_activite_id[]">
-                                                            </select>
-                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="montant_prevu[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le nom et prénom du responsable">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer l'adresse mail du responsable'">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le contact du responsable">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td style="text-align: center">
-                                                <button class="btn btn-danger remove"><i class="feather icon-minus"></i></button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les sources de financement</h5><br>
+                                <h5 style="text-align: center;">Les partenaires techniques et financiers</h5><br>
                                 <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal1">
-                                    <i class="feather icon-plus"></i> Nouveau Projet</a>
+                                    <i class="feather icon-plus"></i> Nouveau Partenaire</a>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Projet </th>
+                                            <th>Partenaire </th>
                                             <th>Montant annoncé</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne1"><i class="feather icon-plus"></i></a></th>
                                         </tr>
@@ -207,7 +138,8 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select class="form-control" id="bailleur_id" name="bailleur_id[]">
+                                                            <select  class="form-control bailleur_id" id="bailleur_id" name="bailleur_id[]">
+                                                                
                                                             </select>
                                                          </div>
                                                     </div>
@@ -224,6 +156,86 @@
                                             </td>
                                             <td style="text-align: center">
                                                 <button class="btn btn-danger remove1"><i class="feather icon-minus"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
+                                {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                                    <i class="feather icon-plus"></i> Nouvelle Ligne</a> --}}
+                                <table id="example-2" class="table table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Ligne Activité </th>
+                                            <th>Quantite</th>
+                                            <th>Montant</th>
+                                            <th>Beneficiaire(s)</th>
+                                            <th>Partenaire</th>
+                                            <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ligne">
+                                        <tr>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="ligne_activite_id[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
+                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <input type="text" name="montant_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <select  class="col-sm-12 multi" multiple="multiple" tabindex="-1" aria-hidden="true">
+                                                                <option value="AL">Alabama</option>
+                                                                <option value="WY">Wyoming</option>
+                                                                <option value="CO">Coming</option>
+                                                                <option value="Ha">Hanry Die</option>
+                                                                <option value="Jn">John Doe</option>
+                                                            </select>                                                        
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="form-group form-primary">
+                                                        <div class="input-group">
+                                                            <select class="form-control" id="" name="[]">
+                                                                 
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <button class="btn btn-danger remove"><i class="feather icon-minus"></i></button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -279,6 +291,15 @@
         <div class="modal-body">
         <form id="ligne_activite">
             @csrf
+                <div class="row form-group">
+                    <div class="col-sm-3">
+                        <label class="col-form-label">Intitulé :</label>
+                    </div>
+                    <div class="col-sm-9 input-group">
+                        <span class="input-group-addon" id="basic-addon7"></span>
+                        <input type="text" name="nom_ligne_activite" class="form-control" placeholder="Veuillez entrer l'intitulé de la ligne d'activité">
+                    </div>
+                </div>
                 <div class="row form-group">
                     <div class="col-sm-3">
                         <label class="col-form-label">Intitulé :</label>
@@ -362,26 +383,38 @@
 @endsection
 
 @section('js')
+
 <script>
-   $(document).ready(function(){
-     $("#responsable_activite_id").on('click',function(e){
-         e.preventDefault();
-         $("#responsable_activite_id").empty();
-    axios.get('/getData')
-    .then(function(response){
-        response.data.responsable_activites.forEach(element => {
-            $('#responsable_activite_id').append(
-                `<option value="${element.id}">${element.nom_responsable_activite}</option>`
-            )
-        });
 
-    })
-    .catch(function(error){
+$(function(){
+    $('.multi').multiselect();
+})
 
-    })
-     });
-});
+    function change()
+    {
+        let pa = $('#select option:selected').attr('data-pa')
+        let plan_action_id = $('#select option:selected').val()
+
+        $("#select1").empty();
+
+        axios.get('/getProjet?plan_action_id='+plan_action_id)
+            .then(function(response) {
+
+                console.log(response)
+                
+                response.data.projet_mises_en_oeuvres.forEach(element => {
+                    $('#select1').append(
+
+                        `<option value="${ element.id }">${element.nom_projet}</option>`
+
+                    )
+                })
+
+            })
+    }
+
 </script>
+
 <script>
    $(document).ready(function(){
      $("#ligne_activite_id").on('click',function(e){
@@ -403,26 +436,7 @@
 });
 </script>
 
-<script>
-   $(document).ready(function(){
-     $("#bailleur_id").on('click',function(e){
-         e.preventDefault();
-         $("#bailleur_id").empty();
-    axios.get('/getData')
-    .then(function(response){
-        response.data.bailleurs.forEach(element => {
-            $('#bailleur_id').append(
-                `<option value="${ element.id }">${element.nom_bailleur}</option>`
-            )
-        });
 
-    })
-    .catch(function(error){
-
-    })
-     });
-});
-</script>
 
 <script>
     $(document).ready(function(){
@@ -515,50 +529,51 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select class="form-control" id="" name="ligne_activite_id[]">
-                                <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($ligne_activites as $ligne_activite)
-                                    <option value="{{ $ligne_activite->id }}">{{ $ligne_activite->nom_ligne_activite }}</option>
-                                @endforeach
+                            <input type="text" name="ligne_activite_id[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
+                            </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <input type="text" name="montant_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <select  class="multi col-sm-12" multiple="multiple" tabindex="-1" aria-hidden="true">
+                                <option value="AL">Alabama</option>
+                                <option value="WY">Wyoming</option>
+                                <option value="WY">Coming</option>
+                                <option value="WY">Hanry Die</option>
+                                <option value="WY">John Doe</option>
+                            </select>                                                        
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div class="">
+                    <div class="form-group form-primary">
+                        <div class="input-group">
+                            <select class="form-control" id="" name="[]">
+                                    
                             </select>
-                        </div>
-                    </div>
-                </div>
-            </td>
-
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="montant_prevu[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
-                        </div>
-                    </div>
-                </div>
-            </td>
-
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant depensé">
                         </div>
                     </div>
                 </div>
@@ -569,6 +584,8 @@
 
             </tr>`;
         $('#ligne').append(tr);
+
+    $('.multi').multiselect();
     };
     $('#ligne').on('click', '.remove', function () {
         $(this).parent().parent().remove();
@@ -590,11 +607,8 @@
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select class="form-control" id="" name="bailleur_id[]">
-                                <option selected="selected">********Sélectionnez********</option>
-                                 @foreach ($bailleurs as $bailleur)
-                                    <option value="{{ $bailleur->id }}">{{ $bailleur->nom_bailleur }}</option>
-                                 @endforeach
+                            <select class="form-control bailleur_id" id="bailleur_id" name="bailleur_id[]">
+                                
                             </select>
                         </div>
                     </div>
@@ -616,6 +630,7 @@
 
             </tr>`;
         $('#ligne1').append(tr);
+        getPartenaires()
     };
     $('#ligne1').on('click', '.remove1', function () {
         $(this).parent().parent().remove();
@@ -623,4 +638,68 @@
 
 
 </script>
+<script>
+$(document).ready(function(){
+    $("#la_b").on('click',function(e){
+        e.preventDefault();
+        $("#la_b").empty();
+        var ligne_activites = $(".ligneActivite").map(function() {
+        return this.value;
+        }).get();
+        ligne_activites.forEach(element => {
+        $('#la_b').append(
+        `<option value="${element}">${element}</option>`
+        )
+        });
+
+    });
+});
+</script>
+<script>
+ $(document).ready(function(){
+     getPartenaires()
+
+ });
+
+var partenaires = []
+ function getPartenaires()
+ {
+      axios.get('/getData')
+    .then(function(response){
+
+            console.log(response)
+             
+             
+        $(".bailleur_id").each(function(){
+             $(this).empty();
+           let self = this
+           partenaires =  response.data.bailleurs
+           response.data.bailleurs.forEach(element => {
+
+            $(self).append(
+                `<option value="${ element.id }">${element.nom_bailleur}</option>`
+            )
+        });
+         });
+        
+    })
+    .catch(function(error){
+             
+             
+      });
+ }
+   
+
+</script>
+
+
+    <!-- Multiselect js -->
+    <script type="text/javascript" src="{{ asset('bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.quicksearch.js') }}"></script>
+    <!-- Select 2 js -->
+<script type="text/javascript" src="{{ asset('bower_components/select2/js/select2.full.min.js') }}"></script>
+<!-- Custom js -->
+<script type="text/javascript" src="{{ asset('assets/pages/advance-elements/select2-custom.js') }}"></script>
+
 @endsection

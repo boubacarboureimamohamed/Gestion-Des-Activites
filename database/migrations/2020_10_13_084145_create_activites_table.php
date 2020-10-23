@@ -22,10 +22,10 @@ class CreateActivitesTable extends Migration
             $table->string('piece_jointe')->nullable();
             $table->bigInteger('demandeur_id')->index()->unsigned();
             $table->foreign('demandeur_id')->references('id')->on('demandeurs');
-            $table->bigInteger('responsable_activite_id')->index()->unsigned();
-            $table->foreign('responsable_activite_id')->references('id')->on('responsable_activites');
             $table->bigInteger('budget_id')->index()->unsigned();
             $table->foreign('budget_id')->references('id')->on('budgets');
+            $table->bigInteger('projet_mise_en_oeuvre_id')->index()->unsigned();
+            $table->foreign('projet_mise_en_oeuvre_id')->references('id')->on('projet_mise_en_oeuvres');
             $table->timestamps();
         });
         

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDemandeursTable extends Migration
+class CreatePlanActionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateDemandeursTable extends Migration
      */
     public function up()
     {
-        Schema::create('demandeurs', function (Blueprint $table) {
+        Schema::create('plan_actions', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_demandeur');
+            $table->string('nom_plan_action');
+            $table->string('commentaire')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateDemandeursTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('demandeurs');
+        Schema::dropIfExists('plan_actions');
     }
 }

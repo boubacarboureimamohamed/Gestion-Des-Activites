@@ -6,10 +6,9 @@ use App\Models\Activite;
 use Illuminate\Http\Request;
 use App\Models\Bailleur;
 use App\Models\LigneActivite;
-use App\Models\ResponsableActivite;
-use App\Models\Demandeur;
 use App\Models\Budget;
-use App\Models\ActiviteLigneActivite;
+use App\Models\PlanAction;
+use App\Models\ProjetMiseEnOeuvre;
 use App\Models\ActiviteBailleur;
 
 class ActivitesController extends Controller
@@ -32,11 +31,11 @@ class ActivitesController extends Controller
      */
     public function create()
     {
-        $responsable_activites = ResponsableActivite::all();
         $bailleurs = Bailleur::all();
-        $demandeurs = Demandeur::all();
+        $plan_actions = PlanAction::all();
+        $projet_mises_en_oeuvres = ProjetMiseEnOeuvre::all();
         $ligne_activites = LigneActivite::all();
-        return view('activites.create', compact('bailleurs', 'demandeurs', 'ligne_activites', 'responsable_activites'));
+        return view('activites.create', compact('bailleurs', 'ligne_activites', 'plan_actions', 'projet_mises_en_oeuvres'));
     }
 
     /**
@@ -52,12 +51,7 @@ class ActivitesController extends Controller
             'nom_activite'=>'required',
             'date_debut_activite'=>'required|date',
             'date_fin_activite'=>'required|date',
-            'demandeur_id'=>'required',
-            'responsable_activite_id'=>'required',
-            'montant_annonce'=>'required',
-            'nom_responsable'=>'required',
-            'mail_responsable'=>'required',
-            'contact_responsable'=>'required'
+            'montant_annonce'=>'required'
         ]);
 
         $budget = Budget::create([
@@ -71,8 +65,6 @@ class ActivitesController extends Controller
             'date_fin_activite'=>$request->date_fin_activite,
             'commentaire_activite'=>$request->commentaire_activite,
             'piece_jointe'=>$request->piece_jointe->storePublicly('Piece_Jointes', ['disk' => 'public']),
-            'demandeur_id'=>$request->demandeur_id,
-            'responsable_activite_id'=>$request->responsable_activite_id,
             'budget_id'=>$budget->id
         ]);
 
@@ -81,9 +73,6 @@ class ActivitesController extends Controller
         {
           ActiviteLigneActivite::create([
                 'montant_prevu'=>$request->montant_prevu[$i],
-                'nom_responsable'=>$request->nom_responsable[$i],
-                'mail_responsable'=>$request->mail_responsable[$i],
-                'contact_responsable'=>$request->contact_responsable[$i],
                 'ligne_activite_id'=>$request->ligne_activite_id[$i],
                 'activite_id'=>$activite->id
             ]);
@@ -144,12 +133,10 @@ class ActivitesController extends Controller
      */
     public function edit($id)
     {
-        $activite = Activite::with('responsableActivite', 'ligneActivites', 'bailleurs', 'demandeur')->find($id);
-        $responsable_activites = ResponsableActivite::all();
-        $demandeurs = Demandeur::all();
+        $activite = Activite::with('ligneActivites', 'bailleurs', 'demandeur')->find($id);
         $ligne_activites = LigneActivite::all();
         $bailleurs = Bailleur::all();
-        return view('activites.edit', compact('activite', 'responsable_activites', 'demandeurs', 'ligne_activites', 'bailleurs'));
+        return view('activites.edit', compact('activite', 'ligne_activites', 'bailleurs'));
     }
 
     /**
@@ -166,12 +153,7 @@ class ActivitesController extends Controller
             'nom_activite'=>'required',
             'date_debut_activite'=>'required|date',
             'date_fin_activite'=>'required|date',
-            'demandeur_id'=>'required',
-            'responsable_activite_id'=>'required',
             'montant_annonce'=>'required',
-            'nom_responsable'=>'required',
-            'mail_responsable'=>'required',
-            'contact_responsable'=>'required'
         ]);
 
         $activite = Activite::find($id);
@@ -179,9 +161,7 @@ class ActivitesController extends Controller
             'nom_activite'=>$request->nom_activite,
             'date_debut_activite'=>$request->date_debut_activite,
             'date_fin_activite'=>$request->date_fin_activite,
-            'commentaire_activite'=>$request->commentaire_activite,
-            'demandeur_id'=>$request->demandeur_id,
-            'responsable_activite_id'=>$request->responsable_activite_id
+            'commentaire_activite'=>$request->commentaire_activite
         ]);
 
         if($request->piece_jointe)
@@ -195,9 +175,6 @@ class ActivitesController extends Controller
         {
             $activite->ligneActivites()->updateExistingPivot($request->ligne_activite_id[$i], [
                 'montant_prevu'=>$request->montant_prevu[$i],
-                'nom_responsable'=>$request->nom_responsable[$i],
-                'mail_responsable'=>$request->mail_responsable[$i],
-                'contact_responsable'=>$request->contact_responsable[$i],
             ]);
         }
 
@@ -222,18 +199,24 @@ class ActivitesController extends Controller
         //
     }
 
-    public function getData()
+    public function getData(Request $request)
     {
-
+        $line_activite = $request->nom_activite;
         $bailleurs = Bailleur::all();
-        $demandeurs = Demandeur::all();
         $ligne_activites = LigneActivite::all();
-        $responsable_activites = ResponsableActivite::all();
         return json_encode([
             'bailleurs'=>$bailleurs,
-            'demandeurs'=>$demandeurs,
             'ligne_activites'=>$ligne_activites,
-            'responsable_activites'=>$responsable_activites
+            'line_activite'=>$line_activite
+        ]);
+    }
+    
+    public function getProjet(Request $request)
+    {
+        $plan_action_id = $request->plan_action_id;
+        $projet_mises_en_oeuvres = ProjetMiseEnOeuvre::where('plan_action_id', '=', $plan_action_id)->get();
+        return json_encode([
+            'projet_mises_en_oeuvres'=>$projet_mises_en_oeuvres
         ]);
     }
 }

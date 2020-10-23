@@ -14,37 +14,34 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Les lignes de l'activite</h3>
+                    <h3>Les projets de mise en oeuvre pour le plan d'action <strong>{{ $plan_action->nom_plan_action }}</strong></h3>
                 </div>
                 <div class="card-block">
 
                     <div class="row">
                         <div class="dt-responsive table-responsive">
-                            <table id="simpletable" class="table table-striped table-bordered nowrap">
-                                <thead>
-                                <tr>
-                                   <th>#</th>
-                                    <th>Ligne activite</th>
-                                    <th>Justifier</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($ligne_activites as $ligneActivite)
-
-                                           @if($ligneActivite->mail_responsable == $user->email || $mail_admin)
+                            <table id="example-2" class="table table-striped table-bordered nowrap">
+                                    <thead>
                                         <tr>
-                                           <td>{{ $ligneActivite->id }}</td>
-                                            <td>{{ $ligneActivite->ligneActivite->nom_ligne_activite }}</td>
-                                            <td>
-                                                <a href="{{ route('justification', [$ligneActivite->id, $ligneActivite->activite->id]) }}" class="btn btn-info">
-                                                    <i class="feather icon-eye"></i>
-                                                </a>
-                                            </td>
+                                            <th># </th>
+                                            <th>Projet </th>
+                                            <th>Responsable</th>
+                                            <th>Email</th>
+                                            <th>Contact</th>
                                         </tr>
-                                        @endif
-                                          @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($plan_action->projetMiseEnOeuvres as $projetMiseEnOeuvre)
+                                            <tr>
+                                                <td>{{ $projetMiseEnOeuvre->id }} </td>
+                                                <td>{{ $projetMiseEnOeuvre->nom_projet }}</td>
+                                                <td>{{ $projetMiseEnOeuvre->nom_responsable_projet }}</td>
+                                                <td>{{ $projetMiseEnOeuvre->email_responsable_projet }}</td>
+                                                <td>{{ $projetMiseEnOeuvre->contact_responsable_projet }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                         </div>
                     </div>
 
@@ -53,7 +50,7 @@
 
                         </div>
                         <div class="col-md-10" style="text-align: center;">
-                            <a href="{{ route('activites.index') }}" class="btn btn-default">
+                            <a href="{{ route('plan_actions.index') }}" class="btn btn-default">
                                     {{ ('Retour') }}
                             </a>
                         </div>

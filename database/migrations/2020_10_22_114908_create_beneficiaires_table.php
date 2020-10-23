@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLigneActivitesTable extends Migration
+class CreateBeneficiairesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateLigneActivitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ligne_activites', function (Blueprint $table) {
+        Schema::create('beneficiaires', function (Blueprint $table) {
             $table->id();
-            $table->string('nom_ligne_activite');
+            $table->string('nom_beneficiaire');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateLigneActivitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ligne_activites');
+        Schema::dropIfExists('beneficiaires');
     }
 }

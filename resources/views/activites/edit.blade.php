@@ -35,20 +35,6 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Responsable :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="" name="responsable_activite_id" value="{{ $activite->responsableActivite->nom_responsable_activite }}">
-                                                    <option value="">********Sélectionnez********</option>
-                                                    @foreach ($responsable_activites as $responsable_activite)
-                                                      <option @if ($responsable_activite->id == $activite->responsable_activite_id) {{ 'selected' }} @endif value="{{ $responsable_activite->id }}">{{ $responsable_activite->nom_responsable_activite }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
                                                 <label class="col-form-label">Date début :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
@@ -71,20 +57,6 @@
                             <div class="col-sm-6">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Demandeur :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="" name="demandeur_id" value="{{ $activite->demandeur->nom_demandeur }}">
-                                                      <option selected="selected">********Sélectionnez********</option>
-                                                    @foreach ($demandeurs as $demandeur)
-                                                      <option @if ($demandeur->id == $activite->demandeur_id) {{ 'selected' }} @endif value="{{ $demandeur->id }}">{{ $demandeur->nom_demandeur }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
                                                 <label class="col-form-label">Budget :</label>
@@ -127,9 +99,6 @@
                                         <tr>
                                             <th>Ligne Activité </th>
                                             <th>Montant prévu</th>
-                                            <th>Responsable</th>
-                                            <th>Mail</th>
-                                            <th>Contact</th>
                                             <th style="text-align: center"><a href="#" class="btn btn-success" id="addLigne"><i class="feather icon-plus"></i></a></th>
                                         </tr>
                                     </thead>
@@ -154,33 +123,6 @@
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
                                                             <input type="text" name="montant_prevu[]" value="{{ $ligne_actvte->pivot->montant_prevu }}" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="nom_responsable[]" value="{{ $ligne_actvte->pivot->nom_responsable }}" id="" class="form-control" placeholder="Veillez entrer le nom et prénom du responsable">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="mail_responsable[]" value="{{ $ligne_actvte->pivot->mail_responsable }}" id="" class="form-control" placeholder="Veillez entrer l'adresse mail du responsable'">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="">
-                                                    <div class="form-group form-primary">
-                                                        <div class="input-group">
-                                                            <input type="text" name="contact_responsable[]" value="{{ $ligne_actvte->pivot->contact_responsable }}" id="" class="form-control" placeholder="Veillez entrer le contact du responsable">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -372,33 +314,6 @@
                     <div class="form-group form-primary">
                         <div class="input-group">
                             <input type="text" name="montant_prevu[]" value="" id="" class="form-control" placeholder="Veillez entrer le montant prévu">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="nom_responsable[]" value="" id="" class="form-control" placeholder="nom responsable">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="mail_responsable[]" value="" id="" class="form-control" placeholder="Mail responsable">
-                        </div>
-                    </div>
-                </div>
-            </td>
-            <td>
-                <div class="">
-                    <div class="form-group form-primary">
-                        <div class="input-group">
-                            <input type="text" name="contact_responsable[]" value="" id="" class="form-control" placeholder="Contact responsable">
                         </div>
                     </div>
                 </div>

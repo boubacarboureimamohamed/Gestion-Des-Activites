@@ -14,44 +14,46 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des responsable d'activité</h3>
+                    <h3>Liste des plans d'action</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('responsable_activites.create') }}" class="btn btn-success">
+                    <a href="{{ route('plan_actions.create') }}" class="btn btn-success">
                         <i class="feather icon-plus"></i> Nouveau</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nom</th>
-                                <th>Prenom</th>
-                                <th>Email</th>
-                                <th>Contact</th>
+                                <th>Plan action</th>
+                                <th>Observations</th>
+                                <th>Detail</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach ($responsable_activites as $responsable_activite)
+                                @foreach ($plan_actions as $plan_action)
                                 <tr>
-                                <td>{{ $responsable_activite->id }} </td>
-                                <td>{{ $responsable_activite->nom_responsable_activite }}</td>
-                                <td>{{ $responsable_activite->prenom_responsable_activite }}</td>
-                                <td>{{ $responsable_activite->mail_responsable_activite }}</td>
-                                <td>{{ $responsable_activite->contact_responsable_activite }}</td>
+                                <td>{{ $plan_action->id }} </td>
+                                <td>{{ $plan_action->nom_plan_action }}</td>
+                                <td>{{ $plan_action->commentaire }}</td>
                                 <td>
-                                    <a href="{{ route('responsable_activites.edit', $responsable_activite) }}" class="btn btn-primary">
+                                    <a href="{{ route('plan_actions.show', $plan_action) }}" class="btn btn-info">
+                                        <i class="feather icon-eye"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ route('plan_actions.edit', $plan_action) }}" class="btn btn-primary">
                                         <i class="feather icon-edit"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ route('responsable_activites.destroy', $responsable_activite->id) }}" id="form{{ $responsable_activite->id }}">
+                                    <form method="POST" action="{{ route('plan_actions.destroy', $plan_action->id) }}" id="form{{ $plan_action->id }}">
 
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
 
-                                        <button type="button" onclick="confirmation('#form{{ $responsable_activite->id }}')" class="btn btn-danger" >
+                                        <button type="button" onclick="confirmation('#form{{ $plan_action->id }}')" class="btn btn-danger" >
                                             <i class="feather icon-trash"></i>
                                         </button>
                                     </form>
