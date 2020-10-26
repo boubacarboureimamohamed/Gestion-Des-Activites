@@ -219,8 +219,8 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class="">
-                                            <a href="{{ route('demandeurs.index') }}">
-                                                <span class="pcoded-mtext">Demandeurs</span>
+                                            <a href="{{ route('beneficiaires.index') }}">
+                                                <span class="pcoded-mtext">Beneficiares</span>
                                             </a>
                                         </li>
                                         <li class="">

@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('activites', 'ActivitesController');
 
-    Route::resource('demandeurs', 'DemandeursController');
+    Route::resource('beneficiaires', 'BeneficiairesController');
 
     Route::post('addLigne_activite', 'LigneActiviteController@addLigne_activite');
 
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('roles', 'RolesController');
     
-    Route::put('update_demandeur/{demandeur}', 'DemandeursController@modifier_demandeur')->name('modifierdemandeur');
+    Route::put('update_beneficiaire/{beneficiaire}', 'BeneficiairesController@modifier_beneficiaire')->name('modifierbeneficiaire');
 
     Route::get('/getData', 'ActivitesController@getData');
 

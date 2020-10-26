@@ -14,42 +14,42 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des demandeurs</h3>
+                    <h3>Liste des beneficiaires</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('demandeurs.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                    <a href="{{ route('beneficiaires.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                         <i class="feather icon-plus"></i>Nouveau</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Demandeur</th>
+                                <th>Beneficiaire</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
-                                    @foreach ($demandeurs as $demandeur)
+                                    @foreach ($beneficiaires as $beneficiaire)
                                 <tr>
-                                    <td>{{ $demandeur->id }} </td>
-                                    <td>{{ $demandeur->nom_demandeur }}</td>
+                                    <td>{{ $beneficiaire->id }} </td>
+                                    <td>{{ $beneficiaire->nom_beneficiaire }}</td>
                                     <td>
                                        <a href=""
-                                            id="l{{ $demandeur->id }}" data-toggle="modal" data-target="#exampleModal1"
-                                            data-route="{{ route('modifierdemandeur', $demandeur->id) }}"
-                                            data-nom_demandeur="{{ $demandeur->nom_demandeur}}"
-                                            onclick="update('#l{{ $demandeur->id }}')"
+                                            id="l{{ $beneficiaire->id }}" data-toggle="modal" data-target="#exampleModal1"
+                                            data-route="{{ route('modifierbeneficiaire', $beneficiaire->id) }}"
+                                            data-nom_beneficiaire="{{ $beneficiaire->nom_beneficiaire}}"
+                                            onclick="update('#l{{ $beneficiaire->id }}')"
                                             class="btn btn-primary"><i class="feather icon-edit"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ route('demandeurs.destroy', $demandeur->id) }}" id="form{{ $demandeur->id }}">
+                                        <form method="POST" action="{{ route('beneficiaires.destroy', $beneficiaire->id) }}" id="form{{ $beneficiaire->id }}">
 
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="button" onclick="confirmation('#form{{ $demandeur->id }}')" class="btn btn-danger" >
+                                            <button type="button" onclick="confirmation('#form{{ $beneficiaire->id }}')" class="btn btn-danger" >
                                                 <i class="feather icon-trash"></i>
                                             </button>
                                         </form>
@@ -72,21 +72,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nouveau demandeur</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nouveau beneficiaire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('demandeurs.store') }}" method="POST">
+            <form action="{{ route('beneficiaires.store') }}" method="POST">
                 @csrf
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Libellé Demandeur</label>
+                            <label class="col-form-label">Nom beneficiaire :</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_demandeur" class="form-control" placeholder="Veuillez entrer le libellé du demandeur">
+                            <input type="text" name="nom_beneficiaire" class="form-control" placeholder="Veuillez entrer le nom du beneficiaire">
                         </div>
                     </div>
 
@@ -105,7 +105,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modification d'un demandeur</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modification d'un beneficiaire</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -116,11 +116,11 @@
             {{ method_field('PUT') }}
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Libellé Demandeur :</label>
+                            <label class="col-form-label">Nom beneficiaire :</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_demandeur" id="nom_demandeur" class="form-control" placeholder="Veuillez entrer le libellé du demandeur">
+                            <input type="text" name="nom_beneficiaire" id="nom_beneficiaire" class="form-control" placeholder="Veuillez entrer le libellé du beneficiaire">
                         </div>
                     </div>
 
@@ -138,9 +138,9 @@
 
 @section('js')
 <script>
-        function update(demandeurId) {
-                $('#nom_demandeur').val($(demandeurId).attr('data-nom_demandeur'))
-                $('#form2').attr('action', $(demandeurId).attr('data-route'))
+        function update(beneficiaireId) {
+                $('#nom_beneficiaire').val($(beneficiaireId).attr('data-nom_beneficiaire'))
+                $('#form2').attr('action', $(beneficiaireId).attr('data-route'))
         }
     </script>
 

@@ -185,7 +185,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="ligne_activite_id[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
+                                                            <input type="text" name="nom_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
                                                          </div>
                                                     </div>
                                                 </div>
@@ -212,12 +212,10 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select  class="col-sm-12 multi" multiple="multiple" tabindex="-1" aria-hidden="true">
-                                                                <option value="AL">Alabama</option>
-                                                                <option value="WY">Wyoming</option>
-                                                                <option value="CO">Coming</option>
-                                                                <option value="Ha">Hanry Die</option>
-                                                                <option value="Jn">John Doe</option>
+                                                            <select  class="col-sm-12 multi" multiple="multiple" tabindex="-1" name="beneficiaire_id[0][]" aria-hidden="true">
+                                                                @foreach ($beneficiaires as $beneficiaire)
+                                                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
+                                                                @endforeach
                                                             </select>                                                        
                                                         </div>
                                                     </div>
@@ -227,7 +225,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select class="form-control" id="" name="[]">
+                                                            <select class="form-control partenaireS" onclick="PartenairesSelectionner()" id="" name="bailleur_ligne_activite[]">
                                                                  
                                                             </select>
                                                         </div>
@@ -416,29 +414,6 @@ $(function(){
 </script>
 
 <script>
-   $(document).ready(function(){
-     $("#ligne_activite_id").on('click',function(e){
-         e.preventDefault();
-         $("#ligne_activite_id").empty();
-    axios.get('/getData')
-    .then(function(response){
-        response.data.ligne_activites.forEach(element => {
-            $('#ligne_activite_id').append(
-                `<option value="${ element.id }">${element.nom_ligne_activite}</option>`
-            )
-        });
-
-    })
-    .catch(function(error){
-
-    })
-     });
-});
-</script>
-
-
-
-<script>
     $(document).ready(function(){
         $("#bailleur").on('submit', function(e){
             e.preventDefault();
@@ -518,6 +493,8 @@ $(function(){
 </script>
 <script>
 
+    var index = 1;
+
     $('#addLigne').on('click', function (f) {
       f.preventDefault()
         addLigne();
@@ -529,7 +506,7 @@ $(function(){
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="ligne_activite_id[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
+                            <input type="text" name="nom_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer l'intitule de la ligne d'activite">
                             </div>
                     </div>
                 </div>
@@ -556,12 +533,10 @@ $(function(){
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select  class="multi col-sm-12" multiple="multiple" tabindex="-1" aria-hidden="true">
-                                <option value="AL">Alabama</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="WY">Coming</option>
-                                <option value="WY">Hanry Die</option>
-                                <option value="WY">John Doe</option>
+                            <select  class="multi col-sm-12" multiple="multiple" name="beneficiaire_id[${index}][]" tabindex="-1" aria-hidden="true">
+                                @foreach ($beneficiaires as $beneficiaire)
+                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
+                                @endforeach
                             </select>                                                        
                         </div>
                     </div>
@@ -571,7 +546,7 @@ $(function(){
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select class="form-control" id="" name="[]">
+                            <select class="form-control partenaireS" id="" onclick="PartenairesSelectionner()" name="bailleur_ligne_activite[]">
                                     
                             </select>
                         </div>
@@ -584,6 +559,8 @@ $(function(){
 
             </tr>`;
         $('#ligne').append(tr);
+        index++;
+        PartenairesSelectionner();
 
     $('.multi').multiselect();
     };
@@ -638,23 +615,7 @@ $(function(){
 
 
 </script>
-<script>
-$(document).ready(function(){
-    $("#la_b").on('click',function(e){
-        e.preventDefault();
-        $("#la_b").empty();
-        var ligne_activites = $(".ligneActivite").map(function() {
-        return this.value;
-        }).get();
-        ligne_activites.forEach(element => {
-        $('#la_b').append(
-        `<option value="${element}">${element}</option>`
-        )
-        });
 
-    });
-});
-</script>
 <script>
  $(document).ready(function(){
      getPartenaires()
@@ -666,11 +627,8 @@ var partenaires = []
  {
       axios.get('/getData')
     .then(function(response){
-
-            console.log(response)
-             
-             
         $(".bailleur_id").each(function(){
+            let oldValue = this.value
              $(this).empty();
            let self = this
            partenaires =  response.data.bailleurs
@@ -678,7 +636,9 @@ var partenaires = []
 
             $(self).append(
                 `<option value="${ element.id }">${element.nom_bailleur}</option>`
+                
             )
+            this.value = oldValue
         });
          });
         
@@ -688,7 +648,29 @@ var partenaires = []
              
       });
  }
-   
+
+ function PartenairesSelectionner()
+ {
+         var selectedPartners = $(".bailleur_id").map(function() {
+        return this.value;
+        }).get(); 
+        console.log(selectedPartners) 
+        $(".partenaireS").each(function(){
+            let oldValue = this.value
+            $(this).empty();
+           let self = this
+           selectedPartners.forEach(element => {
+
+            $(self).append(
+                `<option value="${element}">${element ? partenaires.find((item)=>item.id == element).nom_bailleur : ''}</option>`
+            )
+            this.value = oldValue
+        });
+       
+         });
+       
+ }
+
 
 </script>
 

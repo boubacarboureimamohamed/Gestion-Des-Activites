@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Bailleur;
 use App\Models\LigneActivite;
 use App\Models\Budget;
+use App\Models\Beneficiaire;
 use App\Models\PlanAction;
 use App\Models\ProjetMiseEnOeuvre;
 use App\Models\ActiviteBailleur;
+use App\Models\BeneficiaireLigneActivite;
 
 class ActivitesController extends Controller
 {
@@ -32,10 +34,11 @@ class ActivitesController extends Controller
     public function create()
     {
         $bailleurs = Bailleur::all();
+        $beneficiaires = Beneficiaire::all();
         $plan_actions = PlanAction::all();
         $projet_mises_en_oeuvres = ProjetMiseEnOeuvre::all();
         $ligne_activites = LigneActivite::all();
-        return view('activites.create', compact('bailleurs', 'ligne_activites', 'plan_actions', 'projet_mises_en_oeuvres'));
+        return view('activites.create', compact('bailleurs', 'ligne_activites', 'plan_actions', 'projet_mises_en_oeuvres', 'beneficiaires'));
     }
 
     /**
@@ -46,6 +49,7 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
+       // dd($request->all());
         $this->validate($request, [
 
             'nom_activite'=>'required',
@@ -65,20 +69,32 @@ class ActivitesController extends Controller
             'date_fin_activite'=>$request->date_fin_activite,
             'commentaire_activite'=>$request->commentaire_activite,
             'piece_jointe'=>$request->piece_jointe->storePublicly('Piece_Jointes', ['disk' => 'public']),
+            'projet_mise_en_oeuvre_id'=>$request->projet_mise_en_oeuvre_id,
             'budget_id'=>$budget->id
         ]);
 
 
-        for($i=0; $i< count($request->ligne_activite_id); $i++)
+        for($i=0; $i< count($request->nom_ligne_activite); $i++)
         {
-          ActiviteLigneActivite::create([
-                'montant_prevu'=>$request->montant_prevu[$i],
-                'ligne_activite_id'=>$request->ligne_activite_id[$i],
+         $ligne_activite = LigneActivite::create([
+                'nom_ligne_activite'=>$request->nom_ligne_activite[$i],
+                'quantite_ligne_activite'=>$request->quantite_ligne_activite[$i],
+                'montant_ligne_activite'=>$request->montant_ligne_activite[$i],
+                'bailleur_ligne_activite'=>$request->bailleur_ligne_activite[$i],
                 'activite_id'=>$activite->id
             ]);
+
+            for($r=0; $r<= $i; $r++)
+            {
+                BeneficiaireLigneActivite::create([
+                    'beneficiaire_id'=>$request->beneficiaire_id[$i][$r],
+                    'ligne_activite_id'=>$ligne_activite->id
+                ]);
+            }
+
         }
 
-        for($j=0; $j< count($request->bailleur_id); $j++)
+        for($j=0; $j< count($request->montant_annonce); $j++)
         {
             ActiviteBailleur::create([
                 'montant_annonce'=>$request->montant_annonce[$j],

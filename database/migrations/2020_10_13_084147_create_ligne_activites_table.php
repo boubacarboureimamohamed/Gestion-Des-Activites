@@ -22,7 +22,7 @@ class CreateLigneActivitesTable extends Migration
             $table->string('bailleur_ligne_activite')->nullable();
             $table->bigInteger('activite_id')->index()->unsigned();
             $table->foreign('activite_id')->references('id')->on('activites');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
