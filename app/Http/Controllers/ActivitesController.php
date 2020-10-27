@@ -49,7 +49,7 @@ class ActivitesController extends Controller
      */
     public function store(Request $request)
     {
-       // dd($request->all());
+        //dd($request->all());
         $this->validate($request, [
 
             'nom_activite'=>'required',
@@ -76,15 +76,28 @@ class ActivitesController extends Controller
 
         for($i=0; $i< count($request->nom_ligne_activite); $i++)
         {
-         $ligne_activite = LigneActivite::create([
-                'nom_ligne_activite'=>$request->nom_ligne_activite[$i],
-                'quantite_ligne_activite'=>$request->quantite_ligne_activite[$i],
-                'montant_ligne_activite'=>$request->montant_ligne_activite[$i],
-                'bailleur_ligne_activite'=>$request->bailleur_ligne_activite[$i],
-                'activite_id'=>$activite->id
-            ]);
+            if( isset($request->bailleur_ligne_activite) && isset($request->quantite_ligne_activite) && array_key_exists($i, $request->bailleur_ligne_activite) &&  array_key_exists($i, $request->quantite_ligne_activite)) 
+           {
+                $ligne_activite = LigneActivite::create([
+                    'nom_ligne_activite'=>$request->nom_ligne_activite[$i],
+                    'quantite_ligne_activite'=>$request->quantite_ligne_activite[$i],
+                    'montant_ligne_activite'=>$request->montant_ligne_activite[$i],
+                    'bailleur_ligne_activite'=>$request->bailleur_ligne_activite[$i],
+                    'activite_id'=>$activite->id
+                ]);
+            }
+            else
+            {
+                $ligne_activite = LigneActivite::create([
+                    'nom_ligne_activite'=>$request->nom_ligne_activite[$i],
+                    'montant_ligne_activite'=>$request->montant_ligne_activite[$i],
+                    'activite_id'=>$activite->id,
+                    'bailleur_ligne_activite'=>null,
+                    'quantite_ligne_activite'=>null,
+                ]);
+            }
 
-            for($r=0; $r<= $i; $r++)
+            for($r=0; $r<count($request->beneficiaire_id[$i]); $r++)
             {
                 BeneficiaireLigneActivite::create([
                     'beneficiaire_id'=>$request->beneficiaire_id[$i][$r],
@@ -115,30 +128,38 @@ class ActivitesController extends Controller
      */
     public function show($id)
     {
-        $user = auth()->user();
-        $x = 0;
-        $mail_admin = 0;
-        foreach($user->roles as $role)
-            {
-                if($role->name == 'Admin')
-                    {
-                        $x  = $user->email;
-                    }
-            }
-            $mail_admin = $x;
+        $somme_montant_prevu = 0;
+        $mp = 0;
         $activite = Activite::find($id);
-        $ligne_activites = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->get();
+        $ligne_activites = LigneActivite::where('activite_id', '=', $activite->id)->get();
         $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
-        return view('activites.show', compact('activite', 'ligne_activites', 'budget', 'user', 'mail_admin'));
+        foreach($ligne_activites as $ligne_activite)
+        {
+            $mp = $mp + $ligne_activite->montant_ligne_activite;
+        }
+        $somme_montant_prevu = $mp;
+        return view('activites.show', compact('activite', 'ligne_activites', 'budget', 'somme_montant_prevu'));
     }
 
     public function show_activite($id)
     {
+        $gap  = 0;
+        $sm = 0;
+        $somme_montant = 0;
         $activite = Activite::find($id);
-        $ligne_activites = ActiviteLigneActivite::where('activite_id', '=', $activite->id)->get();
+        $ligne_activites = LigneActivite::where('activite_id', '=', $activite->id)->get();
         $bailleurs = ActiviteBailleur::where('activite_id', '=', $activite->id)->get();
         $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
-        return view('activites.show_activite', compact('activite', 'ligne_activites', 'bailleurs', 'budget'));
+        $ptfs = Budget::all();
+        foreach($bailleurs as $bailleur)
+        {
+            $sm = $sm + $bailleur->montant_annonce;
+        }
+        $somme_montant = $sm;
+        $gap = $budget->montant_budget - $somme_montant;
+
+
+        return view('activites.show_activite', compact('activite', 'ligne_activites', 'bailleurs', 'budget', 'somme_montant', 'gap', 'ptfs'));
     }
 
     /**
@@ -213,6 +234,12 @@ class ActivitesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function show_beneficiaires_ligne(LigneActivite $ligne_activite)
+    {
+       $beneficiaires_lignes =  BeneficiaireLigneActivite::where('ligne_activite_id', '=', $ligne_activite->id)->get();
+        return view('activites.show_beneficiares_ligne', compact('beneficiaires_lignes', 'ligne_activite'));
     }
 
     public function getData(Request $request)

@@ -17,7 +17,6 @@
                     <h3>Les décaissement du montant</h3>
                 </div>
                 <div class="card-block">
-                 @if(!empty($decaissements))
                 <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
@@ -25,7 +24,7 @@
                                 <tr>
                                    <th>#</th>
                                     <th>Libelle</th>
-                                    <th>Montant depensé</th>
+                                    <th>Montant decaissé</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -39,8 +38,39 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div><br><br>
-                    @endif
+                    </div><br>
+                     <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row form-group">
+                                        <div class="col-sm-3">
+                                            <label class="col-form-label">Montant annoncé : </label>
+                                        </div>
+                                        <div class="col-sm-9 input-group">
+                                            <span class="input-group-addon" id="basic-addon7"></span>
+                                            <input type="text"  name="" class="form-control" value="{{ $bailleur->montant_annonce }}" disabled placeholder="Veuillez entrer le nom de l'activité">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row form-group">
+                                        <div class="col-sm-3">
+                                            <label class="col-form-label">Total montant decaissé  :</label>
+                                        </div>
+                                        <div class="col-sm-9 input-group">
+                                            <span class="input-group-addon" id="basic-addon7"></span>
+                                            <input type="text" name="" class="form-control" value="{{ $montant_decaisse }}" placeholder="Veuillez entrer la date fin de l'activité" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <form method="POST" action="{{ route('decaissement_store') }}">
                         @csrf
                     

@@ -17,8 +17,7 @@
                     <h3>Les justifications de dépense</h3>
                 </div>
                 <div class="card-block">
-                @if(!empty($justifications) )
-                <div class="row">
+                     <div class="row">
                         <div class="dt-responsive table-responsive">
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
                                 <thead>
@@ -43,12 +42,44 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div><br><br>
-                    @endif
+                    </div><br>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row form-group">
+                                        <div class="col-sm-3">
+                                            <label class="col-form-label">Montant prevu : </label>
+                                        </div>
+                                        <div class="col-sm-9 input-group">
+                                            <span class="input-group-addon" id="basic-addon7"></span>
+                                            <input type="text"  name="" class="form-control" value="{{ $ligne_activite->montant_ligne_activite }}" disabled placeholder="Veuillez entrer le nom de l'activité">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row form-group">
+                                        <div class="col-sm-3">
+                                            <label class="col-form-label">Total montant depensé  :</label>
+                                        </div>
+                                        <div class="col-sm-9 input-group">
+                                            <span class="input-group-addon" id="basic-addon7"></span>
+                                            <input type="text" name="" class="form-control" value="{{ $montant_depense }}" placeholder="Veuillez entrer la date fin de l'activité" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <form method="POST" action="{{ route('justification_store') }}" enctype="multipart/form-data">
                         @csrf
 
-                    <input type="text"  name="ligne_activite_id" value="{{ $ligne_activite->ligne_activite_id }}" class="form-control" hidden placeholder="">
+                    <input type="text"  name="ligne_activite_id" value="{{ $ligne_activite->id }}" class="form-control" hidden placeholder="">
 
                     <div class="row">
                         <div class="dt-responsive table-responsive">

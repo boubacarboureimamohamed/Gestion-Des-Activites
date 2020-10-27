@@ -25,24 +25,27 @@
                                 <tr>
                                    <th>#</th>
                                     <th>Ligne activite</th>
+                                    <th>Quantite</th>
+                                    <th>Montant</th>
+                                    <th>PTF</th>
                                     <th>Justifier</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($ligne_activites as $ligneActivite)
-
-                                           @if($ligneActivite->mail_responsable == $user->email || $mail_admin)
                                         <tr>
-                                           <td>{{ $ligneActivite->id }}</td>
-                                            <td>{{ $ligneActivite->ligneActivite->nom_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->id }}</td>
+                                            <td>{{ $ligneActivite->nom_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->quantite_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->montant_ligne_activite }}</td>
+                                            <td>{{ $ligneActivite->bailleur_ligne_activite }}</td>
                                             <td>
                                                 <a href="{{ route('justification', [$ligneActivite->id, $ligneActivite->activite->id]) }}" class="btn btn-info">
                                                     <i class="feather icon-eye"></i>
                                                 </a>
                                             </td>
                                         </tr>
-                                        @endif
-                                          @endforeach
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>

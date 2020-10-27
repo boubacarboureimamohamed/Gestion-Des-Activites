@@ -31,9 +31,16 @@ class DecaissementController extends Controller
 
     public function decaissement($id, Activite $activite)
     {
+        $montant_decaisse = 0;
+        $md = 0;
         $bailleur = ActiviteBailleur::where('activite_id', '=', $activite->id)->find($id);
         $decaissements = Decaissement::where('bailleur_id', '=', $bailleur->bailleur_id)->get();
-        return view('decaissements.create', compact('bailleur', 'activite', 'decaissements'));
+        foreach($decaissements as $decaissement)
+        {
+            $md = $md + $decaissement->montant_decaisse;
+        }
+        $montant_decaisse = $md; 
+        return view('decaissements.create', compact('bailleur', 'activite', 'decaissements', 'montant_decaisse'));
     }
 
     public function decaissement_store(Request $request)

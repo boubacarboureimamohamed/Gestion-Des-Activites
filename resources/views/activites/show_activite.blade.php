@@ -1,7 +1,6 @@
 @extends('layouts.adminty')
 
 @section('css')
-
 @endsection
 
 @section('content')
@@ -73,6 +72,15 @@
                                             <input type="text" name="" class="form-control" value="{{ $budget->date_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col-sm-3">
+                                            <label class="col-form-label">GAP :</label>
+                                        </div>
+                                        <div class="col-sm-9 input-group">
+                                            <span class="input-group-addon" id="basic-addon7"></span>
+                                            <input type="text" name="" class="form-control" value="{{ $gap }}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +92,7 @@
                             <table id="simpletable" class="table table-striped table-bordered nowrap">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Projet</th>
                                     <th>Montant annoncé </th>
                                 </tr>
@@ -91,14 +100,19 @@
                                 <tbody>
                                     @foreach ($bailleurs as $bailleur)
                                         <tr>
+                                            <td>{{ $bailleur->id }}</td>
                                             <td>{{ $bailleur->bailleur->nom_bailleur }}</td>
                                             <td>{{ $bailleur->montant_annonce }} </td>
                                         </tr>
                                     @endforeach
+                                        <tr>
+                                            <td colspan="2"&nbsp;><b>Total montant annonce</b></td>
+                                            <td>{{ $somme_montant }}</td>
+                                        </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div><br>
 
                     <h5 style="text-align: center;">Les lignes de l'activite</h5><br><br>
                     <div class="row">
@@ -107,14 +121,30 @@
                                 <thead>
                                 <tr>
                                     <th>Ligne Activite</th>
-                                    <th>Montant prévu </th>
+                                    <th>Quantite</th>
+                                    <th>Montant</th>
+                                    <th>PTF</th>
+                                    <th>Affichier les beneficiaires</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($ligne_activites as $ligneActivite)
-                                        <tr>
-                                            <td>{{ $ligneActivite->ligneActivite->nom_ligne_activite }}</td>
-                                            <td>{{ $ligneActivite->montant_prevu }}</td>
+                                        @foreach ($ptfs as $ptf)
+                                            <tr>
+                                                <td>{{ $ligneActivite->nom_ligne_activite }}</td>
+                                                <td>{{ $ligneActivite->quantite_ligne_activite }}</td>
+                                                <td>{{ $ligneActivite->montant_ligne_activite }}</td>
+                                                @if ($ligneActivite->bailleur_ligne_activite == $ptf->id)
+                                                    <td>{{ $ptf->nom_bailleur }}</td>
+                                                @else
+                                                    <td></td>
+                                                @endif
+                                                <td>
+                                                <a href="{{ route('show_beneficiaires_ligne', $ligneActivite->id) }}" class="btn btn-info">
+                                                    <i class="feather icon-eye"></i>
+                                                </a>
+                                            </td>
+                                        @endforeach
                                         </tr>
                                    @endforeach
                                 </tbody>
@@ -155,6 +185,7 @@
 
     </div>
 </div>
+
 
 @endsection
 
