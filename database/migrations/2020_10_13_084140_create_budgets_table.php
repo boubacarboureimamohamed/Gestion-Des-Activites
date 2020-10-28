@@ -15,8 +15,8 @@ class CreateBudgetsTable extends Migration
     {
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
-            $table->double('montant_budget');
-            $table->date('date_budget');
+            $table->double('montant_budget')->nullable();
+            $table->date('date_budget')->nullable();
             $table->string('commentaire_budget')->nullable();
             $table->timestamps();
         });

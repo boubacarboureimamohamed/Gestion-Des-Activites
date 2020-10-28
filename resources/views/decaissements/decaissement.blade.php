@@ -31,11 +31,6 @@
                             </thead>
                             <tbody>
                                 @foreach ($activites as $activite)
-                                        @foreach ($bailleurs as $bailleur)
-
-                                          @if($activite->id == $bailleur->activite_id)
-
-                                           @if($bailleur->bailleur->mail_bailleur == $user->email || $mail_admin)
                                     <tr>
                                         <td>{{ $activite->id }}</td>
                                         <td>{{ $activite->nom_activite }}</td>
@@ -50,9 +45,6 @@
                                             </a>
                                         </td>
                                     </tr>
-                                       @endif
-                                       @endif
-                                      @endforeach
                                 @endforeach
                             </tbody>
                         </table>

@@ -39,15 +39,15 @@
                                             <input type="text" name="" class="form-control" value="{{ $activite->date_debut_activite }}" placeholder="Veuillez entrer la date début de l'activité" disabled>
                                         </div>
                                     </div>
-                                    <div class="row form-group">
+                                   {{--  <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Budget :</label>
+                                            <label class="col-form-label">GAP :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="{{ $budget->montant_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $gap }}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -65,20 +65,11 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-sm-3">
-                                            <label class="col-form-label">Date budget :</label>
+                                            <label class="col-form-label">Budget :</label>
                                         </div>
                                         <div class="col-sm-9 input-group">
                                             <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="{{ $budget->date_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-sm-3">
-                                            <label class="col-form-label">GAP :</label>
-                                        </div>
-                                        <div class="col-sm-9 input-group">
-                                            <span class="input-group-addon" id="basic-addon7"></span>
-                                            <input type="text" name="" class="form-control" value="{{ $gap }}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
+                                            <input type="text" name="" class="form-control" value="{{ $budget->montant_budget}}" placeholder="Veuillez entrer le budget total de l'activité" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -129,22 +120,17 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($ligne_activites as $ligneActivite)
-                                        @foreach ($ptfs as $ptf)
                                             <tr>
                                                 <td>{{ $ligneActivite->nom_ligne_activite }}</td>
                                                 <td>{{ $ligneActivite->quantite_ligne_activite }}</td>
                                                 <td>{{ $ligneActivite->montant_ligne_activite }}</td>
-                                                @if ($ligneActivite->bailleur_ligne_activite == $ptf->id)
-                                                    <td>{{ $ptf->nom_bailleur }}</td>
-                                                @else
-                                                    <td></td>
-                                                @endif
+                                                <td>{{ $ligneActivite->bailleur_ligne_activite }}</td>
                                                 <td>
                                                 <a href="{{ route('show_beneficiaires_ligne', $ligneActivite->id) }}" class="btn btn-info">
                                                     <i class="feather icon-eye"></i>
                                                 </a>
                                             </td>
-                                        @endforeach
+                                       
                                         </tr>
                                    @endforeach
                                 </tbody>

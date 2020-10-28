@@ -63,7 +63,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('show_decaissemen/t/{id}', 'DecaissementController@show')->name('show_decaissement');
 
-    Route::get('show_activite/{activite}', 'ActivitesController@show_activite')->name('show_activite');
+    Route::get('show_activite/{id}', 'ActivitesController@show_activite')->name('show_activite');
 
     Route::put('update_ligne_activite/{ligne_activite}', 'LigneActiviteController@modifier_ligneActivite')->name('modifierligneactivite');
 

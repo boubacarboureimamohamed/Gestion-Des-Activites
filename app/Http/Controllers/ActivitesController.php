@@ -148,6 +148,7 @@ class ActivitesController extends Controller
         $somme_montant = 0;
         $activite = Activite::find($id);
         $ligne_activites = LigneActivite::where('activite_id', '=', $activite->id)->get();
+       // dd($ligne_activites);
         $bailleurs = ActiviteBailleur::where('activite_id', '=', $activite->id)->get();
         $budget = Budget::where('id', '=', $activite->budget_id)->orderByDesc('date_budget')->first();
         $ptfs = Budget::all();
@@ -157,8 +158,6 @@ class ActivitesController extends Controller
         }
         $somme_montant = $sm;
         $gap = $budget->montant_budget - $somme_montant;
-
-
         return view('activites.show_activite', compact('activite', 'ligne_activites', 'bailleurs', 'budget', 'somme_montant', 'gap', 'ptfs'));
     }
 

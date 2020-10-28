@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des projets</h3>
+                    <h3>Liste des partenaires techniques financiers</h3>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('bailleurs.create') }}" class="btn btn-success">

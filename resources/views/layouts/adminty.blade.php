@@ -224,18 +224,18 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="{{ route('ligne_activites.index') }}" >
-                                                <span class="pcoded-mtext">Lignes activités</span>
-                                            </a>
-                                        </li>
-                                        <li class="">
-                                            <a href="{{ route('bailleurs.index') }}" >
+                                            <a href="#" >
                                                 <span class="pcoded-mtext">Projets</span>
                                             </a>
                                         </li>
                                         <li class="">
                                             <a href="{{ route('plan_actions.index') }}" >
                                                 <span class="pcoded-mtext">Plan actions</span>
+                                            </a>
+                                        </li>
+                                        <li class="">
+                                            <a href="{{ route('bailleurs.index') }}" >
+                                                <span class="pcoded-mtext">Partenaires financiers</span>
                                             </a>
                                         </li>
                                     </ul>

@@ -20,7 +20,7 @@ class CreateActivitesTable extends Migration
             $table->date('date_fin_activite');
             $table->string('commentaire_activite');
             $table->string('piece_jointe')->nullable();
-            $table->bigInteger('budget_id')->index()->unsigned();
+            $table->bigInteger('budget_id')->index()->unsigned()->nullable();
             $table->foreign('budget_id')->references('id')->on('budgets');
             $table->bigInteger('projet_mise_en_oeuvre_id')->index()->unsigned();
             $table->foreign('projet_mise_en_oeuvre_id')->references('id')->on('projet_mise_en_oeuvres');
