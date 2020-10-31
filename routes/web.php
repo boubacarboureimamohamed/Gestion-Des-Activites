@@ -71,7 +71,13 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('plan_actions', 'PlanActionController');
 
+    Route::resource('projets', 'ProjetController');
+
     Route::get('beneficiaires_ligne/{ligne_activite}', 'ActivitesController@show_beneficiaires_ligne')->name('show_beneficiaires_ligne');
+
+    Route::resource('directions', 'DirectionController');
+
+    Route::resource('departements', 'DepartementController');
 
  });
 

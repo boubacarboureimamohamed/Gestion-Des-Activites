@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Beneficiaire;
-use App\Models\Departement;
+use App\Models\ProjetMiseEnOeuvre;
 
-class BeneficiairesController extends Controller
+class ProjetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +14,8 @@ class BeneficiairesController extends Controller
      */
     public function index()
     {
-        $beneficiaires = Beneficiaire::all();
-        $departements = Departement::all();
-        return view('beneficiaires.index', compact('beneficiaires', 'departements'));
+        $projets = ProjetMiseEnOeuvre::all();
+        return view('projets.index', compact('projets'));
     }
 
     /**
@@ -27,7 +25,7 @@ class BeneficiairesController extends Controller
      */
     public function create()
     {
-        return view('beneficiaires.create');
+        //
     }
 
     /**
@@ -37,19 +35,9 @@ class BeneficiairesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
-        $this->validate($request, [
-        'nom_beneficiaire'=>'required',
-        'departement_id'=>'required'
-    ]);
-    
-        Beneficiaire::create([
-        'nom_beneficiaire'=>$request->nom_beneficiaire,
-        'departement_id'=>$request->departement_id
-    ]);
-
-    return redirect(route('beneficiaires.index'))->with('success', 'Operation effectue avec success!');
-}
+    {
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -70,7 +58,8 @@ class BeneficiairesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $projet = ProjetMiseEnOeuvre::find($id);
+        return view('projets.edit', compact('projet'));
     }
 
     /**
@@ -82,21 +71,15 @@ class BeneficiairesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $projet = ProjetMiseEnOeuvre::find($id);
 
-    public function modifier_beneficiaire(Request $request, Beneficiaire $beneficiaire)
-    {
-        dd($request->all());
-        $this->validate($request, [
-
-            'nom_beneficiaire'=>'required',
+        $projet->update([
+            'nom_projet'=>$request->nom_projet,
+            'nom_responsable_projet'=>$request->nom_responsable_projet,
+            'email_responsable_projet'=>$request->email_responsable_projet,
+            'contact_responsable_projet'=>$request->contact_responsable_projet
         ]);
-        $beneficiaire->update([
-            'nom_beneficiaire'=>$request->nom_beneficiaire
-        ]);
-
-        return redirect(route('beneficiaires.index'))->with('success', 'Opération effectuée avec success!');
+        return redirect(route('projets.index'))->with('success', 'Operation effectue avec success!');
     }
 
     /**

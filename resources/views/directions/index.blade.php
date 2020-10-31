@@ -14,50 +14,54 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des beneficiaires</h3>
+                    <h3>Liste des directions</h3>
                 </div>
                 <div class="card-block">
-                    <a href="{{ route('beneficiaires.create') }}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-                        <i class="feather icon-plus"></i>Nouveau</a><br><br>
+                    <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+                        <i class="feather icon-plus"></i> Nouveau</a><br><br>
                     <div class="dt-responsive table-responsive">
                         <table id="simpletable" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Beneficiaire</th>
-                                <th>Departement</th>
+                                <th>Direction</th>
+                                <th>Afficher les departements</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
                             </thead>
                             <tbody>
-                                    @foreach ($beneficiaires as $beneficiaire)
+                                @foreach ($directions as $direction)
                                 <tr>
-                                    <td>{{ $beneficiaire->id }} </td>
-                                    <td>{{ $beneficiaire->nom_beneficiaire }}</td>
-                                    <td>{{ $beneficiaire->departement->libelle_departement }}</td>
+                                    <td>{{ $direction->id }} </td>
+                                    <td>{{ $direction->libelle_direction }}</td>
+                                    <td>
+                                        <a href="{{ route('directions.show', $direction->id) }}" class="btn btn-info">
+                                            <i class="feather icon-eye"></i>
+                                        </a>
+                                    </td>
                                     <td>
                                        <a href=""
-                                            id="l{{ $beneficiaire->id }}" data-toggle="modal" data-target="#exampleModal1"
-                                            data-route="{{ route('modifierbeneficiaire', $beneficiaire->id) }}"
-                                            data-nom_beneficiaire="{{ $beneficiaire->nom_beneficiaire}}"
-                                            onclick="update('#l{{ $beneficiaire->id }}')"
+                                            id="l{{ $direction->id }}" data-toggle="modal" data-target="#exampleModal1"
+                                            data-route="{{ route('directions.update', $direction->id) }}"
+                                            data-libelle_direction="{{ $direction->libelle_direction}}"
+                                            onclick="update('#l{{ $direction->id }}')"
                                             class="btn btn-primary"><i class="feather icon-edit"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <form method="POST" action="{{ route('beneficiaires.destroy', $beneficiaire->id) }}" id="form{{ $beneficiaire->id }}">
+                                        <form method="POST" action="{{ route('plan_actions.destroy', $direction->id) }}" id="form{{ $direction->id }}">
 
                                             {{ csrf_field() }}
                                             {{ method_field('DELETE') }}
 
-                                            <button type="button" onclick="confirmation('#form{{ $beneficiaire->id }}')" class="btn btn-danger" >
+                                            <button type="button" onclick="confirmation('#form{{ $direction->id }}')" class="btn btn-danger" >
                                                 <i class="feather icon-trash"></i>
                                             </button>
                                         </form>
                                     </td>
-                                </tr>
-                                    @endforeach
+                               </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -69,40 +73,29 @@
 
     </div>
 </div>
-        <!-- Ajout demandeur Modal -->
+
+
+
+ <!-- Ajout direction Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Nouveau beneficiaire</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Nouvelle direction</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('beneficiaires.store') }}" method="POST">
+            <form action="{{ route('directions.store') }}" method="POST">
                 @csrf
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Nom beneficiaire :</label>
+                            <label class="col-form-label">Direction :</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_beneficiaire" class="form-control" placeholder="Veuillez entrer le nom du beneficiaire">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-3">
-                            <label class="col-form-label">Departement :</label>
-                        </div>
-                        <div class="col-sm-9 input-group">
-                            <span class="input-group-addon" id="basic-addon1"></span>
-                            <select class="form-control" id="select" name="departement_id">
-                                    <option id="" selected="selected">********Sélectionnez********</option>
-                                @foreach ($departements as $departement)
-                                    <option value="{{ $departement->id }}">{{ $departement->libelle_departement }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" name="libelle_direction" class="form-control" placeholder="Veuillez entrer le nom de la direction">
                         </div>
                     </div>
             </div>
@@ -115,12 +108,12 @@
         </div>
         </div>
 
-             <!-- Modifcation demandeur Modal -->
+             <!-- Modifcation direction Modal -->
         <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modification d'un beneficiaire</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Modification d'une direction</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -131,11 +124,11 @@
             {{ method_field('PUT') }}
                     <div class="row form-group">
                         <div class="col-sm-3">
-                            <label class="col-form-label">Nom beneficiaire :</label>
+                            <label class="col-form-label">Direction :</label>
                         </div>
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
-                            <input type="text" name="nom_beneficiaire" id="nom_beneficiaire" class="form-control" placeholder="Veuillez entrer le libellé du beneficiaire">
+                            <input type="text" name="libelle_direction" id="libelle_direction" class="form-control" placeholder="Veuillez entrer le nom de la direction">
                         </div>
                     </div>
 
@@ -148,14 +141,13 @@
             </div>
         </div>
         </div>
-
 @endsection
 
 @section('js')
 <script>
-        function update(beneficiaireId) {
-                $('#nom_beneficiaire').val($(beneficiaireId).attr('data-nom_beneficiaire'))
-                $('#form2').attr('action', $(beneficiaireId).attr('data-route'))
+        function update(directionId) {
+                $('#libelle_direction').val($(directionId).attr('data-libelle_direction'))
+                $('#form2').attr('action', $(directionId).attr('data-route'))
         }
     </script>
 

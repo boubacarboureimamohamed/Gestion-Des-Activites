@@ -31,7 +31,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Plan d'action :</label>
+                                                <label class="col-form-label">Projet :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
@@ -78,7 +78,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Projet mise en oeuvre :</label>
+                                                <label class="col-form-label">Agence d'execution :</label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
@@ -163,11 +163,54 @@
                             </div>
                         </div>
 
+                        
+
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
                                 {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                     <i class="feather icon-plus"></i> Nouvelle Ligne</a> --}}
+                        
+                                <div class="row">
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Directions :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <select class="form-control" id="directions" name="direction_id" onchange="changedirections()">
+                                                      <option id="" selected="selected">********Sélectionnez********</option>
+                                                    @foreach ($directions as $direction)
+                                                        <option value="{{ $direction->id }}" data-directions="{{ $direction->libelle_direction }}">{{ $direction->libelle_direction }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row form-group">
+                                            <div class="col-sm-3">
+                                                <label class="col-form-label">Departements :</label>
+                                            </div>
+                                            <div class="col-sm-9 input-group">
+                                                <span class="input-group-addon" id="basic-addon1"></span>
+                                                <select class="form-control"  id="departements"  name="departement_id">
+                                                     
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
@@ -194,7 +237,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                                                            <input type="number" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -212,10 +255,8 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select  class="col-sm-12 multi" multiple="multiple" tabindex="-1" name="beneficiaire_id[0][]" aria-hidden="true">
-                                                                @foreach ($beneficiaires as $beneficiaire)
-                                                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
-                                                                @endforeach
+                                                            <select  class="col-sm-12 multi beneficiaires" multiple="multiple"   tabindex="-3" name="beneficiaire_id[0][]" aria-hidden="true" >
+                                                               
                                                             </select>                                                        
                                                         </div>
                                                     </div>
@@ -411,6 +452,32 @@ $(function(){
             })
     }
 
+     function changedirections()
+    {
+        let pa = $('#directions option:selected').attr('data-directions')
+        let direction_id = $('#directions option:selected').val()
+
+        $("#departements").empty();
+
+        axios.get('/getProjet?direction_id='+direction_id)
+            .then(function(response) {
+
+                console.log(response)
+                
+                response.data.departements.forEach(element => {
+                    $('#departements').append(
+
+                        `<option value="${ element.id }">${element.libelle_departement}</option>`
+
+                    )
+                })
+
+            })
+    }
+
+var selectedPartners = $(".bailleur_id").map(function() {
+        return this.value;
+        }).get(); 
 </script>
 
 <script>
@@ -515,7 +582,7 @@ $(function(){
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                            <input type="number" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
                         </div>
                     </div>
                 </div>
@@ -533,10 +600,8 @@ $(function(){
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select  class="multi col-sm-12" multiple="multiple" name="beneficiaire_id[${index}][]" tabindex="-1" aria-hidden="true">
-                                @foreach ($beneficiaires as $beneficiaire)
-                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
-                                @endforeach
+                            <select  class="multi col-sm-12 beneficiaires" multiple="multiple"  name="beneficiaire_id[${index}][]" tabindex="-1" aria-hidden="true">
+                                
                             </select>                                                        
                         </div>
                     </div>
@@ -670,6 +735,27 @@ var partenaires = []
          });
        
  }
+
+      $(document).ready(function(){   
+         $(".beneficiaires").on('click', function(){
+             console.log("bonsoir")
+            axios.get('/getProjet')
+            .then(function(response) {
+
+                console.log(response)
+                
+                response.data.beneficiaires.forEach(element => {
+                    $('.beneficiaires').append(
+
+                        `<option value="${ element.id }">${element.id}</option>`
+
+                    )
+                })
+
+            })   
+        })
+        })
+ 
 
 
 </script>

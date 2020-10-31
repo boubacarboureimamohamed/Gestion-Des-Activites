@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Les projets de mise en oeuvre pour le plan d'action <strong>{{ $plan_action->nom_plan_action }}</strong></h3>
+                    <h3>Les agences d'execution <strong>{{ $plan_action->nom_plan_action }}</strong></h3>
                 </div>
                 <div class="card-block">
 
@@ -24,7 +24,7 @@
                                     <thead>
                                         <tr>
                                             <th># </th>
-                                            <th>Projet </th>
+                                            <th>Agence </th>
                                             <th>Responsable</th>
                                             <th>Email</th>
                                             <th>Contact</th>

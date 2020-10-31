@@ -8,10 +8,13 @@ use App\Models\Bailleur;
 use App\Models\LigneActivite;
 use App\Models\Budget;
 use App\Models\Beneficiaire;
+use App\Models\Departement;
+use App\Models\Direction;
 use App\Models\PlanAction;
 use App\Models\ProjetMiseEnOeuvre;
 use App\Models\ActiviteBailleur;
 use App\Models\BeneficiaireLigneActivite;
+use Illuminate\Support\Facades\DB;
 
 class ActivitesController extends Controller
 {
@@ -38,7 +41,9 @@ class ActivitesController extends Controller
         $plan_actions = PlanAction::all();
         $projet_mises_en_oeuvres = ProjetMiseEnOeuvre::all();
         $ligne_activites = LigneActivite::all();
-        return view('activites.create', compact('bailleurs', 'ligne_activites', 'plan_actions', 'projet_mises_en_oeuvres', 'beneficiaires'));
+        $departements = Departement::all();
+        $directions = Direction::all();
+        return view('activites.create', compact('bailleurs', 'ligne_activites', 'plan_actions', 'projet_mises_en_oeuvres', 'beneficiaires', 'departements', 'directions'));
     }
 
     /**
@@ -76,7 +81,7 @@ class ActivitesController extends Controller
 
         for($i=0; $i< count($request->nom_ligne_activite); $i++)
         {
-            if( isset($request->bailleur_ligne_activite) && isset($request->quantite_ligne_activite) && array_key_exists($i, $request->bailleur_ligne_activite) &&  array_key_exists($i, $request->quantite_ligne_activite)) 
+            if( (isset($request->bailleur_ligne_activite)  && array_key_exists($i, $request->bailleur_ligne_activite)) &&  (isset($request->quantite_ligne_activite) && array_key_exists($i, $request->quantite_ligne_activite))) 
            {
                 $ligne_activite = LigneActivite::create([
                     'nom_ligne_activite'=>$request->nom_ligne_activite[$i],
@@ -256,9 +261,15 @@ class ActivitesController extends Controller
     public function getProjet(Request $request)
     {
         $plan_action_id = $request->plan_action_id;
+        $direction_id = $request->direction_id;
+        $departement_id = $request->departement_id;
         $projet_mises_en_oeuvres = ProjetMiseEnOeuvre::where('plan_action_id', '=', $plan_action_id)->get();
+        $departements = Departement::where('direction_id', '=', $direction_id)->get();
+        $beneficiaires = Beneficiaire::where('departement_id', '=', $departement_id)->get();
         return json_encode([
-            'projet_mises_en_oeuvres'=>$projet_mises_en_oeuvres
+            'projet_mises_en_oeuvres'=>$projet_mises_en_oeuvres,
+            'departements'=>$departements,
+            'beneficiaires'=>$beneficiaires
         ]);
     }
 }

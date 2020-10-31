@@ -224,13 +224,23 @@
                                             </a>
                                         </li>
                                         <li class="">
-                                            <a href="#" >
+                                            <a href="{{ route('plan_actions.index') }}" >
                                                 <span class="pcoded-mtext">Projets</span>
                                             </a>
                                         </li>
+                                         <li class="">
+                                            <a href="{{ route('directions.index') }}" >
+                                                <span class="pcoded-mtext">Directions</span>
+                                            </a>
+                                        </li>
+                                         <li class="">
+                                            <a href="{{ route('departements.index') }}" >
+                                                <span class="pcoded-mtext">Departements</span>
+                                            </a>
+                                        </li>
                                         <li class="">
-                                            <a href="{{ route('plan_actions.index') }}" >
-                                                <span class="pcoded-mtext">Plan actions</span>
+                                            <a href="{{ route('projets.index') }}" >
+                                                <span class="pcoded-mtext">Agences d'executions</span>
                                             </a>
                                         </li>
                                         <li class="">

@@ -7,7 +7,7 @@
             <!-- Date card start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Modification d'un plan d'action</h3>
+                    <h3>Modification d'un projet</h3>
                 </div>
                 <div class="card-block">
                     <form method="POST" action="{{ route('plan_actions.update', $plan_action->id) }}">
@@ -19,7 +19,7 @@
                                     <div class="col-sm-12">
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Intitule Plan Action : </label>
+                                                <label class="col-form-label">Intitule Projet : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon7"></span>
@@ -48,11 +48,11 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <h5 style="text-align: center;">Les projets de mise en oeuvre</h5><br>
+                                <h5 style="text-align: center;">Les Agences d'execution</h5><br>
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
-                                            <th>Projet </th>
+                                            <th>Agence </th>
                                             <th>Responsable</th>
                                             <th>Email</th>
                                             <th>Contact</th>
