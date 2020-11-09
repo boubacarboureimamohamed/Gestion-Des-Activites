@@ -25,7 +25,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Beneficiaire</th>
-                                <th>Departement</th>
                                 <th>Modifier</th>
                                 <th>Supprimer</th>
                             </tr>
@@ -35,7 +34,6 @@
                                 <tr>
                                     <td>{{ $beneficiaire->id }} </td>
                                     <td>{{ $beneficiaire->nom_beneficiaire }}</td>
-                                    <td>{{ $beneficiaire->departement->libelle_departement }}</td>
                                     <td>
                                        <a href=""
                                             id="l{{ $beneficiaire->id }}" data-toggle="modal" data-target="#exampleModal1"
@@ -89,20 +87,6 @@
                         <div class="col-sm-9 input-group">
                             <span class="input-group-addon" id="basic-addon7"></span>
                             <input type="text" name="nom_beneficiaire" class="form-control" placeholder="Veuillez entrer le nom du beneficiaire">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-3">
-                            <label class="col-form-label">Departement :</label>
-                        </div>
-                        <div class="col-sm-9 input-group">
-                            <span class="input-group-addon" id="basic-addon1"></span>
-                            <select class="form-control" id="select" name="departement_id">
-                                    <option id="" selected="selected">********Sélectionnez********</option>
-                                @foreach ($departements as $departement)
-                                    <option value="{{ $departement->id }}">{{ $departement->libelle_departement }}</option>
-                                @endforeach
-                            </select>
                         </div>
                     </div>
             </div>

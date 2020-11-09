@@ -37,15 +37,13 @@ class BeneficiairesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {      
         $this->validate($request, [
-        'nom_beneficiaire'=>'required',
-        'departement_id'=>'required'
+        'nom_beneficiaire'=>'required'
     ]);
     
         Beneficiaire::create([
-        'nom_beneficiaire'=>$request->nom_beneficiaire,
-        'departement_id'=>$request->departement_id
+        'nom_beneficiaire'=>$request->nom_beneficiaire
     ]);
 
     return redirect(route('beneficiaires.index'))->with('success', 'Operation effectue avec success!');

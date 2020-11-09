@@ -1,3 +1,4 @@
+
 @extends('layouts.adminty')
 
 @section('css')
@@ -45,7 +46,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-sm-3">
-                                                <label class="col-form-label">Libellé Activité : </label>
+                                                <label class="col-form-label">Axe d'intervention : </label>
                                             </div>
                                             <div class="col-sm-9 input-group">
                                                 <span class="input-group-addon" id="basic-addon1"></span>
@@ -163,54 +164,11 @@
                             </div>
                         </div>
 
-                        
-
                         <div class="row">
                             <div class="col-sm-12">
                                 <h5 style="text-align: center;">Les lignes de l'activité</h5><br>
                                 {{-- <a href="" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                                     <i class="feather icon-plus"></i> Nouvelle Ligne</a> --}}
-                        
-                                <div class="row">
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Directions :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control" id="directions" name="direction_id" onchange="changedirections()">
-                                                      <option id="" selected="selected">********Sélectionnez********</option>
-                                                    @foreach ($directions as $direction)
-                                                        <option value="{{ $direction->id }}" data-directions="{{ $direction->libelle_direction }}">{{ $direction->libelle_direction }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="row form-group">
-                                            <div class="col-sm-3">
-                                                <label class="col-form-label">Departements :</label>
-                                            </div>
-                                            <div class="col-sm-9 input-group">
-                                                <span class="input-group-addon" id="basic-addon1"></span>
-                                                <select class="form-control"  id="departements"  name="departement_id">
-                                                     
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                                 <table id="example-2" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
@@ -237,7 +195,7 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <input type="number" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                                                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,8 +213,10 @@
                                                 <div class="">
                                                     <div class="form-group form-primary">
                                                         <div class="input-group">
-                                                            <select  class="col-sm-12 multi beneficiaires" multiple="multiple"   tabindex="-3" name="beneficiaire_id[0][]" aria-hidden="true" >
-                                                               
+                                                            <select  class="col-sm-12 multi" multiple="multiple" tabindex="-1" name="beneficiaire_id[0][]" aria-hidden="true">
+                                                                @foreach ($beneficiaires as $beneficiaire)
+                                                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
+                                                                @endforeach
                                                             </select>                                                        
                                                         </div>
                                                     </div>
@@ -424,60 +384,25 @@
 @section('js')
 
 <script>
-
 $(function(){
     $('.multi').multiselect();
 })
-
     function change()
     {
         let pa = $('#select option:selected').attr('data-pa')
         let plan_action_id = $('#select option:selected').val()
-
         $("#select1").empty();
-
         axios.get('/getProjet?plan_action_id='+plan_action_id)
             .then(function(response) {
-
                 console.log(response)
                 
                 response.data.projet_mises_en_oeuvres.forEach(element => {
                     $('#select1').append(
-
                         `<option value="${ element.id }">${element.nom_projet}</option>`
-
                     )
                 })
-
             })
     }
-
-     function changedirections()
-    {
-        let pa = $('#directions option:selected').attr('data-directions')
-        let direction_id = $('#directions option:selected').val()
-
-        $("#departements").empty();
-
-        axios.get('/getProjet?direction_id='+direction_id)
-            .then(function(response) {
-
-                console.log(response)
-                
-                response.data.departements.forEach(element => {
-                    $('#departements').append(
-
-                        `<option value="${ element.id }">${element.libelle_departement}</option>`
-
-                    )
-                })
-
-            })
-    }
-
-var selectedPartners = $(".bailleur_id").map(function() {
-        return this.value;
-        }).get(); 
 </script>
 
 <script>
@@ -497,7 +422,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
                     icon: "success",
                     button: "Ok",
                 });
-
                 },
                  error: function(error){
                      let all_errors = '';
@@ -506,7 +430,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
                      Object.keys(error.responseJSON.errors).forEach(function(bailleur){
                           all_errors += '\n'+error.responseJSON.errors[bailleur]
                      });
-
                  swal({
                 title: "Erreur !",
                 text: all_errors,
@@ -518,7 +441,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
             });
         });
     });
-
 </script>
 <script>
     $(document).ready(function(){
@@ -537,7 +459,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
                     icon: "success",
                     button: "Ok",
                 });
-
                 },
                  error: function(error){
                      let all_errors = '';
@@ -556,19 +477,15 @@ var selectedPartners = $(".bailleur_id").map(function() {
             });
         });
     });
-
 </script>
 <script>
-
     var index = 1;
-
     $('#addLigne').on('click', function (f) {
       f.preventDefault()
         addLigne();
     });
     function addLigne() {
         var tr = `<tr>
-
             <td>
                 <div class="">
                     <div class="form-group form-primary">
@@ -582,7 +499,7 @@ var selectedPartners = $(".bailleur_id").map(function() {
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <input type="number" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
+                            <input type="text" name="quantite_ligne_activite[]" value="" id="" class="form-control" placeholder="Veillez entrer la quantite">
                         </div>
                     </div>
                 </div>
@@ -600,8 +517,10 @@ var selectedPartners = $(".bailleur_id").map(function() {
                 <div class="">
                     <div class="form-group form-primary">
                         <div class="input-group">
-                            <select  class="multi col-sm-12 beneficiaires" multiple="multiple"  name="beneficiaire_id[${index}][]" tabindex="-1" aria-hidden="true">
-                                
+                            <select  class="multi col-sm-12" multiple="multiple" name="beneficiaire_id[${index}][]" tabindex="-1" aria-hidden="true">
+                                @foreach ($beneficiaires as $beneficiaire)
+                                    <option value="{{ $beneficiaire->id }}">{{ $beneficiaire->nom_beneficiaire }}</option>
+                                @endforeach
                             </select>                                                        
                         </div>
                     </div>
@@ -621,30 +540,24 @@ var selectedPartners = $(".bailleur_id").map(function() {
             <td style="text-align: center">
                 <button class="btn btn-danger remove"><i class="feather icon-minus"></i></button>
             </td>
-
             </tr>`;
         $('#ligne').append(tr);
         index++;
         PartenairesSelectionner();
-
     $('.multi').multiselect();
     };
     $('#ligne').on('click', '.remove', function () {
         $(this).parent().parent().remove();
     })
-
-
 </script>
 
 <script>
-
     $('#addLigne1').on('click', function (f) {
       f.preventDefault()
         addLigne1();
     });
     function addLigne1() {
         var tr = `<tr>
-
             <td>
                 <div class="">
                     <div class="form-group form-primary">
@@ -656,7 +569,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
                     </div>
                 </div>
             </td>
-
             <td>
                 <div class="">
                     <div class="form-group form-primary">
@@ -669,7 +581,6 @@ var selectedPartners = $(".bailleur_id").map(function() {
             <td style="text-align: center">
                 <button class="btn btn-danger remove1"><i class="feather icon-minus"></i></button>
             </td>
-
             </tr>`;
         $('#ligne1').append(tr);
         getPartenaires()
@@ -677,16 +588,12 @@ var selectedPartners = $(".bailleur_id").map(function() {
     $('#ligne1').on('click', '.remove1', function () {
         $(this).parent().parent().remove();
     })
-
-
 </script>
 
 <script>
  $(document).ready(function(){
      getPartenaires()
-
  });
-
 var partenaires = []
  function getPartenaires()
  {
@@ -698,7 +605,6 @@ var partenaires = []
            let self = this
            partenaires =  response.data.bailleurs
            response.data.bailleurs.forEach(element => {
-
             $(self).append(
                 `<option value="${ element.id }">${element.nom_bailleur}</option>`
                 
@@ -713,7 +619,6 @@ var partenaires = []
              
       });
  }
-
  function PartenairesSelectionner()
  {
          var selectedPartners = $(".bailleur_id").map(function() {
@@ -725,7 +630,6 @@ var partenaires = []
             $(this).empty();
            let self = this
            selectedPartners.forEach(element => {
-
             $(self).append(
                 `<option value="${element}">${element ? partenaires.find((item)=>item.id == element).nom_bailleur : ''}</option>`
             )
@@ -735,29 +639,6 @@ var partenaires = []
          });
        
  }
-
-      $(document).ready(function(){   
-         $(".beneficiaires").on('click', function(){
-             console.log("bonsoir")
-            axios.get('/getProjet')
-            .then(function(response) {
-
-                console.log(response)
-                
-                response.data.beneficiaires.forEach(element => {
-                    $('.beneficiaires').append(
-
-                        `<option value="${ element.id }">${element.id}</option>`
-
-                    )
-                })
-
-            })   
-        })
-        })
- 
-
-
 </script>
 
 

@@ -14,7 +14,7 @@
             <!-- Zero config.table start -->
             <div class="card">
                 <div class="card-header"  style="text-align: center;">
-                    <h3>Liste des projets</h3>
+                    <h3>Liste des agences d'execution</h3>
                 </div>
                 <div class="card-block">
                     <a href="{{ route('projets.create') }}" class="btn btn-success">
@@ -24,7 +24,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Projet</th>
+                                <th>Agence</th>
                                 <th>Responsable</th>
                                 <th>Adresse mail</th>
                                 <th>Contact</th>

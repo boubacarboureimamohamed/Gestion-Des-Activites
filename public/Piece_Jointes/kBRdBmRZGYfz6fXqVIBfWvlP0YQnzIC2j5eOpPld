@@ -1,0 +1,889 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
+--
+-- Client :  localhost:3306
+-- Généré le :  Mer 28 Octobre 2020 à 09:56
+-- Version du serveur :  5.7.31-0ubuntu0.18.04.1
+-- Version de PHP :  7.2.24-0ubuntu0.18.04.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données :  `db_activity`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `activites`
+--
+
+CREATE TABLE `activites` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_activite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date_debut_activite` date NOT NULL,
+  `date_fin_activite` date NOT NULL,
+  `commentaire_activite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `piece_jointe` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `budget_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `projet_mise_en_oeuvre_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `activites`
+--
+
+INSERT INTO `activites` (`id`, `nom_activite`, `date_debut_activite`, `date_fin_activite`, `commentaire_activite`, `piece_jointe`, `budget_id`, `projet_mise_en_oeuvre_id`, `created_at`, `updated_at`) VALUES
+(1, 'COORDINATION', '2020-10-04', '2020-10-30', 'RAS', 'Piece_Jointes/YZR5eDLj4ZieAp1IBVgLFDAQGeDZHRRMtTNm66qk.xlsx', 1, 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(2, 'SURVEILLANCE EPIDEMIOLOGIQUE', '2020-10-27', '2020-11-27', 'RAS', 'Piece_Jointes/XpW7eMOfSUksvC62iviBhChskcACZxlmxumBQyWM.xls', 2, 1, '2020-10-27 17:03:45', '2020-10-27 17:03:45');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `activite_bailleurs`
+--
+
+CREATE TABLE `activite_bailleurs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `montant_annonce` double NOT NULL,
+  `activite_id` bigint(20) UNSIGNED NOT NULL,
+  `bailleur_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `activite_bailleurs`
+--
+
+INSERT INTO `activite_bailleurs` (`id`, `montant_annonce`, `activite_id`, `bailleur_id`, `created_at`, `updated_at`) VALUES
+(1, 53000000, 1, 7, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(2, 300000000, 1, 6, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(3, 404400000, 1, 2, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(4, 90000000, 1, 10, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(5, 40000000, 1, 4, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(6, 20000000, 2, 3, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(7, 30000000, 2, 8, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(8, 50000000, 2, 9, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(9, 10000000, 2, 6, '2020-10-27 17:03:46', '2020-10-27 17:03:46');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bailleurs`
+--
+
+CREATE TABLE `bailleurs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_bailleur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_bailleur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresse_bailleur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mail_bailleur` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `bailleurs`
+--
+
+INSERT INTO `bailleurs` (`id`, `nom_bailleur`, `contact_bailleur`, `adresse_bailleur`, `mail_bailleur`, `created_at`, `updated_at`) VALUES
+(1, 'USAID', '0022789087650', 'Niamey', 'usaid@gmail.com', NULL, NULL),
+(2, 'UNICEF', '0022789087659', 'Niamey', 'unicef@gmail.com', NULL, NULL),
+(3, 'UNFPA', '0022789087658', 'Niamey', 'unfpa@gmail.com', NULL, NULL),
+(4, 'UEMOA', '0022789087657', 'Niamey', 'uemoa@gmail.com', NULL, NULL),
+(5, 'UE', '0022789087656', 'Niamey', 'ue@gmail.com', NULL, NULL),
+(6, 'OMS', '0022789087655', 'Niamey', 'oms@gmail.com', NULL, NULL),
+(7, 'GAVI', '0022789087653', 'Niamey', 'gavi@gmail.com', NULL, NULL),
+(8, 'PAM', '0022789087652', 'Niamey', 'pam@gmail.com', NULL, NULL),
+(9, 'ONUSIDA', '0022789087651', 'Niamey', 'onusida@gmail.com', NULL, NULL),
+(10, 'INDE', '0022789087654', 'Niamey', 'inde@gmail.com', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `beneficiaires`
+--
+
+CREATE TABLE `beneficiaires` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_beneficiaire` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `beneficiaires`
+--
+
+INSERT INTO `beneficiaires` (`id`, `nom_beneficiaire`, `created_at`, `updated_at`) VALUES
+(1, 'DS Aderbissinat', '2020-10-27 16:09:17', '2020-10-27 16:09:17'),
+(2, 'DS Arlit', '2020-10-27 16:09:43', '2020-10-27 16:09:43'),
+(3, 'DS Bilma', '2020-10-27 16:10:00', '2020-10-27 16:10:00'),
+(4, 'DS Iferouane', '2020-10-27 16:10:16', '2020-10-27 16:10:16'),
+(5, 'DS Ingall', '2020-10-27 16:10:31', '2020-10-27 16:10:31'),
+(6, 'DS Tchirozérine', '2020-10-27 16:10:47', '2020-10-27 16:10:47'),
+(7, 'DS Bosso', '2020-10-27 16:11:07', '2020-10-27 16:11:07'),
+(8, 'DS Goudoumaria', '2020-10-27 16:11:27', '2020-10-27 16:11:27'),
+(9, 'DS Mainé Soroa', '2020-10-27 16:11:41', '2020-10-27 16:11:41'),
+(10, 'DS N\'Gourti', '2020-10-27 16:11:59', '2020-10-27 16:11:59');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `beneficiaire_ligne_activites`
+--
+
+CREATE TABLE `beneficiaire_ligne_activites` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `beneficiaire_id` bigint(20) UNSIGNED NOT NULL,
+  `ligne_activite_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `beneficiaire_ligne_activites`
+--
+
+INSERT INTO `beneficiaire_ligne_activites` (`id`, `beneficiaire_id`, `ligne_activite_id`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(2, 3, 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(3, 5, 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(4, 2, 2, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(5, 6, 2, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(6, 9, 2, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(7, 2, 3, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(8, 6, 3, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(9, 7, 3, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(10, 6, 4, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(11, 7, 4, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(12, 9, 4, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(13, 10, 4, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(14, 6, 5, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(15, 7, 5, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(16, 8, 5, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(17, 9, 5, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(18, 10, 5, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(19, 2, 6, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(20, 3, 6, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(21, 7, 6, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(22, 3, 7, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(23, 4, 7, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(24, 5, 7, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(25, 6, 7, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(26, 1, 8, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(27, 2, 8, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(28, 3, 8, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(29, 2, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(30, 3, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(31, 4, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(32, 5, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(33, 6, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(34, 7, 9, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(35, 7, 10, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(36, 8, 10, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(37, 9, 10, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(38, 10, 10, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(39, 1, 11, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(40, 2, 11, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(41, 3, 11, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(42, 4, 11, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(43, 7, 11, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(44, 4, 12, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(45, 5, 12, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(46, 6, 12, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(47, 8, 12, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(48, 7, 13, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(49, 8, 13, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(50, 9, 13, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(51, 10, 13, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(52, 3, 14, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(53, 4, 14, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(54, 5, 14, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(55, 6, 14, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(56, 7, 14, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(57, 3, 15, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(58, 4, 15, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(59, 6, 15, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(60, 7, 15, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(61, 10, 15, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(62, 2, 16, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(63, 3, 16, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(64, 4, 16, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(65, 6, 16, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(66, 5, 17, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(67, 6, 17, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(68, 7, 17, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(69, 8, 17, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(70, 9, 17, '2020-10-27 17:03:46', '2020-10-27 17:03:46');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `budgets`
+--
+
+CREATE TABLE `budgets` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `montant_budget` double DEFAULT NULL,
+  `date_budget` date DEFAULT NULL,
+  `commentaire_budget` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `budgets`
+--
+
+INSERT INTO `budgets` (`id`, `montant_budget`, `date_budget`, `commentaire_budget`, `created_at`, `updated_at`) VALUES
+(1, NULL, '2020-10-27', NULL, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(2, NULL, '2020-10-27', NULL, '2020-10-27 17:03:45', '2020-10-27 17:03:45');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `configs`
+--
+
+CREATE TABLE `configs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `theme` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `decaissements`
+--
+
+CREATE TABLE `decaissements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `montant_decaisse` double NOT NULL,
+  `date_decaissement` date NOT NULL,
+  `bailleur_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `decaissements`
+--
+
+INSERT INTO `decaissements` (`id`, `montant_decaisse`, `date_decaissement`, `bailleur_id`, `created_at`, `updated_at`) VALUES
+(1, 25000000, '2020-10-27', 7, '2020-10-27 17:06:22', '2020-10-27 17:06:22'),
+(2, 30000000, '2020-10-27', 4, '2020-10-27 17:06:53', '2020-10-27 17:06:53');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `justifications`
+--
+
+CREATE TABLE `justifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `montant_depense` double NOT NULL,
+  `piece_jointe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ligne_activite_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ligne_activites`
+--
+
+CREATE TABLE `ligne_activites` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_ligne_activite` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `quantite_ligne_activite` int(11) DEFAULT NULL,
+  `montant_ligne_activite` double NOT NULL,
+  `commentaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bailleur_ligne_activite` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `activite_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `ligne_activites`
+--
+
+INSERT INTO `ligne_activites` (`id`, `nom_ligne_activite`, `quantite_ligne_activite`, `montant_ligne_activite`, `commentaire`, `bailleur_ligne_activite`, `activite_id`, `created_at`, `updated_at`) VALUES
+(1, 'Acquerir et installer  du materiel de vidéo conférence', 25, 53000000, NULL, '7', 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(2, 'Doter les secrétariat des comités en Kits informatiques et consommables du bureau', 3, 300000000, NULL, '6', 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(3, 'Organiser des réunions du Comité de crise', 5, 404400000, NULL, '2', 1, '2020-10-27 16:35:28', '2020-10-27 16:35:28'),
+(4, 'Tenir des réunions hebdomadaires de coordination à tous les niveaux', 1, 90000000, NULL, '10', 1, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(5, 'Superviser les  sites d’isolement', 9, 40000000, NULL, '4', 1, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(6, 'Superviser les sites de prise en charge du pays', 3, 300000, NULL, '7', 1, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(7, 'Superviser les points d\'entrée (PoE)', 1, 10000, NULL, '10', 1, '2020-10-27 16:35:29', '2020-10-27 16:35:29'),
+(8, 'Dynamiser le comité National one Health', 4, 10000000, NULL, '3', 2, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(9, 'Dynamiser les 8 comités régionaux One Health à tous les niveaux.', 7, 20000000, NULL, '8', 2, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(10, 'Dynamiser les 72 comités départementaux One Health', 1, 30000000, NULL, '9', 2, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(11, 'Dynamiser les équipes d’intervention rapide à tous les niveaux', 8, 40000000, NULL, '6', 2, '2020-10-27 17:03:45', '2020-10-27 17:03:45'),
+(12, 'Mettre en place le dispositif d\'acheminement des prélèvements des régions vers le niveau central (CERMES)', 9, 9000000, NULL, '3', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(13, 'Former les agents de santé dans le cadre de la lutte contre le Covid-19 (Prélèvement)', 4, 70000000, NULL, '8', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(14, 'Pré positionner le matériel de prélèvement des cas et autres consommables de laboratoire', 6, 90000000, NULL, '9', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(15, 'Doter les formations sanitaires et les points d’entrées terrestres et aéroportuaires en outils de collecte des données', 1, 60000000, NULL, '9', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(16, 'Motiver les agents  impliqués dans le suivi des autoisolements', 2, 80000000, NULL, '6', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46'),
+(17, 'Assurer la dissémination des SOP', 7, 40000000, NULL, '6', 2, '2020-10-27 17:03:46', '2020-10-27 17:03:46');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2020_10_13_084025_create_bailleurs_table', 1),
+(5, '2020_10_13_084139_create_plan_actions_table', 1),
+(6, '2020_10_13_084140_create_budgets_table', 1),
+(7, '2020_10_13_084140_create_projet_mise_en_oeuvres_table', 1),
+(8, '2020_10_13_084145_create_activites_table', 1),
+(9, '2020_10_13_084147_create_ligne_activites_table', 1),
+(10, '2020_10_15_125159_create_configs_table', 1),
+(11, '2020_10_16_080610_create_permission_tables', 1),
+(12, '2020_10_17_130239_create_justifications_table', 1),
+(13, '2020_10_18_114518_create_decaissements_table', 1),
+(14, '2020_10_20_163234_create_activite_bailleurs_table', 1),
+(15, '2020_10_22_114908_create_beneficiaires_table', 1),
+(16, '2020_10_22_115118_create_beneficiaire_ligne_activites_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `model_has_permissions`
+--
+
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `model_has_roles`
+--
+
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) UNSIGNED NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `model_has_roles`
+--
+
+INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
+(1, 'App\\User', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'create_user', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02'),
+(2, 'edit_user', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02'),
+(3, 'delete_user', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02'),
+(4, 'create_role', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02'),
+(5, 'edit_role', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02'),
+(6, 'delete_role', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `plan_actions`
+--
+
+CREATE TABLE `plan_actions` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_plan_action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `commentaire` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `plan_actions`
+--
+
+INSERT INTO `plan_actions` (`id`, `nom_plan_action`, `commentaire`, `created_at`, `updated_at`) VALUES
+(1, 'Covid 19', 'Pandemie', '2020-10-27 16:08:23', '2020-10-27 16:08:23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `projet_mise_en_oeuvres`
+--
+
+CREATE TABLE `projet_mise_en_oeuvres` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `nom_projet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom_responsable_projet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_responsable_projet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_responsable_projet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `plan_action_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `projet_mise_en_oeuvres`
+--
+
+INSERT INTO `projet_mise_en_oeuvres` (`id`, `nom_projet`, `nom_responsable_projet`, `email_responsable_projet`, `contact_responsable_projet`, `plan_action_id`, `created_at`, `updated_at`) VALUES
+(1, 'GAVI/HPV', 'BOUBACAR Boureima', 'boureima@gmail.com', '0022789098765', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(2, 'GAVI/VPI', 'AMADOU Moussa', 'moussa@gmail.com', '0022789098760', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(3, 'MAP II', 'ALI Gambo', 'gambo@gmail.com', '0022789098761', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(4, 'PAC II', 'MANI Waziri', 'waziri@gmail.com', '0022789098762', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(5, 'PADL', 'ABDOU Mounir', 'mounir@gmail.com', '0022789098763', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(6, 'PARSS', 'OUMAROU Mamoudou', 'mamoudou@gmail.com', '00227890987654', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(7, 'PASEHA', 'GOUMBI Mouniratou', 'mouniratou@gmail.com', '0022789098766', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23'),
+(8, 'PPILDA', 'CHAIBOU Hadjara', 'hadjara@gmail.com', '0022789098767', 1, '2020-10-27 16:08:23', '2020-10-27 16:08:23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'web', '2020-10-27 15:56:02', '2020-10-27 15:56:02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `role_has_permissions`
+--
+
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) UNSIGNED NOT NULL,
+  `role_id` bigint(20) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `role_has_permissions`
+--
+
+INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contenu de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin System', 'admin@gmail.com', NULL, '$2y$10$SnTKpyP8r3AGjFs2PzvgfuurllA9xWr2puwIemdvDUg.n9dIqZAL.', NULL, '2020-10-27 15:56:02', '2020-10-27 15:56:02');
+
+--
+-- Index pour les tables exportées
+--
+
+--
+-- Index pour la table `activites`
+--
+ALTER TABLE `activites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `activites_budget_id_index` (`budget_id`),
+  ADD KEY `activites_projet_mise_en_oeuvre_id_index` (`projet_mise_en_oeuvre_id`);
+
+--
+-- Index pour la table `activite_bailleurs`
+--
+ALTER TABLE `activite_bailleurs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `activite_bailleurs_activite_id_index` (`activite_id`),
+  ADD KEY `activite_bailleurs_bailleur_id_index` (`bailleur_id`);
+
+--
+-- Index pour la table `bailleurs`
+--
+ALTER TABLE `bailleurs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `bailleurs_mail_bailleur_unique` (`mail_bailleur`);
+
+--
+-- Index pour la table `beneficiaires`
+--
+ALTER TABLE `beneficiaires`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `beneficiaire_ligne_activites`
+--
+ALTER TABLE `beneficiaire_ligne_activites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `beneficiaire_ligne_activites_beneficiaire_id_index` (`beneficiaire_id`),
+  ADD KEY `beneficiaire_ligne_activites_ligne_activite_id_index` (`ligne_activite_id`);
+
+--
+-- Index pour la table `budgets`
+--
+ALTER TABLE `budgets`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `configs`
+--
+ALTER TABLE `configs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `decaissements`
+--
+ALTER TABLE `decaissements`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `decaissements_bailleur_id_index` (`bailleur_id`);
+
+--
+-- Index pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `justifications`
+--
+ALTER TABLE `justifications`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `justifications_ligne_activite_id_index` (`ligne_activite_id`);
+
+--
+-- Index pour la table `ligne_activites`
+--
+ALTER TABLE `ligne_activites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ligne_activites_activite_id_index` (`activite_id`);
+
+--
+-- Index pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Index pour la table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
+
+--
+-- Index pour la table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Index pour la table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `plan_actions`
+--
+ALTER TABLE `plan_actions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `projet_mise_en_oeuvres`
+--
+ALTER TABLE `projet_mise_en_oeuvres`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `projet_mise_en_oeuvres_plan_action_id_index` (`plan_action_id`);
+
+--
+-- Index pour la table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD PRIMARY KEY (`permission_id`,`role_id`),
+  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables exportées
+--
+
+--
+-- AUTO_INCREMENT pour la table `activites`
+--
+ALTER TABLE `activites`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `activite_bailleurs`
+--
+ALTER TABLE `activite_bailleurs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `bailleurs`
+--
+ALTER TABLE `bailleurs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `beneficiaires`
+--
+ALTER TABLE `beneficiaires`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT pour la table `beneficiaire_ligne_activites`
+--
+ALTER TABLE `beneficiaire_ligne_activites`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+--
+-- AUTO_INCREMENT pour la table `budgets`
+--
+ALTER TABLE `budgets`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `configs`
+--
+ALTER TABLE `configs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `decaissements`
+--
+ALTER TABLE `decaissements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT pour la table `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `justifications`
+--
+ALTER TABLE `justifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `ligne_activites`
+--
+ALTER TABLE `ligne_activites`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT pour la table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT pour la table `plan_actions`
+--
+ALTER TABLE `plan_actions`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `projet_mise_en_oeuvres`
+--
+ALTER TABLE `projet_mise_en_oeuvres`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT pour la table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `activites`
+--
+ALTER TABLE `activites`
+  ADD CONSTRAINT `activites_budget_id_foreign` FOREIGN KEY (`budget_id`) REFERENCES `budgets` (`id`),
+  ADD CONSTRAINT `activites_projet_mise_en_oeuvre_id_foreign` FOREIGN KEY (`projet_mise_en_oeuvre_id`) REFERENCES `projet_mise_en_oeuvres` (`id`);
+
+--
+-- Contraintes pour la table `activite_bailleurs`
+--
+ALTER TABLE `activite_bailleurs`
+  ADD CONSTRAINT `activite_bailleurs_activite_id_foreign` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`),
+  ADD CONSTRAINT `activite_bailleurs_bailleur_id_foreign` FOREIGN KEY (`bailleur_id`) REFERENCES `bailleurs` (`id`);
+
+--
+-- Contraintes pour la table `beneficiaire_ligne_activites`
+--
+ALTER TABLE `beneficiaire_ligne_activites`
+  ADD CONSTRAINT `beneficiaire_ligne_activites_beneficiaire_id_foreign` FOREIGN KEY (`beneficiaire_id`) REFERENCES `beneficiaires` (`id`),
+  ADD CONSTRAINT `beneficiaire_ligne_activites_ligne_activite_id_foreign` FOREIGN KEY (`ligne_activite_id`) REFERENCES `ligne_activites` (`id`);
+
+--
+-- Contraintes pour la table `decaissements`
+--
+ALTER TABLE `decaissements`
+  ADD CONSTRAINT `decaissements_bailleur_id_foreign` FOREIGN KEY (`bailleur_id`) REFERENCES `bailleurs` (`id`);
+
+--
+-- Contraintes pour la table `justifications`
+--
+ALTER TABLE `justifications`
+  ADD CONSTRAINT `justifications_ligne_activite_id_foreign` FOREIGN KEY (`ligne_activite_id`) REFERENCES `ligne_activites` (`id`);
+
+--
+-- Contraintes pour la table `ligne_activites`
+--
+ALTER TABLE `ligne_activites`
+  ADD CONSTRAINT `ligne_activites_activite_id_foreign` FOREIGN KEY (`activite_id`) REFERENCES `activites` (`id`);
+
+--
+-- Contraintes pour la table `model_has_permissions`
+--
+ALTER TABLE `model_has_permissions`
+  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `model_has_roles`
+--
+ALTER TABLE `model_has_roles`
+  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Contraintes pour la table `projet_mise_en_oeuvres`
+--
+ALTER TABLE `projet_mise_en_oeuvres`
+  ADD CONSTRAINT `projet_mise_en_oeuvres_plan_action_id_foreign` FOREIGN KEY (`plan_action_id`) REFERENCES `plan_actions` (`id`);
+
+--
+-- Contraintes pour la table `role_has_permissions`
+--
+ALTER TABLE `role_has_permissions`
+  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -24,7 +24,6 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Activité</th>
                                 <th>Budget</th>
                                 <th>Date</th>
                                 <th>Observations</th>
@@ -36,7 +35,6 @@
                                 @foreach ($budgets as $budget)
                                 <tr>
                                 <td>{{ $budget->id }} </td>
-                                <td>{{ $budget->nom_activite }}</td>
                                 <td>{{ $budget->montant_budget }}</td>
                                 <td>{{ $budget->date_budget }}</td>
                                 <td>{{ $budget->commentaire_budget }}</td>

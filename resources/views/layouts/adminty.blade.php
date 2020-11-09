@@ -228,7 +228,7 @@
                                                 <span class="pcoded-mtext">Projets</span>
                                             </a>
                                         </li>
-                                         <li class="">
+                                         {{-- <li class="">
                                             <a href="{{ route('directions.index') }}" >
                                                 <span class="pcoded-mtext">Directions</span>
                                             </a>
@@ -237,7 +237,7 @@
                                             <a href="{{ route('departements.index') }}" >
                                                 <span class="pcoded-mtext">Departements</span>
                                             </a>
-                                        </li>
+                                        </li> --}}
                                         <li class="">
                                             <a href="{{ route('projets.index') }}" >
                                                 <span class="pcoded-mtext">Agences d'executions</span>
